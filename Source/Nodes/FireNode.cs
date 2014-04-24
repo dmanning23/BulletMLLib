@@ -1,5 +1,3 @@
-using System;
-using System.Xml;
 using System.Diagnostics;
 
 namespace BulletMLLib

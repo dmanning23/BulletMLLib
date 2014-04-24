@@ -1,10 +1,7 @@
-﻿using System.Threading.Tasks;
-using System;
-using Vector2Extensions;
+﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using System.Text;
 using System.Diagnostics;
-using Microsoft.Xna.Framework;
+using System.Threading.Tasks;
 using Vector2Extensions;
 
 namespace BulletMLLib

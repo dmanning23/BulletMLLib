@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Xml;
 using System.Xml.Schema;
-using System.IO;
 
 namespace BulletMLLib
 {
