@@ -44,6 +44,8 @@ namespace BulletMLLib
 		/// <value>The scale.</value>
 		public float Scale { get; set; }
 
+		private float _speed;
+
 		//TODO: do a task factory, we are going to be creating a LOT of those little dudes
 
 		#endregion //Members
@@ -60,7 +62,17 @@ namespace BulletMLLib
 		/// Gets or sets the speed
 		/// </summary>
 		/// <value>The speed, in pixels/frame</value>
-		public float Speed { get; set; }
+		public virtual float Speed 
+		{
+			get
+			{
+				return _speed;
+			}
+			set
+			{
+				_speed = value;
+			}
+		}
 
 		/// <summary>
 		/// A list of tasks that will define this bullets behavior
@@ -105,7 +117,7 @@ namespace BulletMLLib
 		/// Gets or sets the direction.
 		/// </summary>
 		/// <value>The direction in radians.</value>
-		public float Direction
+		public virtual float Direction
 		{
 			get
 			{

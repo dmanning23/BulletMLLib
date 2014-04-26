@@ -10,14 +10,24 @@ namespace BulletMLLib
 		#region Members
 
 		/// <summary>
-		/// The amount to change speed every frame
+		/// The amount pulled out of the node
 		/// </summary>
-		private float SpeedChange { get; set; }
+		private float NodeSpeed;
+
+		/// <summary>
+		/// the type of speed change, pulled out of the node
+		/// </summary>
+		private ENodeType ChangeType;
 
 		/// <summary>
 		/// How long to run this task... measured in frames
 		/// </summary>
 		private float Duration { get; set; }
+
+		/// <summary>
+		/// How many frames this dude has ran
+		/// </summary>
+		private float RunDelta { get; set; }
 
 		#endregion //Members
 
@@ -49,23 +59,29 @@ namespace BulletMLLib
 				Duration = 1.0f;
 			}
 
-			switch (Node.GetChild(ENodeName.speed).NodeType)
+			NodeSpeed = Node.GetChildValue(ENodeName.speed, this);
+			ChangeType = Node.GetChild(ENodeName.speed).NodeType;
+		}
+
+		private float GetSpeed(Bullet bullet)
+		{
+			switch (ChangeType)
 			{
 				case ENodeType.sequence:
 				{
-					SpeedChange = Node.GetChildValue(ENodeName.speed, this);
+					return NodeSpeed;
 				}
 				break;
 
 				case ENodeType.relative:
 				{
-					SpeedChange = Node.GetChildValue(ENodeName.speed, this) / Duration;
+					return NodeSpeed / Duration;
 				}
 				break;
 
 				default:
 				{
-					SpeedChange = (Node.GetChildValue(ENodeName.speed, this) - bullet.Speed) / Duration;
+					return ((NodeSpeed - bullet.Speed) / (Duration - RunDelta));
 				}
 				break;
 			}
@@ -79,16 +95,17 @@ namespace BulletMLLib
 		/// <param name="bullet">The bullet to update this task against.</param>
 		public override ERunStatus Run(Bullet bullet)
 		{
-			bullet.Speed += SpeedChange;
+			bullet.Speed += GetSpeed(bullet);
 
-			Duration -= 1.0f * bullet.TimeSpeed;
-			if (Duration <= 0.0f)
+			RunDelta += 1.0f * bullet.TimeSpeed;
+			if (Duration <= RunDelta)
 			{
 				TaskFinished = true;
 				return ERunStatus.End;
 			}
 			else
 			{
+				//since this task isn't finished, run it again next time
 				return ERunStatus.Continue;
 			}
 		}

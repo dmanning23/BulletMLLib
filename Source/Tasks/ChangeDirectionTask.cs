@@ -12,14 +12,24 @@ namespace BulletMLLib
 		#region Members
 
 		/// <summary>
-		/// The amount to change driection every frame
+		/// The amount pulled out of the node
 		/// </summary>
-		private float DirectionChange;
+		private float NodeDirection;
+
+		/// <summary>
+		/// the type of direction change, pulled out of the node
+		/// </summary>
+		private ENodeType ChangeType;
 
 		/// <summary>
 		/// How long to run this task... measured in frames
 		/// </summary>
 		private float Duration { get; set; }
+
+		/// <summary>
+		/// How many frames this dude has ran
+		/// </summary>
+		private float RunDelta { get; set; }
 
 		#endregion //Members
 
@@ -42,6 +52,8 @@ namespace BulletMLLib
 		/// <param name="bullet">Bullet.</param>
 		protected override void SetupTask(Bullet bullet)
 		{
+			RunDelta = 0;
+
 			//set the time length to run this dude
 			Duration = Node.GetChildValue(ENodeName.term, this);
 
@@ -53,60 +65,73 @@ namespace BulletMLLib
 
 			//Get the amount to change direction from the nodes
 			DirectionNode dirNode = Node.GetChild(ENodeName.direction) as DirectionNode;
-			float value = dirNode.GetValue(this) * (float)Math.PI / 180.0f; //also make sure to convert to radians
+			NodeDirection = dirNode.GetValue(this) * (float)Math.PI / 180.0f; //also make sure to convert to radians
 
 			//How do we want to change direction?
-			ENodeType changeType = dirNode.NodeType;
-			switch (changeType)
+			ChangeType = dirNode.NodeType;
+		}
+
+		private float GetDirection(Bullet bullet)
+		{
+			//How do we want to change direction?
+			float direction = 0.0f;
+			switch (ChangeType)
 			{
 				case ENodeType.sequence:
 				{
 					//We are going to add this amount to the direction every frame
-					DirectionChange = value;
+					direction = NodeDirection;
 				}
 				break;
 
 				case ENodeType.absolute:
 				{
 					//We are going to go in the direction we are given, regardless of where we are pointing right now
-					DirectionChange = value - bullet.Direction;
+					direction = NodeDirection - bullet.Direction;
 				}
 				break;
 
 				case ENodeType.relative:
 				{
 					//The direction change will be relative to our current direction
-					DirectionChange = value;
+					direction = NodeDirection;
 				}
 				break;
 
 				default:
 				{
 					//the direction change is to aim at the enemy
-					DirectionChange = ((value + bullet.GetAimDir()) - bullet.Direction);
+					direction = ((NodeDirection + bullet.GetAimDir()) - bullet.Direction);
 				}
 				break;
 			}
 
 			//keep the direction between -180 and 180
-			DirectionChange = MathHelper.WrapAngle(DirectionChange);
+			direction = MathHelper.WrapAngle(direction);
 
 			//The sequence type of change direction is unaffected by the duration
-			if (changeType != ENodeType.sequence)
+			if (ChangeType == ENodeType.absolute)
+			{
+				//divide by the amount fo time remaining
+				direction /= Duration - RunDelta;
+			}
+			else if (ChangeType != ENodeType.sequence)
 			{
 				//Divide by the duration so we ease into the direction change
-				DirectionChange /= Duration;
+				direction /= Duration;
 			}
+
+			return direction;
 		}
 		
 		public override ERunStatus Run(Bullet bullet)
 		{
 			//change the direction of the bullet by the correct amount
-			bullet.Direction += DirectionChange;
+			bullet.Direction += GetDirection(bullet);
 
 			//decrement the amount if time left to run and return End when this task is finished
-			Duration -= 1.0f * bullet.TimeSpeed;
-			if (Duration <= 0.0f)
+			RunDelta += 1.0f * bullet.TimeSpeed;
+			if (Duration <= RunDelta)
 			{
 				TaskFinished = true;
 				return ERunStatus.End;
