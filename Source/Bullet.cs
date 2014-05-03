@@ -198,7 +198,7 @@ namespace BulletMLLib
 						else
 						{
 							//Create a new bullet
-							Bullet newDude = _bulletManager.CreateBullet();
+							Bullet newDude = _bulletManager.CreateTopBullet();
 
 							//set the position to this dude's position
 							newDude.X = this.X;
@@ -337,6 +337,25 @@ namespace BulletMLLib
 			}
 
 			return null;
+		}
+
+		/// <summary>
+		/// Check if this bullet has finished running all its tasks.
+		/// </summary>
+		/// <returns></returns>
+		public bool TasksFinished()
+		{
+			for (int i = 0; i < Tasks.Count; i++)
+			{
+				if (!Tasks[i].TaskFinished)
+				{
+					//at least one of the tasks is still working
+					return false;
+				}
+			}
+
+			//all the tasks and their child tasks are done running
+			return true;
 		}
 
 		#endregion //Methods

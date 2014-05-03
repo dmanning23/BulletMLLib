@@ -29,6 +29,13 @@ namespace BulletMLLib
 		/// <returns>A shiny new bullet</returns>
 		Bullet CreateBullet();
 
+		/// <summary>
+		/// Create a new bullet that will be initialized from a top level node.
+		/// These are usually special bullets that dont need to be drawn or kept around after they finish tasks etc.
+		/// </summary>
+		/// <returns>A shiny new top-level bullet</returns>
+		Bullet CreateTopBullet();
+
 		#endregion //Methods
 	}
 }
