@@ -10,7 +10,7 @@ namespace BulletMLLib
 	/// This is the bullet class that outside assemblies will interact with.
 	/// Just inherit from this class and override the abstract functions!
 	/// </summary>
-	public abstract class Bullet
+	public abstract class Bullet : IBullet
 	{
 		#region Members
 
@@ -149,7 +149,7 @@ namespace BulletMLLib
 		/// Initializes a new instance of the <see cref="BulletMLLib.Bullet"/> class.
 		/// </summary>
 		/// <param name="myBulletManager">My bullet manager.</param>
-		public Bullet(IBulletManager myBulletManager)
+		protected Bullet(IBulletManager myBulletManager)
 		{
 			//grba the bullet manager for this dude
 			Debug.Assert(null != myBulletManager);
@@ -198,7 +198,7 @@ namespace BulletMLLib
 						else
 						{
 							//Create a new bullet
-							Bullet newDude = _bulletManager.CreateTopBullet();
+							IBullet newDude = _bulletManager.CreateTopBullet();
 
 							//set the position to this dude's position
 							newDude.X = this.X;
@@ -247,7 +247,6 @@ namespace BulletMLLib
 		/// <summary>
 		/// Asynchronous update method
 		/// </summary>
-		/// <param name="time_elapsed"></param>
 		/// <returns></returns>
 		public Task UpdateAsync()
 		{
@@ -289,8 +288,6 @@ namespace BulletMLLib
 
 			//get our position
 			Vector2 pos = new Vector2(X, Y);
-
-			//TODO: this function doesn't seem to work... bullets sometimes just spin around in circles?
 
 			//get the angle at that dude
 			return (shipPos - pos).Angle();

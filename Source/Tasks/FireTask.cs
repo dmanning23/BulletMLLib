@@ -289,7 +289,7 @@ namespace BulletMLLib
 		public override ERunStatus Run(Bullet bullet)
 		{
 			//Create the new bullet
-			Bullet newBullet = bullet.MyBulletManager.CreateBullet();
+			IBullet newBullet = bullet.MyBulletManager.CreateBullet();
 
 			if (newBullet == null)
 			{

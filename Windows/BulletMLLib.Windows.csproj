@@ -66,6 +66,9 @@
     <Compile Include="..\Source\Bullet.cs">
       <Link>Bullet.cs</Link>
     </Compile>
+    <Compile Include="..\Source\IBullet.cs">
+      <Link>IBullet.cs</Link>
+    </Compile>
     <Compile Include="..\Source\IBulletManager.cs">
       <Link>IBulletManager.cs</Link>
     </Compile>
