@@ -121,11 +121,11 @@ namespace BulletMLTests
 			string filename = @"Content\ActionManyTop.xml";
 			BulletPattern pattern = new BulletPattern();
 			pattern.ParseXML(filename);
-			Mover mover = (Mover)manager.CreateBullet();
+			Mover mover = (Mover)manager.CreateTopBullet();
 			mover.InitTopNode(pattern.RootNode);
 			manager.FreeMovers();
 
-			Assert.AreEqual(2, manager.movers.Count);
+			Assert.AreEqual(0, manager.movers.Count);
 		}
 	}
 }
