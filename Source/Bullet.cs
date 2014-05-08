@@ -49,7 +49,7 @@ namespace BulletMLLib
 		/// <summary>
 		/// Store the initial velocity of the bullet when it is fired.
 		/// </summary>
-		private Vector2 _initialVelocity;
+		private Vector2 _initialVelocity = Vector2.Zero;
 
 		//TODO: do a task factory, we are going to be creating a LOT of those little dudes
 
@@ -269,9 +269,9 @@ namespace BulletMLLib
 			if (Vector2.Zero != InitialVelocity)
 			{
 				//now that the heading and speed have been set, adjust them according to the initial velocity.
-				Vector2 final = (Direction.ToVector2() * Speed) + InitialVelocity;
+				Vector2 final = (Direction.ToVector2() * Speed * Scale) + InitialVelocity;
 				Direction = final.Angle();
-				Speed = final.Length();
+				Speed = final.Length() / Scale;
 			}
 		}
 
