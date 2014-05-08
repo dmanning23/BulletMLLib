@@ -135,7 +135,7 @@ namespace BulletMLLib
 					//add the params to the action task
 					for (int i = 0; i < childNode.ChildNodes.Count; i++)
 					{
-						actionTask.ParamList.Add(childNode.ChildNodes[i].GetValue(this));
+						actionTask.ParamList.Add(childNode.ChildNodes[i].GetValue(this, bullet));
 					}
 
 					//parse the children of the action node into the task
@@ -185,7 +185,7 @@ namespace BulletMLLib
 					//add the params to the fire task
 					for (int i = 0; i < childNode.ChildNodes.Count; i++)
 					{
-						fireTask.ParamList.Add(childNode.ChildNodes[i].GetValue(this));
+						fireTask.ParamList.Add(childNode.ChildNodes[i].GetValue(this, bullet));
 					}
 
 					//parse the children of the action node into the task
@@ -322,9 +322,9 @@ namespace BulletMLLib
 		/// Gets the node value.
 		/// </summary>
 		/// <returns>The node value.</returns>
-		public float GetNodeValue()
+		public float GetNodeValue(Bullet bullet)
 		{
-			return Node.GetValue(this);
+			return Node.GetValue(this, bullet);
 		}
 
 		/// <summary>

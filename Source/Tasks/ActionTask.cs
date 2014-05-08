@@ -34,9 +34,6 @@ namespace BulletMLLib
 		{
 			Debug.Assert(null != Node);
 			Debug.Assert(null != Owner);
-
-			//set the number of times to repeat this action
-			RepeatNumMax = node.RepeatNum(this);
 		}
 
 		/// <summary>
@@ -46,6 +43,11 @@ namespace BulletMLLib
 		/// <param name="bullet">the bullet this dude is controlling</param>
 		public override void ParseTasks(Bullet bullet)
 		{
+			//set the number of times to repeat this action
+			var actionNode = Node as ActionNode;
+			Debug.Assert(null != actionNode);
+			RepeatNumMax = actionNode.RepeatNum(this, bullet);
+
 			//is this an actionref task?
 			if (ENodeName.actionRef == Node.Name)
 			{

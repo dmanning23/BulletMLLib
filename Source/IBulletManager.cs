@@ -7,6 +7,12 @@ namespace BulletMLLib
 	/// </summary>
 	public interface IBulletManager
 	{
+		#region Properties
+
+		
+
+		#endregion Properties
+
 		#region Methods
 
 		/// <summary>
@@ -35,6 +41,14 @@ namespace BulletMLLib
 		/// </summary>
 		/// <returns>A shiny new top-level bullet</returns>
 		IBullet CreateTopBullet();
+
+		/// <summary>
+		/// This is an item that gets passed into Equationator at runtime by the bullet manager.
+		/// so for example, instead of having different script files for the 3 different levels of your boss, 
+		/// can have the tier go from 0.0 -> 3.0 as it takes damage and do the following in your script:
+		/// $tier % 3
+		/// </summary>
+		float Tier();
 
 		#endregion //Methods
 	}

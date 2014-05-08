@@ -51,7 +51,7 @@ namespace BulletMLLib
 		protected override void SetupTask(Bullet bullet)
 		{
 			//set the length of time to run this dude
-			Duration = Node.GetChildValue(ENodeName.term, this);
+			Duration = Node.GetChildValue(ENodeName.term, this, bullet);
 
 			//check for divide by 0
 			if (0.0f == Duration)
@@ -59,7 +59,7 @@ namespace BulletMLLib
 				Duration = 1.0f;
 			}
 
-			NodeSpeed = Node.GetChildValue(ENodeName.speed, this);
+			NodeSpeed = Node.GetChildValue(ENodeName.speed, this, bullet);
 			ChangeType = Node.GetChild(ENodeName.speed).NodeType;
 		}
 

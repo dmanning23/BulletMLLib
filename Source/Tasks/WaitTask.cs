@@ -36,7 +36,7 @@ namespace BulletMLLib
 		/// <param name="bullet">Bullet.</param>
 		protected override void SetupTask(Bullet bullet)
 		{
-			Duration = Node.GetValue(this);
+			Duration = Node.GetValue(this, bullet);
 		}
 
 		/// <summary>

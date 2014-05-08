@@ -78,12 +78,12 @@ namespace BulletMLLib
 		/// </summary>
 		/// <param name="myTask">the task to get the number of repeat times for</param>
 		/// <returns>The number of times to repeat this node, as specified by a parent Repeat node.</returns>
-		public int RepeatNum(ActionTask myTask)
+		public int RepeatNum(ActionTask myTask, Bullet bullet)
 		{
 			if (null != ParentRepeatNode)
 			{
 				//Get the equation value of the repeat node
-				return (int)ParentRepeatNode.GetChildValue(ENodeName.times, myTask);
+				return (int)ParentRepeatNode.GetChildValue(ENodeName.times, myTask, bullet);
 			}
 			else
 			{
