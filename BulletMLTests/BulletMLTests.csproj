@@ -50,9 +50,6 @@
     <Compile Include="ParamNodeTest.cs" />
     <Compile Include="BulletRefNodeTest.cs" />
     <Compile Include="ActionRefNodeTest.cs" />
-    <Compile Include="testharness\Mover.cs" />
-    <Compile Include="testharness\MoverManager.cs" />
-    <Compile Include="testharness\Myship.cs" />
     <Compile Include="VerifyTestHarness.cs" />
     <Compile Include="ActionTaskTest.cs" />
     <Compile Include="TaskTest.cs" />
@@ -75,9 +72,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\externals\MonoGame\MonoGame.Framework\MonoGame.Framework.WindowsGL.csproj">
-      <Project>{7de47032-a904-4c29-bd22-2d235e8d91ba}</Project>
-      <Name>MonoGame.Framework.WindowsGL</Name>
+    <ProjectReference Include="..\..\..\Windows\BulletMLLibQuickStart.Windows.csproj">
+      <Project>{c40cb563-3543-4225-8b3d-7f382a43fff7}</Project>
+      <Name>BulletMLLibQuickStart.Windows</Name>
     </ProjectReference>
     <ProjectReference Include="..\Windows\BulletMLLib.Windows.csproj">
       <Project>{203274cd-9994-4562-b824-6cf9cae40347}</Project>
@@ -266,4 +263,11 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <Import Project="..\..\..\Windows\packages\MonoGame.Binaries.3.2.0\build\net40\MonoGame.Binaries.targets" Condition="Exists('..\..\..\Windows\packages\MonoGame.Binaries.3.2.0\build\net40\MonoGame.Binaries.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\..\Windows\packages\MonoGame.Binaries.3.2.0\build\net40\MonoGame.Binaries.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\Windows\packages\MonoGame.Binaries.3.2.0\build\net40\MonoGame.Binaries.targets'))" />
+  </Target>
 </Project>

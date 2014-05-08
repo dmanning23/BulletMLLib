@@ -1,3 +1,4 @@
+using BulletMLSample;
 using NUnit.Framework;
 using System;
 using BulletMLLib;
@@ -135,8 +136,8 @@ namespace BulletMLTests
 			mover.InitTopNode(pattern.RootNode);
 
 			FireTask testTask = mover.FindTaskByLabel("testFire") as FireTask;
-			Assert.AreEqual(1.0f, testTask.InitialSpeedTask.GetNodeValue());
-			Assert.AreEqual(1.0f, testTask.SequenceSpeedTask.GetNodeValue());
+			Assert.AreEqual(1.0f, testTask.InitialSpeedTask.GetNodeValue(mover));
+			Assert.AreEqual(1.0f, testTask.SequenceSpeedTask.GetNodeValue(mover));
 		}
 
 		[Test()]

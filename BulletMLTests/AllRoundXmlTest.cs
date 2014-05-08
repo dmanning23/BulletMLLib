@@ -1,3 +1,4 @@
+using BulletMLSample;
 using NUnit.Framework;
 using System;
 using BulletMLLib;
@@ -63,7 +64,7 @@ namespace BulletMLTests
 			ActionTask myAction = mover.Tasks[0] as ActionTask;
 
 			ActionNode testNode = pattern.RootNode.FindLabelNode("top", ENodeName.action) as ActionNode;
-			Assert.AreEqual(1, testNode.RepeatNum(myAction));
+			Assert.AreEqual(1, testNode.RepeatNum(myAction, mover));
 		}
 
 		[Test()]

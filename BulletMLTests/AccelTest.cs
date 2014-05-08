@@ -1,3 +1,4 @@
+using BulletMLSample;
 using NUnit.Framework;
 using System;
 using BulletMLLib;
@@ -149,7 +150,7 @@ namespace BulletMLTests
 
 			AccelTask myTask = mover.FindTaskByLabelAndName("test", ENodeName.accel) as AccelTask;
 			BulletMLNode myNode = myTask.Node.GetChild(ENodeName.horizontal);
-			Assert.AreEqual(10.0f, myNode.GetValue(myTask));
+			Assert.AreEqual(10.0f, myNode.GetValue(myTask, mover));
 		}
 
 		[Test()]
@@ -191,7 +192,7 @@ namespace BulletMLTests
 
 			AccelTask myTask = mover.FindTaskByLabelAndName("test", ENodeName.accel) as AccelTask;
 			BulletMLNode myNode = myTask.Node.GetChild(ENodeName.vertical);
-			Assert.AreEqual(20.0f, myNode.GetValue(myTask));
+			Assert.AreEqual(20.0f, myNode.GetValue(myTask, mover));
 		}
 
 		[Test()]

@@ -1,3 +1,4 @@
+using BulletMLSample;
 using NUnit.Framework;
 using System;
 using BulletMLLib;
@@ -41,7 +42,7 @@ namespace BulletMLTests
 			ActionTask myAction = mover.Tasks[0] as ActionTask;
 
 			ActionNode testNode = pattern.RootNode.FindLabelNode("top", ENodeName.action) as ActionNode;
-			Assert.AreEqual(1, testNode.RepeatNum(myAction));
+			Assert.AreEqual(1, testNode.RepeatNum(myAction, mover));
 		}
 
 		[Test()]
@@ -110,7 +111,7 @@ namespace BulletMLTests
 			ActionTask testTask = myTask.ChildTasks[0] as ActionTask;
 			ActionNode actionNode = testTask.Node as ActionNode;
 
-			Assert.AreEqual(1, actionNode.RepeatNum(testTask));
+			Assert.AreEqual(1, actionNode.RepeatNum(testTask, mover));
 		}
 
 		[Test()]
@@ -136,7 +137,7 @@ namespace BulletMLTests
 			ActionTask testTask = mover.FindTaskByLabel("test") as ActionTask;
 			ActionNode actionNode = testTask.Node as ActionNode;
 
-			Assert.AreEqual(10, actionNode.RepeatNum(testTask));
+			Assert.AreEqual(10, actionNode.RepeatNum(testTask, mover));
 		}
 	}
 }
