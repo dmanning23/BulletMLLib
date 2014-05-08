@@ -46,6 +46,11 @@ namespace BulletMLLib
 
 		private float _speed;
 
+		/// <summary>
+		/// Store the initial velocity of the bullet when it is fired.
+		/// </summary>
+		private Vector2 _initialVelocity;
+
 		//TODO: do a task factory, we are going to be creating a LOT of those little dudes
 
 		#endregion //Members
@@ -138,6 +143,23 @@ namespace BulletMLLib
 			get
 			{
 				return MyNode.Label;
+			}
+		}
+
+		/// <summary>
+		/// This is the initial velocity of the bullet when it is fired.
+		/// For example, if the enemy is moving forward and fires bullets, they will clump together because they don't retain the enemy's velocity.
+		/// Set this property if you have fast moving enemies or guns and want the bullet pattern to inherit the velocity of the object that fired them.
+		/// </summary>
+		public Vector2 InitialVelocity
+		{
+			get
+			{
+				return _initialVelocity;
+			}
+			set
+			{
+				_initialVelocity = value;
 			}
 		}
 
@@ -242,6 +264,15 @@ namespace BulletMLLib
 			task.InitTask(this);
 
 			Tasks.Add(task);
+
+			//Check if we should change the start heading and speed to adjust for an initial velocity
+			if (Vector2.Zero != InitialVelocity)
+			{
+				//now that the heading and speed have been set, adjust them according to the initial velocity.
+				Vector2 final = (Direction.ToVector2() * Speed) + InitialVelocity;
+				Direction = final.Angle();
+				Speed = final.Length();
+			}
 		}
 
 		/// <summary>

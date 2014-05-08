@@ -16,8 +16,6 @@ namespace BulletMLLib
 		/// </summary>
 		public BulletMLNode RootNode { get; private set; }
 
-		//TODO: move filename class to github and use it here
-
 		/// <summary>
 		/// Gets the filename.
 		/// This property is only set by calling the parse method
