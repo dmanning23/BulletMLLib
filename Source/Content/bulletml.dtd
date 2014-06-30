@@ -18,7 +18,7 @@
 <!ELEMENT actionRef (param*)>
 <!ATTLIST actionRef label CDATA #REQUIRED>
 
-<!ELEMENT repeat (times, (action | actionRef)*)>
+<!ELEMENT repeat (times, (action | actionRef)+)>
 
 <!ELEMENT accel (horizontal?, vertical?, term)>
 <!ATTLIST accel label CDATA #IMPLIED>
