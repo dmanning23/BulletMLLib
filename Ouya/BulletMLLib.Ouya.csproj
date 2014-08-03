@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9B42F450-3159-4D87-A2E8-EB3F13087B83}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>BulletMLLib.Ouya</RootNamespace>
+    <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
+    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
+    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
+    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
+    <AndroidResgenClass>Resource</AndroidResgenClass>
+    <AssemblyName>BulletMLLib.Ouya</AssemblyName>
+    <TargetFrameworkVersion>v4.2</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidLinkMode>None</AndroidLinkMode>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Mono.Android" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Resources\Resource.designer.cs" />
+    <Compile Include="..\Source\Bullet.cs">
+      <Link>Bullet.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\BulletMLEquation.cs">
+      <Link>BulletMLEquation.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\BulletPattern.cs">
+      <Link>BulletPattern.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\ENodeName.cs">
+      <Link>ENodeName.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\ENodeType.cs">
+      <Link>ENodeType.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\EPatternType.cs">
+      <Link>EPatternType.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\ERunStatus.cs">
+      <Link>ERunStatus.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\FireData.cs">
+      <Link>FireData.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\GameManager.cs">
+      <Link>GameManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\IBullet.cs">
+      <Link>IBullet.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\IBulletManager.cs">
+      <Link>IBulletManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\PositionDelegate.cs">
+      <Link>PositionDelegate.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Nodes\AccelNode.cs">
+      <Link>Nodes\AccelNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Nodes\ActionNode.cs">
+      <Link>Nodes\ActionNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Nodes\ActionRefNode.cs">
+      <Link>Nodes\ActionRefNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Nodes\BulletMLNode.cs">
+      <Link>Nodes\BulletMLNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Nodes\BulletNode.cs">
+      <Link>Nodes\BulletNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Nodes\BulletRefNode.cs">
+      <Link>Nodes\BulletRefNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Nodes\ChangeDirectionNode.cs">
+      <Link>Nodes\ChangeDirectionNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Nodes\ChangeSpeedNode.cs">
+      <Link>Nodes\ChangeSpeedNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Nodes\DirectionNode.cs">
+      <Link>Nodes\DirectionNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Nodes\FireNode.cs">
+      <Link>Nodes\FireNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Nodes\FireRefNode.cs">
+      <Link>Nodes\FireRefNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Nodes\HorizontalNode.cs">
+      <Link>Nodes\HorizontalNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Nodes\NodeFactory.cs">
+      <Link>Nodes\NodeFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Nodes\ParamNode.cs">
+      <Link>Nodes\ParamNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Nodes\RepeatNode.cs">
+      <Link>Nodes\RepeatNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Nodes\SpeedNode.cs">
+      <Link>Nodes\SpeedNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Nodes\TermNode.cs">
+      <Link>Nodes\TermNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Nodes\TimesNode.cs">
+      <Link>Nodes\TimesNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Nodes\VanishNode.cs">
+      <Link>Nodes\VanishNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Nodes\VerticalNode.cs">
+      <Link>Nodes\VerticalNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Nodes\WaitNode.cs">
+      <Link>Nodes\WaitNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Properties\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Tasks\AccelTask.cs">
+      <Link>Tasks\AccelTask.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Tasks\ActionTask.cs">
+      <Link>Tasks\ActionTask.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Tasks\BulletMLTask.cs">
+      <Link>Tasks\BulletMLTask.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Tasks\ChangeDirectionTask.cs">
+      <Link>Tasks\ChangeDirectionTask.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Tasks\ChangeSpeedTask.cs">
+      <Link>Tasks\ChangeSpeedTask.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Tasks\FireTask.cs">
+      <Link>Tasks\FireTask.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Tasks\RepeatTask.cs">
+      <Link>Tasks\RepeatTask.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Tasks\SetDirectionTask.cs">
+      <Link>Tasks\SetDirectionTask.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Tasks\SetSpeedTask.cs">
+      <Link>Tasks\SetSpeedTask.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Tasks\VanishTask.cs">
+      <Link>Tasks\VanishTask.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Tasks\WaitTask.cs">
+      <Link>Tasks\WaitTask.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AboutResources.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\Strings.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Equationator\Ouya\Equationator.Ouya.csproj">
+      <Project>{A5A021CF-48B5-4D35-9DC3-49AC93BF3824}</Project>
+      <Name>Equationator.Ouya</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MonoGame\MonoGame.Framework\MonoGame.Framework.Ouya.csproj">
+      <Project>{8BEA875D-66D2-4A5F-B137-83D262A3851D}</Project>
+      <Name>MonoGame.Framework.Ouya</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Vector2Extensions\Ouya\Vector2Extensions.Ouya.csproj">
+      <Project>{D2F681A5-57CC-4023-9470-B6A7ED443771}</Project>
+      <Name>Vector2Extensions.Ouya</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>
