@@ -22,20 +22,20 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
+    <DefineConstants>DEBUG;OUYA</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <DefineConstants>OUYA</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -200,6 +200,10 @@
     <ProjectReference Include="..\..\Vector2Extensions\Ouya\Vector2Extensions.Ouya.csproj">
       <Project>{D2F681A5-57CC-4023-9470-B6A7ED443771}</Project>
       <Name>Vector2Extensions.Ouya</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ouya-csharp\Ouya.Console.Api\Ouya.Console.Api.csproj">
+      <Project>{493A4B6F-98CE-4000-8A0C-4A4726299061}</Project>
+      <Name>Ouya.Console.Api</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

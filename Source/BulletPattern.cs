@@ -1,6 +1,11 @@
 ﻿using System;
+using System.IO;
 using System.Xml;
 using System.Xml.Schema;
+using Microsoft.Xna.Framework;
+#if OUYA
+using Ouya.Console.Api;
+#endif
 
 namespace BulletMLLib
 {
@@ -62,8 +67,12 @@ namespace BulletMLLib
 			settings.ValidationType = ValidationType.DTD;
 			settings.DtdProcessing = DtdProcessing.Parse;
 			settings.ValidationEventHandler += new ValidationEventHandler(MyValidationEventHandler);
-			
+
+			#if OUYA
+			using (Stream reader = Game.Activity.Assets.Open(xmlFileName))
+			#else
 			using (XmlReader reader = XmlReader.Create(xmlFileName, settings))
+			#endif
 			{
 				try
 				{
