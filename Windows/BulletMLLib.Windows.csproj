@@ -63,6 +63,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <Import Project="..\..\Equationator\Equationator.Shared\Equationator.Shared.projitems" Label="Shared" Condition="Exists('..\..\Equationator\Equationator.Shared\Equationator.Shared.projitems')" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Compile Include="..\Source\Bullet.cs">
@@ -199,10 +200,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Equationator\Windows\Equationator.csproj">
-      <Project>{779F99A3-B976-45B2-AE0D-AD3EAF92A0D4}</Project>
-      <Name>Equationator</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Vector2Extensions\Windows\Vector2Extensions.Windows.csproj">
       <Project>{2c5acada-d15a-4193-ba0a-d36a362075f4}</Project>
       <Name>Vector2Extensions.Windows</Name>
