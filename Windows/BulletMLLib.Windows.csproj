@@ -200,6 +200,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Equationator\Equationator.Windows\Equationator.Windows.csproj">
+      <Project>{52e9b2ef-cfa4-4905-a94c-fe0372164e0b}</Project>
+      <Name>Equationator.Windows</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Vector2Extensions\Windows\Vector2Extensions.Windows.csproj">
       <Project>{2c5acada-d15a-4193-ba0a-d36a362075f4}</Project>
       <Name>Vector2Extensions.Windows</Name>

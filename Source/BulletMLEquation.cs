@@ -26,13 +26,13 @@ namespace BulletMLLib
 		/// used as a callback function in bulletml euqations
 		/// </summary>
 		/// <returns>The value.</returns>
-		public float RandomValue()
+		public double RandomValue()
 		{
 			//this value is "$rand", return a random number
-			return (float)g_Random.NextDouble();
+			return g_Random.NextDouble();
 		}
 
-		public float GameDifficulty()
+		public double GameDifficulty()
 		{
 			//This number is "$rank" which is the game difficulty.
 			Debug.Assert(null != GameManager.GameDifficulty);

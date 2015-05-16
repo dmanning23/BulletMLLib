@@ -297,7 +297,7 @@ namespace BulletMLLib
 		/// </summary>
 		/// <returns>The parameter value.</returns>
 		/// <param name="iParamNumber">the index of the parameter to get</param>
-		public float GetParamValue(int iParamNumber)
+		public double GetParamValue(int iParamNumber)
 		{
 			//if that task doesn't have any params, go up until we find one that does
 			if (ParamList.Count < iParamNumber)

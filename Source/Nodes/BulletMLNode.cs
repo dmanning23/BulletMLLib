@@ -217,10 +217,11 @@ namespace BulletMLLib
 		/// </summary>
 		/// <returns>The value.</returns>
 		/// <param name="task">Task.</param>
+		/// <param name="bullet">The bullet to get the value for</param>
 		public float GetValue(BulletMLTask task, Bullet bullet)
 		{
 			//send to the equation for an answer
-			return NodeEquation.Solve(task.GetParamValue, bullet.MyBulletManager.Tier);
+			return (float)NodeEquation.Solve(task.GetParamValue, bullet.MyBulletManager.Tier);
 		}
 
 		#region XML Methods

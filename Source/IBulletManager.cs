@@ -48,7 +48,7 @@ namespace BulletMLLib
 		/// can have the tier go from 0.0 -> 3.0 as it takes damage and do the following in your script:
 		/// $tier % 3
 		/// </summary>
-		float Tier();
+		double Tier();
 
 		#endregion //Methods
 	}
