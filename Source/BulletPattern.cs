@@ -64,7 +64,7 @@ namespace BulletMLLib
 		public void ParseXML(string xmlFileName)
 		{
 			XmlReaderSettings settings = new XmlReaderSettings();
-			settings.ValidationType = ValidationType.DTD;
+			settings.ValidationType = ValidationType.None;
 			settings.DtdProcessing = DtdProcessing.Parse;
 			settings.ValidationEventHandler += new ValidationEventHandler(MyValidationEventHandler);
 
