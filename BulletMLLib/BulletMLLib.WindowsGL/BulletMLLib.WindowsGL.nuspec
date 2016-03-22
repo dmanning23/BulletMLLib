@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>BulletMLLib.WindowsGL</id>
+        <version>1.0.0</version>
+        <title>BulletMLLib.WindowsGL</title>
+        <authors>dmanning23</authors>
+		<owners>dmanning23</owners>
+		<projectUrl>https://github.com/dmanning23/BulletMLLib</projectUrl>
+		<licenseUrl>https://github.com/dmanning23/BulletMLLib/blob/master/LICENSE.txt</licenseUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>Library for parsing BulletML xml files. Used for scripting bullet patterns in shmup games.</description>
+        <releaseNotes />
+        <copyright>Copyright 2016</copyright>
+        <tags>MonoGame WindowsGL BulletML shmup</tags>
+        <dependencies>
+            <dependency id="MonoGame.Framework.WindowsGL" version="(3.5,)"/>
+			<dependency id="RandomExtensions.WindowsGL" version="(1.0,)"/>
+			<dependency id="Equationator" version="(1.0,)"/>
+			<dependency id="Vector2Extensions.WindowsGL" version="(1.0,)"/>
+		</dependencies>
+    </metadata>
+    <files>
+        <file src="Y:\Documents\Projects\BulletMLLib\BulletMLLib\BulletMLLib.WindowsGL\bin\Release\BulletMLLib.WindowsGL.pdb" target="lib\BulletMLLib.WindowsGL.pdb" />
+        <file src="Y:\Documents\Projects\BulletMLLib\BulletMLLib\BulletMLLib.WindowsGL\bin\Release\BulletMLLib.WindowsGL.dll" target="lib\BulletMLLib.WindowsGL.dll" />
+    </files>
+</package>

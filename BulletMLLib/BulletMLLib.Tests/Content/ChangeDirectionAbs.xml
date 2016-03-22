@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "bulletml.dtd">
+
+<bulletml type="vertical"
+          xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+	<action label="top">
+		<changeDirection>
+			<direction type="absolute">90</direction>
+			<term>2</term>
+		</changeDirection>
+	</action>
+
+</bulletml>

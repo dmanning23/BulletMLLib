@@ -16,18 +16,12 @@ The wiki is a great reference for writing bulletML scripts:
 
 https://github.com/dmanning23/BulletMLLib/wiki
 
+A bunch of open-source BulletML scripts from around the web have been collected in the BulletMLExamples repo:
+
+https://github.com/dmanning23/BulletMLExamples
+
 ## BulletMLLibQuickStart
 
 For an example of how to use the BulletMLLib, check out the QuickStart project:
 
 https://github.com/dmanning23/BulletMLLibQuickStart
-
-It uses BulletMLLib as a submodule, so to checkout out all the code:
-
-git clone https://github.com/dmanning23/BulletMLLibQuickStart
-
-cd BulletMLLibQuickStart
-
-git submodule init
-
-git submodule update
