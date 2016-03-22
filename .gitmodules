@@ -1,15 +1,1 @@
-[submodule "BulletMLSample/Content/Samples"]
-	path = BulletMLSample/Content/Samples
-	url = https://github.com/dmanning23/BulletMLExamples.git
-[submodule "externals/Equationator"]
-	path = externals/Equationator
-	url = https://github.com/dmanning23/Equationator.git
-[submodule "externals/Vector2Extensions"]
-	path = externals/Vector2Extensions
-	url = git@github.com:dmanning23/Vector2Extensions.git
-[submodule "externals/MonoGame"]
-	path = externals/MonoGame
-	url = git@github.com:dmanning23/MonoGame.git
-[submodule "externals/RandomExtensions"]
-	path = externals/RandomExtensions
-	url = git@github.com:dmanning23/RandomExtensions.git
+
