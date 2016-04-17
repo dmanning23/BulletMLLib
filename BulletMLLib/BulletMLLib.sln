@@ -1,32 +1,47 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulletMLLib.Tests", "BulletMLLib.Tests\BulletMLLib.Tests.csproj", "{14CBD999-D5C4-43F1-B685-AD9C295A52B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulletMLLib.WindowsGL", "BulletMLLib.WindowsGL\BulletMLLib.WindowsGL.csproj", "{5063030C-7C64-4ECB-A5A9-295776AE5BE6}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulletMLLib.Android", "BulletMLLib.Android\BulletMLLib.Android.csproj", "{FB367D4F-9AFF-4562-864A-C35C51BDBCDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulletMLLib.DesktopGL", "BulletMLLib.DesktopGL\BulletMLLib.DesktopGL.csproj", "{D9E1E2D5-A3C6-4DD7-AE0C-65C6065787F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulletMLLib.iOS", "BulletMLLib.iOS\BulletMLLib.iOS.csproj", "{5B39461A-BF2A-48B2-BA11-61F11B7330D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		AppStore|Any CPU = AppStore|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{14CBD999-D5C4-43F1-B685-AD9C295A52B3}.AppStore|Any CPU.ActiveCfg = Release|Any CPU
+		{14CBD999-D5C4-43F1-B685-AD9C295A52B3}.AppStore|Any CPU.Build.0 = Release|Any CPU
 		{14CBD999-D5C4-43F1-B685-AD9C295A52B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{14CBD999-D5C4-43F1-B685-AD9C295A52B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14CBD999-D5C4-43F1-B685-AD9C295A52B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14CBD999-D5C4-43F1-B685-AD9C295A52B3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5063030C-7C64-4ECB-A5A9-295776AE5BE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5063030C-7C64-4ECB-A5A9-295776AE5BE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5063030C-7C64-4ECB-A5A9-295776AE5BE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5063030C-7C64-4ECB-A5A9-295776AE5BE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB367D4F-9AFF-4562-864A-C35C51BDBCDB}.AppStore|Any CPU.ActiveCfg = Release|Any CPU
+		{FB367D4F-9AFF-4562-864A-C35C51BDBCDB}.AppStore|Any CPU.Build.0 = Release|Any CPU
 		{FB367D4F-9AFF-4562-864A-C35C51BDBCDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FB367D4F-9AFF-4562-864A-C35C51BDBCDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB367D4F-9AFF-4562-864A-C35C51BDBCDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB367D4F-9AFF-4562-864A-C35C51BDBCDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9E1E2D5-A3C6-4DD7-AE0C-65C6065787F3}.AppStore|Any CPU.ActiveCfg = Release|Any CPU
+		{D9E1E2D5-A3C6-4DD7-AE0C-65C6065787F3}.AppStore|Any CPU.Build.0 = Release|Any CPU
+		{D9E1E2D5-A3C6-4DD7-AE0C-65C6065787F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9E1E2D5-A3C6-4DD7-AE0C-65C6065787F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9E1E2D5-A3C6-4DD7-AE0C-65C6065787F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9E1E2D5-A3C6-4DD7-AE0C-65C6065787F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B39461A-BF2A-48B2-BA11-61F11B7330D5}.AppStore|Any CPU.ActiveCfg = AppStore|Any CPU
+		{5B39461A-BF2A-48B2-BA11-61F11B7330D5}.AppStore|Any CPU.Build.0 = AppStore|Any CPU
+		{5B39461A-BF2A-48B2-BA11-61F11B7330D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B39461A-BF2A-48B2-BA11-61F11B7330D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B39461A-BF2A-48B2-BA11-61F11B7330D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B39461A-BF2A-48B2-BA11-61F11B7330D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

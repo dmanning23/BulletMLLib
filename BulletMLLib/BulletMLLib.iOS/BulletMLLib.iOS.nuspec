@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
-        <id>BulletMLLib.Android</id>
+        <id>BulletMLLib.iOS</id>
         <version>1.0.1</version>
-        <title>BulletMLLib.Android</title>
+        <title>BulletMLLib.iOS</title>
         <authors>dmanning23</authors>
 		<owners>dmanning23</owners>
 		<projectUrl>https://github.com/dmanning23/BulletMLLib</projectUrl>
@@ -12,17 +12,17 @@
 		<description>Library for parsing BulletML xml files. Used for scripting bullet patterns in shmup games.</description>
         <releaseNotes />
         <copyright>Copyright 2016</copyright>
-        <tags>MonoGame Android BulletML shmup</tags>
+        <tags>MonoGame iOS BulletML shmup</tags>
         <dependencies>
-            <dependency id="MonoGame.Framework.Android" version="3.5"/>
-			<dependency id="RandomExtensions.Android" version="1.0"/>
+            <dependency id="MonoGame.Framework.iOS" version="3.5"/>
+			<dependency id="RandomExtensions.iOS" version="1.0"/>
 			<dependency id="Equationator" version="1.0"/>
-			<dependency id="Vector2Extensions.Android" version="1.0"/>
+			<dependency id="Vector2Extensions.iOS" version="1.0"/>
 		</dependencies>
     </metadata>
     <files>
-        <file src="bin\Release\BulletMLLib.Android.pdb" target="lib\BulletMLLib.Android.pdb" />
-        <file src="bin\Release\BulletMLLib.Android.dll" target="lib\BulletMLLib.Android.dll" />
+        <file src="bin\Release\BulletMLLib.iOS.pdb" target="lib\BulletMLLib.iOS.pdb" />
+        <file src="bin\Release\BulletMLLib.iOS.dll" target="lib\BulletMLLib.iOS.dll" />
 		<file src="bin\Release\Content\bulletml.dtd" target="Content\bulletml.dtd" />
     </files>
 </package>

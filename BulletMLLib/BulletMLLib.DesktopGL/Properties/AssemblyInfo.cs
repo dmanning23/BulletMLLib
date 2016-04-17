@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BulletMLLib.WindowsGL")]
+[assembly: AssemblyTitle("BulletMLLib.DesktopGL")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("BulletMLLib.WindowsGL")]
+[assembly: AssemblyProduct("BulletMLLib.DesktopGL")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("5063030c-7c64-4ecb-a5a9-295776ae5be6")]
+[assembly: Guid("d9e1e2d5-a3c6-4dd7-ae0c-65c6065787f3")]
 
 // Version information for an assembly consists of the following four values:
 //

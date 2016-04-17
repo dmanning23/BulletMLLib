@@ -12,7 +12,7 @@ namespace BulletMLTests
 		[SetUp()]
 		public void setupHarness()
 		{
-			Filename.SetCurrentDirectory(@"Y:\Documents\Projects\BulletMLLib\BulletMLLib\BulletMLLib.Tests\bin\Debug");
+			Filename.SetCurrentDirectory(@"C:\Projects\BulletMLLib\BulletMLLib\BulletMLLib.Tests\bin\Debug");
 		}
 
 		[Test()]
