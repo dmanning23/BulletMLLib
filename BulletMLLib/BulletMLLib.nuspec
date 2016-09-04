@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+    <metadata>
+        <id>BulletMLLib</id>
+        <version>1.0.2</version>
+        <title>BulletMLLib</title>
+        <authors>dmanning23</authors>
+        <owners>dmanning23</owners>
+        <licenseUrl>https://github.com/dmanning23/BulletMLLib/blob/master/LICENSE.txt</licenseUrl>
+        <projectUrl>https://github.com/dmanning23/BulletMLLib</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Library for parsing BulletML xml files. Used for scripting bullet patterns in shmup games.</description>
+        <releaseNotes />
+        <copyright>Copyright 2016</copyright>
+        <tags>pcl, windows phone, winphone, android, ios, universal, monogame</tags>
+        <dependencies>
+            <group targetFramework="MonoAndroid1.0">
+                <dependency id="MonoGame.Framework.Android" version="3.5" />
+                <dependency id="Equationator" version="1.0" />
+            </group>
+            <group targetFramework="Xamarin iOS1.0">
+                <dependency id="MonoGame.Framework.iOS" version="3.5" />
+                <dependency id="Equationator" version="1.0" />
+            </group>
+            <!--<group targetFramework="Windows 10 Universal App Platform10.0">
+                <dependency id="MonoGame.Framework.WindowsUniversal" version="3.5" />
+                <dependency id="Microsoft.NETCore.UniversalWindowsPlatform" version="5.1" />
+                <dependency id="Equationator" version="1.0" />
+            </group>-->
+            <group targetFramework=".NETFramework4.5.1">
+                <dependency id="MonoGame.Framework.DesktopGL" version="3.5" />
+                <dependency id="Equationator" version="1.0" />
+            </group>
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="..\Content\bulletml.dtd" target="content\bulletml.dtd" />
+        <file src="BulletMLLib.Android\bin\Release\BulletMLLib.Android.dll" target="lib\MonoAndroid10\BulletMLLib.Android.dll" />
+        <file src="BulletMLLib.Android\bin\Release\BulletMLLib.Android.pdb" target="lib\MonoAndroid10\BulletMLLib.Android.pdb" />
+        <file src="BulletMLLib.DesktopGL\bin\Release\BulletMLLib.DesktopGL.dll" target="lib\net451\BulletMLLib.DesktopGL.dll" />
+        <file src="BulletMLLib.DesktopGL\bin\Release\BulletMLLib.DesktopGL.pdb" target="lib\net451\BulletMLLib.DesktopGL.pdb" />
+        <file src="BulletMLLib.iOS\bin\Release\BulletMLLib.iOS.dll" target="lib\Xamarin.iOS10\BulletMLLib.iOS.dll" />
+        <file src="BulletMLLib.iOS\bin\Release\BulletMLLib.iOS.pdb" target="lib\Xamarin.iOS10\BulletMLLib.iOS.pdb" />
+    </files>
+</package>

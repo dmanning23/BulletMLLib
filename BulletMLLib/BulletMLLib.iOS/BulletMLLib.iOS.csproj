@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Equationator.iOS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Equationator.iOS.1.0.3\lib\Equationator.iOS.dll</HintPath>
+      <HintPath>..\packages\Equationator.1.0.4\lib\Xamarin.iOS10\Equationator.iOS.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MonoGame.Framework, Version=3.5.1.1679, Culture=neutral, processorArchitecture=MSIL">
@@ -40,14 +40,14 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="RandomExtensions.iOS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RandomExtensions.dmanning23.iOS.1.0.1\lib\RandomExtensions.iOS.dll</HintPath>
+      <HintPath>..\packages\RandomExtensions.dmanning23.1.0.2\lib\Xamarin.iOS10\RandomExtensions.iOS.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Vector2Extensions.iOS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vector2Extensions.iOS.1.0.4\lib\Vector2Extensions.iOS.dll</HintPath>
+      <HintPath>..\packages\Vector2Extensions.1.0.1\lib\Xamarin.iOS10\Vector2Extensions.iOS.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Xamarin.iOS" />
@@ -56,147 +56,16 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Source\Bullet.cs">
-      <Link>Bullet.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\BulletMLEquation.cs">
-      <Link>BulletMLEquation.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\BulletPattern.cs">
-      <Link>BulletPattern.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\ENodeName.cs">
-      <Link>ENodeName.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\ENodeType.cs">
-      <Link>ENodeType.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\EPatternType.cs">
-      <Link>EPatternType.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\ERunStatus.cs">
-      <Link>ERunStatus.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\FireData.cs">
-      <Link>FireData.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\GameManager.cs">
-      <Link>GameManager.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\IBullet.cs">
-      <Link>IBullet.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\IBulletManager.cs">
-      <Link>IBulletManager.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Nodes\AccelNode.cs">
-      <Link>Nodes\AccelNode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Nodes\ActionNode.cs">
-      <Link>Nodes\ActionNode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Nodes\ActionRefNode.cs">
-      <Link>Nodes\ActionRefNode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Nodes\BulletMLNode.cs">
-      <Link>Nodes\BulletMLNode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Nodes\BulletNode.cs">
-      <Link>Nodes\BulletNode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Nodes\BulletRefNode.cs">
-      <Link>Nodes\BulletRefNode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Nodes\ChangeDirectionNode.cs">
-      <Link>Nodes\ChangeDirectionNode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Nodes\ChangeSpeedNode.cs">
-      <Link>Nodes\ChangeSpeedNode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Nodes\DirectionNode.cs">
-      <Link>Nodes\DirectionNode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Nodes\FireNode.cs">
-      <Link>Nodes\FireNode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Nodes\FireRefNode.cs">
-      <Link>Nodes\FireRefNode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Nodes\HorizontalNode.cs">
-      <Link>Nodes\HorizontalNode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Nodes\NodeFactory.cs">
-      <Link>Nodes\NodeFactory.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Nodes\ParamNode.cs">
-      <Link>Nodes\ParamNode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Nodes\RepeatNode.cs">
-      <Link>Nodes\RepeatNode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Nodes\SpeedNode.cs">
-      <Link>Nodes\SpeedNode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Nodes\TermNode.cs">
-      <Link>Nodes\TermNode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Nodes\TimesNode.cs">
-      <Link>Nodes\TimesNode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Nodes\VanishNode.cs">
-      <Link>Nodes\VanishNode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Nodes\VerticalNode.cs">
-      <Link>Nodes\VerticalNode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Nodes\WaitNode.cs">
-      <Link>Nodes\WaitNode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\PositionDelegate.cs">
-      <Link>PositionDelegate.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Tasks\AccelTask.cs">
-      <Link>Tasks\AccelTask.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Tasks\ActionTask.cs">
-      <Link>Tasks\ActionTask.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Tasks\BulletMLTask.cs">
-      <Link>Tasks\BulletMLTask.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Tasks\ChangeDirectionTask.cs">
-      <Link>Tasks\ChangeDirectionTask.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Tasks\ChangeSpeedTask.cs">
-      <Link>Tasks\ChangeSpeedTask.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Tasks\FireTask.cs">
-      <Link>Tasks\FireTask.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Tasks\RepeatTask.cs">
-      <Link>Tasks\RepeatTask.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Tasks\SetDirectionTask.cs">
-      <Link>Tasks\SetDirectionTask.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Tasks\SetSpeedTask.cs">
-      <Link>Tasks\SetSpeedTask.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Tasks\VanishTask.cs">
-      <Link>Tasks\VanishTask.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Tasks\WaitTask.cs">
-      <Link>Tasks\WaitTask.cs</Link>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\Source\Content\bulletml.dtd">
+    <Content Include="..\..\Content\bulletml.dtd">
       <Link>Content\bulletml.dtd</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="BulletMLLib.iOS.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
+  <Import Project="..\BulletMLLib.SharedProject\BulletMLLib.SharedProject.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

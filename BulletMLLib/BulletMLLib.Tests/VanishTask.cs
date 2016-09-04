@@ -1,8 +1,8 @@
 using BulletMLSample;
-using FilenameBuddy;
 using NUnit.Framework;
 using System;
 using BulletMLLib;
+using FilenameBuddy;
 
 namespace BulletMLTests
 {
