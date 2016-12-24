@@ -63,24 +63,25 @@ namespace BulletMLLib
 		/// <param name="xmlFileName">Xml file name.</param>
 		public void ParseXML(string xmlFileName)
 		{
+#if NETFX_CORE
+			XmlReaderSettings settings = new XmlReaderSettings();
+			settings.DtdProcessing = DtdProcessing.Ignore;
+#else
 			XmlReaderSettings settings = new XmlReaderSettings();
 			settings.ValidationType = ValidationType.None;
 			settings.DtdProcessing = DtdProcessing.Parse;
 			settings.ValidationEventHandler += new ValidationEventHandler(MyValidationEventHandler);
-
-			#if OUYA
-			using (Stream reader = Game.Activity.Assets.Open(xmlFileName))
-			#else
-			using (XmlReader reader = XmlReader.Create(xmlFileName, settings))
-			#endif
+#endif
+			try
 			{
-				try
+				using (XmlReader reader = XmlReader.Create(xmlFileName, settings))
 				{
+
 					//Open the file.
 					XmlDocument xmlDoc = new XmlDocument();
 					xmlDoc.Load(reader);
 					XmlNode rootXmlNode = xmlDoc.DocumentElement;
-				
+
 					//make sure it is actually an xml node
 					if (rootXmlNode.NodeType == XmlNodeType.Element)
 					{
@@ -89,7 +90,7 @@ namespace BulletMLLib
 						if ("bulletml" != strElementName)
 						{
 							//The first node HAS to be bulletml
-							throw new Exception("Error reading \"" + xmlFileName + "\": XML root node needs to be \"bulletml\", found \"" + strElementName + "\" instead"); 
+							throw new Exception("Error reading \"" + xmlFileName + "\": XML root node needs to be \"bulletml\", found \"" + strElementName + "\" instead");
 						}
 
 						//Create the root node of the bulletml tree
@@ -113,11 +114,11 @@ namespace BulletMLLib
 						}
 					}
 				}
-				catch (Exception ex)
-				{
-					//an error ocurred reading in the tree
-					throw new Exception("Error reading \"" + xmlFileName + "\"", ex);
-				}
+			}
+			catch (Exception ex)
+			{
+				//an error ocurred reading in the tree
+				throw new Exception("Error reading \"" + xmlFileName + "\"", ex);
 			}
 
 			//grab that filename 
@@ -135,6 +136,7 @@ namespace BulletMLLib
 			}
 		}
 
+#if !NETFX_CORE
 		/// <summary>
 		/// delegate method that gets called when a validation error occurs
 		/// </summary>
@@ -147,6 +149,8 @@ namespace BulletMLLib
 			                             args.Exception.LineNumber,
 			                             args.Exception.LinePosition);
 		}
+#endif
+
 		#endregion //Methods
 	}
 }
