@@ -40,9 +40,11 @@ x64/
 *.cachefile
 *.apk
 *.nupkg
+*csproj.bak
 .DS_Store
 ._.DS_Store
 UpgradeLog.htm
+project.lock.json
 
 # Visual C++ cache files
 ipch/
