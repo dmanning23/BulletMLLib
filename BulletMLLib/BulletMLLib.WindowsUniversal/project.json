@@ -1,10 +1,10 @@
 ﻿{
   "dependencies": {
-    "Equationator": "1.0.4",
+    "Equationator": "1.0.5",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
     "MonoGame.Framework.WindowsUniversal": "3.5.1.1679",
     "System.Xml.XmlDocument": "4.3.0",
-    "Vector2Extensions": "1.0.1"
+    "Vector2Extensions": "1.0.8"
   },
   "frameworks": {
     "uap10.0": {}
