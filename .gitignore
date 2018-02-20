@@ -47,6 +47,7 @@ UpgradeLog.htm
 project.lock.json
 
 # Visual C++ cache files
+.vs/
 ipch/
 *.aps
 *.ncb
