@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
 	<metadata>
 		<id>BulletMLLib</id>
-		<version>1.0.8</version>
+		<version>2.0.0</version>
 		<title>BulletMLLib</title>
 		<authors>dmanning23</authors>
 		<owners>dmanning23</owners>
@@ -15,34 +15,34 @@
 		<tags>pcl, windows phone, winphone, android, ios, universal, monogame</tags>
 		<dependencies>
 			<group targetFramework="MonoAndroid10">
-				<dependency id="MonoGame.Framework.Android" version="3.6" />
+				<dependency id="MonoGame.Framework.Android" version="3.7" />
 				<dependency id="Equationator" version="1.0" />
-				<dependency id="FilenameBuddy" version="1.0" />
-				<dependency id="RandomExtensions.dmanning23" version="1.0" />
-				<dependency id="Vector2Extensions" version="1.0" />
+				<dependency id="FilenameBuddy" version="2.0" />
+				<dependency id="RandomExtensions.dmanning23" version="2.0" />
+				<dependency id="Vector2Extensions" version="2.0" />
 			</group>
 			<group targetFramework="Xamarin.iOS10">
-				<dependency id="MonoGame.Framework.iOS" version="3.6" />
+				<dependency id="MonoGame.Framework.iOS" version="3.7" />
 				<dependency id="Equationator" version="1.0" />
-				<dependency id="FilenameBuddy" version="1.0" />
-				<dependency id="RandomExtensions.dmanning23" version="1.0" />
-				<dependency id="Vector2Extensions" version="1.0" />
+				<dependency id="FilenameBuddy" version="2.0" />
+				<dependency id="RandomExtensions.dmanning23" version="2.0" />
+				<dependency id="Vector2Extensions" version="2.0" />
 			</group>
 			<group targetFramework="uap10.0">
-				<dependency id="MonoGame.Framework.WindowsUniversal" version="3.6" />
+				<dependency id="MonoGame.Framework.WindowsUniversal" version="3.7" />
 				<dependency id="Microsoft.NETCore.UniversalWindowsPlatform" version="5.1" />
 				<dependency id="Equationator" version="1.0" />
 				<dependency id="System.Xml.XmlDocument" version="4.3" />
-				<dependency id="FilenameBuddy" version="1.0" />
-				<dependency id="RandomExtensions.dmanning23" version="1.0" />
-				<dependency id="Vector2Extensions" version="1.0" />
+				<dependency id="FilenameBuddy" version="2.0" />
+				<dependency id="RandomExtensions.dmanning23" version="2.0" />
+				<dependency id="Vector2Extensions" version="2.0" />
 			</group>
 			<group targetFramework="net451">
-				<dependency id="MonoGame.Framework.WindowsDX" version="3.6" />
+				<dependency id="MonoGame.Framework.WindowsDX" version="3.7" />
 				<dependency id="Equationator" version="1.0" />
-				<dependency id="FilenameBuddy" version="1.0" />
-				<dependency id="RandomExtensions.dmanning23" version="1.0" />
-				<dependency id="Vector2Extensions" version="1.0" />
+				<dependency id="FilenameBuddy" version="2.0" />
+				<dependency id="RandomExtensions.dmanning23" version="2.0" />
+				<dependency id="Vector2Extensions" version="2.0" />
 			</group>
 		</dependencies>
 	</metadata>
