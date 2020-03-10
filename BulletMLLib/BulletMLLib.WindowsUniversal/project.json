@@ -1,12 +1,12 @@
 ﻿{
   "dependencies": {
     "Equationator": "1.0.7",
-    "FilenameBuddy": "2.0.5",
-    "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.8",
+    "FilenameBuddy": "2.0.8",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.9",
     "MonoGame.Framework.WindowsUniversal": "3.7.1.189",
     "RandomExtensions.dmanning23": "2.0.0",
     "System.Xml.XmlDocument": "4.3.0",
-    "Vector2Extensions": "2.0.1"
+    "Vector2Extensions": "2.0.2"
   },
   "frameworks": {
     "uap10.0.14393": {}
