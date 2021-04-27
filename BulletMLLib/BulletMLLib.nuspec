@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
 	<metadata>
 		<id>BulletMLLib</id>
-		<version>2.0.1</version>
+		<version>2.0.2</version>
 		<title>BulletMLLib</title>
 		<authors>dmanning23</authors>
 		<owners>dmanning23</owners>
@@ -28,15 +28,6 @@
 				<dependency id="RandomExtensions.dmanning23" version="2.0" />
 				<dependency id="Vector2Extensions" version="2.0" />
 			</group>
-			<group targetFramework="uap10.0">
-				<dependency id="MonoGame.Framework.WindowsUniversal" version="3.7" />
-				<dependency id="Microsoft.NETCore.UniversalWindowsPlatform" version="5.1" />
-				<dependency id="Equationator" version="1.0" />
-				<dependency id="System.Xml.XmlDocument" version="4.3" />
-				<dependency id="FilenameBuddy" version="2.0" />
-				<dependency id="RandomExtensions.dmanning23" version="2.0" />
-				<dependency id="Vector2Extensions" version="2.0" />
-			</group>
 			<group targetFramework="net451">
 				<dependency id="MonoGame.Framework.WindowsDX" version="3.7" />
 				<dependency id="Equationator" version="1.0" />
@@ -57,8 +48,5 @@
 
 		<file src="BulletMLLib.iOS\bin\Release\BulletMLLib.iOS.dll" target="lib\Xamarin.iOS10\BulletMLLib.iOS.dll" />
 		<file src="BulletMLLib.iOS\bin\Release\BulletMLLib.iOS.pdb" target="lib\Xamarin.iOS10\BulletMLLib.iOS.pdb" />
-
-		<file src="BulletMLLib.WindowsUniversal\bin\Release\BulletMLLib.WindowsUniversal.dll" target="lib\uap10.0\BulletMLLib.WindowsUniversal.dll" />
-		<file src="BulletMLLib.WindowsUniversal\bin\Release\BulletMLLib.WindowsUniversal.pdb" target="lib\uap10.0\BulletMLLib.WindowsUniversal.pdb" />
 	</files>
 </package>
