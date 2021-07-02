@@ -3,7 +3,7 @@ namespace BulletMLLib
 {
 	public class WaitNode : BulletMLNode
 	{
-		public WaitNode() : base(ENodeName.wait)
+		public WaitNode(IBulletManager manager) : base(ENodeName.wait, manager)
 		{
 		}
 	}

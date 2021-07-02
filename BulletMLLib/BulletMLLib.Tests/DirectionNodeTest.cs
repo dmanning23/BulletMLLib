@@ -2,17 +2,29 @@ using FilenameBuddy;
 using NUnit.Framework;
 using System;
 using BulletMLLib;
+using BulletMLSample;
 
 namespace BulletMLTests
 {
 	[TestFixture()]
 	public class DirectionNodeTest
 	{
+		MoverManager manager;
+		Myship dude;
+
+		[SetUp()]
+		public void setupHarness()
+		{
+			Filename.SetCurrentDirectory(@"C:\Projects\BulletMLLib\BulletMLLib\BulletMLLib.Tests\bin\Debug");
+			dude = new Myship();
+			manager = new MoverManager(dude.Position);
+		}
+
 		[Test()]
 		public void CreatedDirectionNode()
 		{
 			var filename = new Filename(@"FireDirection.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			Assert.IsNotNull(pattern.RootNode);
@@ -22,7 +34,7 @@ namespace BulletMLTests
 		public void CreatedDirectionNode1()
 		{
 			var filename = new Filename(@"FireDirection.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			ActionNode testActionNode = pattern.RootNode.GetChild(ENodeName.action) as ActionNode;
@@ -35,7 +47,7 @@ namespace BulletMLTests
 		public void CreatedDirectionNode2()
 		{
 			var filename = new Filename(@"FireDirection.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			ActionNode testActionNode = pattern.RootNode.GetChild(ENodeName.action) as ActionNode;
@@ -48,7 +60,7 @@ namespace BulletMLTests
 		public void DirectionNodeDefaultValue()
 		{
 			var filename = new Filename(@"FireDirection.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			ActionNode testActionNode = pattern.RootNode.GetChild(ENodeName.action) as ActionNode;
@@ -62,7 +74,7 @@ namespace BulletMLTests
 		public void DirectionNodeAim()
 		{
 			var filename = new Filename(@"FireDirectionAim.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			ActionNode testActionNode = pattern.RootNode.GetChild(ENodeName.action) as ActionNode;
@@ -76,7 +88,7 @@ namespace BulletMLTests
 		public void DirectionNodeAbsolute()
 		{
 			var filename = new Filename(@"FireDirectionAbsolute.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			ActionNode testActionNode = pattern.RootNode.GetChild(ENodeName.action) as ActionNode;
@@ -90,7 +102,7 @@ namespace BulletMLTests
 		public void DirectionNodeSequence()
 		{
 			var filename = new Filename(@"FireDirectionSequence.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			ActionNode testActionNode = pattern.RootNode.GetChild(ENodeName.action) as ActionNode;
@@ -104,7 +116,7 @@ namespace BulletMLTests
 		public void DirectionNodeRelative()
 		{
 			var filename = new Filename(@"FireDirectionRelative.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			ActionNode testActionNode = pattern.RootNode.GetChild(ENodeName.action) as ActionNode;

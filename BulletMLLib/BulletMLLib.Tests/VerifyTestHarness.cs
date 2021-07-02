@@ -1,10 +1,8 @@
+using BulletMLLib;
 using BulletMLSample;
 using FilenameBuddy;
 using NUnit.Framework;
-using System;
-using BulletMLLib;
 using System.IO;
-using Microsoft.Xna.Framework;
 
 namespace BulletMLTests
 {
@@ -30,7 +28,7 @@ namespace BulletMLTests
 			foreach (var source in Directory.GetFiles(filename.GetPath(), "*.xml"))
 			{
 				//load & validate the pattern
-				BulletPattern pattern = new BulletPattern();
+				BulletPattern pattern = new BulletPattern(manager);
 				pattern.ParseXML(source);
 
 				//fire in the hole
@@ -44,7 +42,7 @@ namespace BulletMLTests
 		public void NoBullet()
 		{
 			var filename = new Filename(@"Empty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -57,7 +55,7 @@ namespace BulletMLTests
 		public void NoBullet1()
 		{
 			var filename = new Filename(@"FireEmptyNoBullets.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -70,7 +68,7 @@ namespace BulletMLTests
 		public void NoBullet2()
 		{
 			var filename = new Filename(@"BulletEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -83,7 +81,7 @@ namespace BulletMLTests
 		public void NoBullet3()
 		{
 			var filename = new Filename(@"ActionEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -96,7 +94,7 @@ namespace BulletMLTests
 		public void OneBullet()
 		{
 			var filename = new Filename(@"ActionOneTop.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -109,7 +107,7 @@ namespace BulletMLTests
 		public void OneBullet1()
 		{
 			var filename = new Filename(@"FireDirection.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -122,7 +120,7 @@ namespace BulletMLTests
 		public void TwoBullets()
 		{
 			var filename = new Filename(@"ActionManyTop.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateTopBullet();
 			mover.InitTopNode(pattern.RootNode);

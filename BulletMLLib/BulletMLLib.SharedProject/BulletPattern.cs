@@ -29,7 +29,9 @@ namespace BulletMLLib
 		/// this is read in from the xml
 		/// </summary>
 		/// <value>The orientation.</value>
-		public EPatternType Orientation { get; private set; }
+		public EPatternType Orientation { get; private set; } = EPatternType.none;
+
+		private IBulletManager BulletManager { get;set;}
 
 		#endregion //Members
 
@@ -38,8 +40,9 @@ namespace BulletMLLib
 		/// <summary>
 		/// Initializes a new instance of the <see cref="BulletMLLib.BulletPattern"/> class.
 		/// </summary>
-		public BulletPattern()
+		public BulletPattern(IBulletManager manager)
 		{
+			BulletManager = manager;
 			RootNode = null;
 		}
 
@@ -128,10 +131,10 @@ namespace BulletMLLib
 				}
 
 				//Create the root node of the bulletml tree
-				RootNode = new BulletMLNode(ENodeName.bulletml);
+				RootNode = new BulletMLNode(ENodeName.bulletml, BulletManager);
 
 				//Read in the whole bulletml tree
-				RootNode.Parse(rootXmlNode, null);
+				RootNode.Parse(rootXmlNode, null, BulletManager);
 
 				//Find what kind of pattern this is: horizontal or vertical
 				XmlNamedNodeMap mapAttributes = rootXmlNode.Attributes;

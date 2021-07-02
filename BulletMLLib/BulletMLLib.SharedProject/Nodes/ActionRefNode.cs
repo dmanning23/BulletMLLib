@@ -19,7 +19,7 @@ namespace BulletMLLib
 		/// <summary>
 		/// Initializes a new instance of the <see cref="BulletMLLib.ActionRefNode"/> class.
 		/// </summary>
-		public ActionRefNode() : base(ENodeName.actionRef)
+		public ActionRefNode(IBulletManager manager) : base(ENodeName.actionRef, manager)
 		{
 		}
 

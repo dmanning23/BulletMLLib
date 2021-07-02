@@ -1,8 +1,7 @@
+using BulletMLLib;
 using BulletMLSample;
 using FilenameBuddy;
 using NUnit.Framework;
-using System;
-using BulletMLLib;
 
 namespace BulletMLTests
 {
@@ -24,7 +23,7 @@ namespace BulletMLTests
 		public void CorrectNode()
 		{
 			var filename = new Filename(@"ActionOneTop.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -37,7 +36,7 @@ namespace BulletMLTests
 		public void RepeatOnce()
 		{
 			var filename = new Filename(@"ActionOneTop.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -51,7 +50,7 @@ namespace BulletMLTests
 		public void CorrectAction()
 		{
 			var filename = new Filename(@"ActionRepeatOnce.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -63,7 +62,7 @@ namespace BulletMLTests
 		public void CorrectAction1()
 		{
 			var filename = new Filename(@"ActionRepeatOnce.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -76,7 +75,7 @@ namespace BulletMLTests
 		public void CorrectAction2()
 		{
 			var filename = new Filename(@"ActionRepeatOnce.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -92,7 +91,7 @@ namespace BulletMLTests
 		public void RepeatNumInitCorrect()
 		{
 			var filename = new Filename(@"ActionRepeatOnce.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -105,7 +104,7 @@ namespace BulletMLTests
 		public void RepeatNumMaxInitCorrect()
 		{
 			var filename = new Filename(@"ActionRepeatOnce.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -120,7 +119,7 @@ namespace BulletMLTests
 		public void RepeatNumMaxCorrect()
 		{
 			var filename = new Filename(@"ActionRepeatMany.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -132,7 +131,7 @@ namespace BulletMLTests
 		public void RepeatNumMaxCorrect1()
 		{
 			var filename = new Filename(@"ActionRepeatMany.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);

@@ -12,89 +12,89 @@ namespace BulletMLLib
 		/// </summary>
 		/// <returns>An instance of the correct node type</returns>
 		/// <param name="nodeType">Node type that we want.</param>
-		public static BulletMLNode CreateNode(ENodeName nodeType)
+		public static BulletMLNode CreateNode(ENodeName nodeType, IBulletManager manager)
 		{
 			switch (nodeType)
 			{
 				case ENodeName.bullet:
 				{
-					return new BulletNode();
+					return new BulletNode(manager);
 				}
 				case ENodeName.action:
 				{
-					return new ActionNode();
+					return new ActionNode(manager);
 				}
 				case ENodeName.fire:
 				{
-					return new FireNode();
+					return new FireNode(manager);
 				}
 				case ENodeName.changeDirection:
 				{
-					return new ChangeDirectionNode();
+					return new ChangeDirectionNode(manager);
 				}
 				case ENodeName.changeSpeed:
 				{
-					return new ChangeSpeedNode();
+					return new ChangeSpeedNode(manager);
 				}
 				case ENodeName.accel:
 				{
-					return new AccelNode();
+					return new AccelNode(manager);
 				}
 				case ENodeName.wait:
 				{
-					return new WaitNode();
+					return new WaitNode(manager);
 				}
 				case ENodeName.repeat:
 				{
-					return new RepeatNode();
+					return new RepeatNode(manager);
 				}
 				case ENodeName.bulletRef:
 				{
-					return new BulletRefNode();
+					return new BulletRefNode(manager);
 				}
 				case ENodeName.actionRef:
 				{
-					return new ActionRefNode();
+					return new ActionRefNode(manager);
 				}
 				case ENodeName.fireRef:
 				{
-					return new FireRefNode();
+					return new FireRefNode(manager);
 				}
 				case ENodeName.vanish:
 				{
-					return new VanishNode();
+					return new VanishNode(manager);
 				}
 				case ENodeName.horizontal:
 				{
-					return new HorizontalNode();
+					return new HorizontalNode(manager);
 				}
 				case ENodeName.vertical:
 				{
-					return new VerticalNode();
+					return new VerticalNode(manager);
 				}
 				case ENodeName.term:
 				{
-					return new TermNode();
+					return new TermNode(manager);
 				}
 				case ENodeName.times:
 				{
-					return new TimesNode();
+					return new TimesNode(manager);
 				}
 				case ENodeName.direction:
 				{
-					return new DirectionNode();
+					return new DirectionNode(manager);
 				}
 				case ENodeName.speed:
 				{
-					return new SpeedNode();
+					return new SpeedNode(manager);
 				}
 				case ENodeName.param:
 				{
-					return new ParamNode();
+					return new ParamNode(manager);
 				}
 				case ENodeName.bulletml:
 				{
-					return new BulletMLNode(ENodeName.bulletml);
+					return new BulletMLNode(ENodeName.bulletml, manager);
 				}
 				default:
 				{

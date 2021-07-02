@@ -20,7 +20,7 @@ namespace BulletMLLib
 		/// <summary>
 		/// Initializes a new instance of the <see cref="BulletMLLib.FireRefNode"/> class.
 		/// </summary>
-		public FireRefNode() : base(ENodeName.fireRef)
+		public FireRefNode(IBulletManager manager) : base(ENodeName.fireRef, manager)
 		{
 		}
 

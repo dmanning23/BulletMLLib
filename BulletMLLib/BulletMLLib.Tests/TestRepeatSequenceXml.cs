@@ -1,8 +1,7 @@
-using FilenameBuddy;
-using BulletMLSample;
-using NUnit.Framework;
-using System;
 using BulletMLLib;
+using BulletMLSample;
+using FilenameBuddy;
+using NUnit.Framework;
 
 namespace BulletMLTests
 {
@@ -19,7 +18,7 @@ namespace BulletMLTests
 			Filename.SetCurrentDirectory(@"C:\Projects\BulletMLLib\BulletMLLib\BulletMLLib.Tests\bin\Debug");
 			dude = new Myship();
 			manager = new MoverManager(dude.Position);
-			pattern = new BulletPattern();
+			pattern = new BulletPattern(manager);
 		}
 
 		[Test()]

@@ -66,6 +66,8 @@ namespace BulletMLSample
 			//_inputWrapper = new InputWrapper(new ControllerWrapper(PlayerIndex.One, true), _clock.GetCurrentTime);
 			//_inputWrapper.Controller.UseKeyboard = true;
 			_moverManager = new MoverManager(myship.Position);
+
+			_moverManager.Difficulty = _Rank;
 		}
 
 		protected override void Initialize()
@@ -76,8 +78,6 @@ namespace BulletMLSample
 
 			base.Initialize();
 		}
-
-		public float GetRank() { return _Rank; }
 
 		protected override void LoadContent()
 		{
@@ -94,12 +94,11 @@ namespace BulletMLSample
 				_patternNames.Add(source);
 
 				//load the pattern
-				BulletPattern pattern = new BulletPattern();
+				BulletPattern pattern = new BulletPattern(_moverManager);
 				pattern.ParseXML(source);
 				_myPatterns.Add(pattern);
 			}
 
-			GameManager.GameDifficulty = this.GetRank;
 
 			AddBullet();
 		}

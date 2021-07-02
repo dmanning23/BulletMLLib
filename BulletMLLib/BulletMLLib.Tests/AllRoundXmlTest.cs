@@ -1,8 +1,7 @@
+using BulletMLLib;
 using BulletMLSample;
 using FilenameBuddy;
 using NUnit.Framework;
-using System;
-using BulletMLLib;
 
 namespace BulletMLTests
 {
@@ -19,7 +18,7 @@ namespace BulletMLTests
 			Filename.SetCurrentDirectory(@"C:\Projects\BulletMLLib\BulletMLLib\BulletMLLib.Tests\bin\Debug");
 			dude = new Myship();
 			manager = new MoverManager(dude.Position);
-			pattern = new BulletPattern();
+			pattern = new BulletPattern(manager);
 		}
 
 		[Test()]
@@ -46,7 +45,7 @@ namespace BulletMLTests
 		public void CorrectNode()
 		{
 			var filename = new Filename(@"AllRound.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -59,7 +58,7 @@ namespace BulletMLTests
 		public void RepeatOnce()
 		{
 			var filename = new Filename(@"AllRound.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -73,7 +72,7 @@ namespace BulletMLTests
 		public void CorrectAction()
 		{
 			var filename = new Filename(@"AllRound.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);

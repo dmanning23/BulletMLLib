@@ -1,18 +1,29 @@
-using NUnit.Framework;
-using System;
 using BulletMLLib;
+using BulletMLSample;
 using FilenameBuddy;
+using NUnit.Framework;
 
 namespace BulletMLTests
 {
 	[TestFixture()]
 	public class ActionRefNodeTest
 	{
+		MoverManager manager;
+		Myship dude;
+
+		[SetUp()]
+		public void setupHarness()
+		{
+			Filename.SetCurrentDirectory(@"C:\Projects\BulletMLLib\BulletMLLib\BulletMLLib.Tests\bin\Debug");
+			dude = new Myship();
+			manager = new MoverManager(dude.Position);
+		}
+
 		[Test()]
 		public void ValidXML()
 		{
 			var filename = new Filename(@"ActionRefEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			Assert.IsNotNull(pattern.RootNode);
@@ -22,7 +33,7 @@ namespace BulletMLTests
 		public void GotActionRefNode()
 		{
 			var filename = new Filename(@"ActionRefEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			ActionNode testActionNode = pattern.RootNode.GetChild(ENodeName.action) as ActionNode;
@@ -33,7 +44,7 @@ namespace BulletMLTests
 		public void GotActionRefNode1()
 		{
 			var filename = new Filename(@"ActionRefEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			ActionNode testActionNode = pattern.RootNode.GetChild(ENodeName.action) as ActionNode;
@@ -45,7 +56,7 @@ namespace BulletMLTests
 		public void GotActionRefNode2()
 		{
 			var filename = new Filename(@"ActionRefEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			ActionNode testActionNode = pattern.RootNode.GetChild(ENodeName.action) as ActionNode;
@@ -58,7 +69,7 @@ namespace BulletMLTests
 		public void GotActionRefNode3()
 		{
 			var filename = new Filename(@"ActionRefEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			ActionNode testActionNode = pattern.RootNode.GetChild(ENodeName.action) as ActionNode;
@@ -71,7 +82,7 @@ namespace BulletMLTests
 		public void GotActionRefNode4()
 		{
 			var filename = new Filename(@"ActionRefEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			ActionNode testActionNode = pattern.RootNode.GetChild(ENodeName.action) as ActionNode;
@@ -84,7 +95,7 @@ namespace BulletMLTests
 		public void FoundActionNode()
 		{
 			var filename = new Filename(@"ActionRefEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			ActionNode testActionNode = pattern.RootNode.GetChild(ENodeName.action) as ActionNode;
@@ -99,7 +110,7 @@ namespace BulletMLTests
 		public void FoundActionNode1()
 		{
 			var filename = new Filename(@"ActionRefEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			ActionNode testActionNode = pattern.RootNode.GetChild(ENodeName.action) as ActionNode;
@@ -114,7 +125,7 @@ namespace BulletMLTests
 		public void FoundActionNode2()
 		{
 			var filename = new Filename(@"ActionRefEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			ActionNode testActionNode = pattern.RootNode.GetChild(ENodeName.action) as ActionNode;
@@ -130,7 +141,7 @@ namespace BulletMLTests
 		public void FoundCorrectActionNode()
 		{
 			var filename = new Filename(@"ActionRefParam.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			ActionNode testActionNode = pattern.RootNode.GetChild(ENodeName.action) as ActionNode;

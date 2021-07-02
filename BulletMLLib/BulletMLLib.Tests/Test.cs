@@ -3,16 +3,22 @@ using System;
 using BulletMLLib;
 using System.IO;
 using FilenameBuddy;
+using BulletMLSample;
 
 namespace BulletMLTests
 {
 	[TestFixture()]
 	public class Test
 	{
+		MoverManager manager;
+		Myship dude;
+
 		[SetUp()]
 		public void setupHarness()
 		{
 			Filename.SetCurrentDirectory(@"C:\Projects\BulletMLLib\BulletMLLib\BulletMLLib.Tests\bin\Debug");
+			dude = new Myship();
+			manager = new MoverManager(dude.Position);
 		}
 
 		[Test()]
@@ -23,7 +29,7 @@ namespace BulletMLTests
 			foreach (var source in Directory.GetFiles(filename.GetPath(), "*.xml"))
 			{
 				//load & validate the pattern
-				BulletPattern pattern = new BulletPattern();
+				BulletPattern pattern = new BulletPattern(manager);
 				pattern.ParseXML(source);
 			}
 		}

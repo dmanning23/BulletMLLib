@@ -3,7 +3,7 @@ namespace BulletMLLib
 {
 	public class ChangeDirectionNode : BulletMLNode
 	{
-		public ChangeDirectionNode() : base(ENodeName.changeDirection)
+		public ChangeDirectionNode(IBulletManager manager) : base(ENodeName.changeDirection, manager)
 		{
 		}
 	}

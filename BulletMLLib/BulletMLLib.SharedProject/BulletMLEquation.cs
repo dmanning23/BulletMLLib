@@ -10,33 +10,16 @@ namespace BulletMLLib
 	/// </summary>
 	public class BulletMLEquation : Equation
 	{
-		/// <summary>
-		/// A randomizer for getting random values
-		/// </summary>
-		static private Random g_Random = new Random(DateTime.Now.Millisecond);
-
-		public BulletMLEquation()
+		public BulletMLEquation(IBulletManager manager)
 		{
 			//add the specific functions we will use for bulletml grammar
-			AddFunction("rand", RandomValue);
-			AddFunction("rank", GameDifficulty);
-		}
+			AddFunction("rank", manager.GameDifficulty);
 
-		/// <summary>
-		/// used as a callback function in bulletml euqations
-		/// </summary>
-		/// <returns>The value.</returns>
-		public double RandomValue()
-		{
-			//this value is "$rand", return a random number
-			return g_Random.NextDouble();
-		}
-
-		public double GameDifficulty()
-		{
-			//This number is "$rank" which is the game difficulty.
-			Debug.Assert(null != GameManager.GameDifficulty);
-			return GameManager.GameDifficulty();
+			//Add any additional methods that have been added to this specific bulletml implementation
+			foreach (var function in manager.CallbackFunctions)
+			{
+				AddFunction(function.Key, function.Value);
+			}
 		}
 	}
 }

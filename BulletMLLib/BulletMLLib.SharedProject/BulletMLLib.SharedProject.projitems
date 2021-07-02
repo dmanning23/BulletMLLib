@@ -17,7 +17,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)EPatternType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ERunStatus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FireData.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IBullet.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IBulletManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Nodes\AccelNode.cs" />

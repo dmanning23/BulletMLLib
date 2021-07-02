@@ -3,7 +3,7 @@ namespace BulletMLLib
 {
 	public class ChangeSpeedNode : BulletMLNode
 	{
-		public ChangeSpeedNode() : base(ENodeName.changeSpeed)
+		public ChangeSpeedNode(IBulletManager manager) : base(ENodeName.changeSpeed, manager)
 		{
 		}
 	}

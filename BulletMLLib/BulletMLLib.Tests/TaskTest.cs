@@ -24,7 +24,7 @@ namespace BulletMLTests
 		public void OneAction()
 		{
 			var filename = new Filename(@"ActionOneTop.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -36,7 +36,7 @@ namespace BulletMLTests
 		public void OneAction1()
 		{
 			var filename = new Filename(@"ActionOneTop.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -48,7 +48,7 @@ namespace BulletMLTests
 		public void NoChildTasks()
 		{
 			var filename = new Filename(@"ActionOneTop.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -60,7 +60,7 @@ namespace BulletMLTests
 		public void NoParams()
 		{
 			var filename = new Filename(@"ActionOneTop.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -72,7 +72,7 @@ namespace BulletMLTests
 		public void NoOwner()
 		{
 			var filename = new Filename(@"ActionOneTop.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -84,7 +84,7 @@ namespace BulletMLTests
 		public void CorrectNode()
 		{
 			var filename = new Filename(@"ActionOneTop.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -96,7 +96,7 @@ namespace BulletMLTests
 		public void NotFinished()
 		{
 			var filename = new Filename(@"ActionOneTop.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -108,7 +108,7 @@ namespace BulletMLTests
 		public void OkFinished()
 		{
 			var filename = new Filename(@"ActionOneTop.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -120,7 +120,7 @@ namespace BulletMLTests
 		public void TaskFinishedFlag()
 		{
 			var filename = new Filename(@"ActionOneTop.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);

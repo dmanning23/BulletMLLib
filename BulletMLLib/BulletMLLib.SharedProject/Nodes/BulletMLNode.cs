@@ -49,7 +49,7 @@ namespace BulletMLLib
 		/// An equation used to get a value of this node.
 		/// </summary>
 		/// <value>The node value.</value>
-		protected BulletMLEquation NodeEquation = new BulletMLEquation();
+		protected BulletMLEquation NodeEquation;
 
 		/// <summary>
 		/// A list of all the child nodes for this dude
@@ -61,6 +61,11 @@ namespace BulletMLLib
 		/// </summary>
 		protected BulletMLNode Parent { get; private set; }
 
+		/// <summary>
+		/// The ID of this node.
+		/// </summary>
+		public string Id { get; set; }
+
 		#endregion //Members
 
 		#region Methods
@@ -68,8 +73,9 @@ namespace BulletMLLib
 		/// <summary>
 		/// Initializes a new instance of the <see cref="BulletMLLib.BulletMLNode"/> class.
 		/// </summary>
-		public BulletMLNode(ENodeName nodeType)
+		public BulletMLNode(ENodeName nodeType, IBulletManager manager)
 		{
+			NodeEquation = new BulletMLEquation(manager);
 			ChildNodes = new List<BulletMLNode>();
 			Name = nodeType;
 			NodeType = ENodeType.none;
@@ -221,7 +227,7 @@ namespace BulletMLLib
 		public float GetValue(BulletMLTask task, Bullet bullet)
 		{
 			//send to the equation for an answer
-			return (float)NodeEquation.Solve(task.GetParamValue, bullet.MyBulletManager.Tier);
+			return (float)NodeEquation.Solve(task.GetParamValue);
 		}
 
 		#region XML Methods
@@ -231,7 +237,7 @@ namespace BulletMLLib
 		/// Read all the data from the xml node into this dude.
 		/// </summary>
 		/// <param name="bulletNodeElement">Bullet node element.</param>
-		public void Parse(XmlNode bulletNodeElement, BulletMLNode parentNode)
+		public void Parse(XmlNode bulletNodeElement, BulletMLNode parentNode, IBulletManager manager)
 		{
 			// Handle null argument.
 			if (null == bulletNodeElement)
@@ -288,10 +294,10 @@ namespace BulletMLLib
 					}
 
 					//create a new node
-					BulletMLNode childBulletNode = NodeFactory.CreateNode(BulletMLNode.StringToName(childNode.Name));
+					BulletMLNode childBulletNode = NodeFactory.CreateNode(BulletMLNode.StringToName(childNode.Name), manager);
 
 					//read in the node and store it
-					childBulletNode.Parse(childNode, this);
+					childBulletNode.Parse(childNode, this, manager);
 					ChildNodes.Add(childBulletNode);
 				}
 			}

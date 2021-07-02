@@ -6,7 +6,7 @@ namespace BulletMLLib
 		/// <summary>
 		/// Initializes a new instance of the <see cref="BulletMLLib.DirectionNode"/> class.
 		/// </summary>
-		public DirectionNode() : base(ENodeName.direction)
+		public DirectionNode(IBulletManager manager) : base(ENodeName.direction, manager)
 		{
 			//set the default type to "aim"
 			NodeType = ENodeType.aim;

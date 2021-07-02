@@ -2,17 +2,29 @@ using NUnit.Framework;
 using FilenameBuddy;
 using System;
 using BulletMLLib;
+using BulletMLSample;
 
 namespace BulletMLTests
 {
 	[TestFixture()]
 	public class SpeedNodeTest
 	{
+		MoverManager manager;
+		Myship dude;
+
+		[SetUp()]
+		public void setupHarness()
+		{
+			Filename.SetCurrentDirectory(@"C:\Projects\BulletMLLib\BulletMLLib\BulletMLLib.Tests\bin\Debug");
+			dude = new Myship();
+			manager = new MoverManager(dude.Position);
+		}
+
 		[Test()]
 		public void CreatedSpeedNode()
 		{
 			var filename = new Filename(@"FireSpeed.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			Assert.IsNotNull(pattern.RootNode);
@@ -22,7 +34,7 @@ namespace BulletMLTests
 		public void CreatedSpeedNode1()
 		{
 			var filename = new Filename(@"FireSpeed.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			ActionNode testActionNode = pattern.RootNode.GetChild(ENodeName.action) as ActionNode;
@@ -35,7 +47,7 @@ namespace BulletMLTests
 		public void CreatedSpeedNode2()
 		{
 			var filename = new Filename(@"FireSpeed.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			ActionNode testActionNode = pattern.RootNode.GetChild(ENodeName.action) as ActionNode;
@@ -47,7 +59,7 @@ namespace BulletMLTests
 		public void CreatedSpeedNode3()
 		{
 			var filename = new Filename(@"FireSpeed.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			ActionNode testActionNode = pattern.RootNode.GetChild(ENodeName.action) as ActionNode;
@@ -59,7 +71,7 @@ namespace BulletMLTests
 		public void SpeedNodeDefaultValue()
 		{
 			var filename = new Filename(@"FireSpeed.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			ActionNode testActionNode = pattern.RootNode.GetChild(ENodeName.action) as ActionNode;
@@ -73,7 +85,7 @@ namespace BulletMLTests
 		public void SpeedNodeAbsolute()
 		{
 			var filename = new Filename(@"FireSpeedAbsolute.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			ActionNode testActionNode = pattern.RootNode.GetChild(ENodeName.action) as ActionNode;
@@ -87,7 +99,7 @@ namespace BulletMLTests
 		public void SpeedNodeSequence()
 		{
 			var filename = new Filename(@"FireSpeedSequence.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			ActionNode testActionNode = pattern.RootNode.GetChild(ENodeName.action) as ActionNode;
@@ -101,7 +113,7 @@ namespace BulletMLTests
 		public void SpeedNodeRelative()
 		{
 			var filename = new Filename(@"FireSpeedRelative.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			ActionNode testActionNode = pattern.RootNode.GetChild(ENodeName.action) as ActionNode;

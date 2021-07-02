@@ -1,4 +1,6 @@
+using Equationator;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 
 namespace BulletMLLib
 {
@@ -7,13 +9,16 @@ namespace BulletMLLib
 	/// </summary>
 	public interface IBulletManager
 	{
-		#region Properties
+		/// <summary>
+		/// This is a list of additional callbacks that can be set in this BulletML implementation.
+		/// For example, if you have a method to return the player's Tier you could use $tier in the bulletml scripts
+		/// </summary>
+		Dictionary<string, FunctionDelegate> CallbackFunctions { get; }
 
-		
-
-		#endregion Properties
-
-		#region Methods
+		/// <summary>
+		/// callback method to get the game difficulty.
+		/// </summary>
+		FunctionDelegate GameDifficulty { get; }
 
 		/// <summary>
 		/// a mathod to get current position of the player
@@ -41,15 +46,5 @@ namespace BulletMLLib
 		/// </summary>
 		/// <returns>A shiny new top-level bullet</returns>
 		IBullet CreateTopBullet();
-
-		/// <summary>
-		/// This is an item that gets passed into Equationator at runtime by the bullet manager.
-		/// so for example, instead of having different script files for the 3 different levels of your boss, 
-		/// can have the tier go from 0.0 -> 3.0 as it takes damage and do the following in your script:
-		/// $tier % 3
-		/// </summary>
-		double Tier();
-
-		#endregion //Methods
 	}
 }

@@ -3,7 +3,7 @@ namespace BulletMLLib
 {
 	public class RepeatNode : BulletMLNode
 	{
-		public RepeatNode() : base(ENodeName.repeat)
+		public RepeatNode(IBulletManager manager) : base(ENodeName.repeat, manager)
 		{
 		}
 	}

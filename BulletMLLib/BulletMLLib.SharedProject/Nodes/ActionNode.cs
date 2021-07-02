@@ -23,7 +23,7 @@ namespace BulletMLLib
 		/// <summary>
 		/// Initializes a new instance of the <see cref="BulletMLLib.ActionNode"/> class.
 		/// </summary>
-		public ActionNode() : this(ENodeName.action)
+		public ActionNode(IBulletManager manager) : base(ENodeName.action, manager)
 		{
 		}
 
@@ -32,7 +32,7 @@ namespace BulletMLLib
 		/// this is the constructor used by sub classes
 		/// </summary>
 		/// <param name="eNodeType">the node type.</param>
-		public ActionNode(ENodeName eNodeType) : base(eNodeType)
+		public ActionNode(ENodeName eNodeType, IBulletManager manager) : base(eNodeType, manager)
 		{
 		}
 

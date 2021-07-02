@@ -24,7 +24,7 @@ namespace BulletMLTests
 		public void CorrectNode()
 		{
 			var filename = new Filename(@"FireEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -37,7 +37,7 @@ namespace BulletMLTests
 		public void RepeatOnce()
 		{
 			var filename = new Filename(@"FireEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -51,7 +51,7 @@ namespace BulletMLTests
 		public void CorrectAction()
 		{
 			var filename = new Filename(@"FireEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -63,7 +63,7 @@ namespace BulletMLTests
 		public void CorrectAction1()
 		{
 			var filename = new Filename(@"FireEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -76,7 +76,7 @@ namespace BulletMLTests
 		public void CorrectAction2()
 		{
 			var filename = new Filename(@"FireEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -92,7 +92,7 @@ namespace BulletMLTests
 		public void NoSubTasks()
 		{
 			var filename = new Filename(@"FireEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -106,7 +106,7 @@ namespace BulletMLTests
 		public void NoSubTasks1()
 		{
 			var filename = new Filename(@"FireSpeedBulletSpeed.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -120,7 +120,7 @@ namespace BulletMLTests
 		public void FireDirectionInitCorrect()
 		{
 			var filename = new Filename(@"FireEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -136,7 +136,7 @@ namespace BulletMLTests
 		{
 			dude.pos.Y = -100.0f;
 			var filename = new Filename(@"FireEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -153,7 +153,7 @@ namespace BulletMLTests
 			dude.pos.X = 100.0f;
 			dude.pos.Y = 0.0f;
 			var filename = new Filename(@"FireEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -170,7 +170,7 @@ namespace BulletMLTests
 			dude.pos.X = -100.0f;
 			dude.pos.Y = 0.0f;
 			var filename = new Filename(@"FireEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -185,7 +185,7 @@ namespace BulletMLTests
 		public void FireSpeedInitCorrect()
 		{
 			var filename = new Filename(@"FireEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -199,7 +199,7 @@ namespace BulletMLTests
 		public void FireInitialRunInitCorrect()
 		{
 			var filename = new Filename(@"FireEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -213,7 +213,7 @@ namespace BulletMLTests
 		public void FireBulletRefInitCorrect()
 		{
 			var filename = new Filename(@"FireEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -227,7 +227,7 @@ namespace BulletMLTests
 		public void FireInitDirInitCorrect()
 		{
 			var filename = new Filename(@"FireEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -241,7 +241,7 @@ namespace BulletMLTests
 		public void FireSpeedInitInitCorrect()
 		{
 			var filename = new Filename(@"FireEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -255,7 +255,7 @@ namespace BulletMLTests
 		public void FireDirSeqInitCorrect()
 		{
 			var filename = new Filename(@"FireEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -269,7 +269,7 @@ namespace BulletMLTests
 		public void FireSpeedSeqInitCorrect()
 		{
 			var filename = new Filename(@"FireEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -283,7 +283,7 @@ namespace BulletMLTests
 		public void FoundBullet()
 		{
 			var filename = new Filename(@"BulletSpeed.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);
@@ -296,7 +296,7 @@ namespace BulletMLTests
 		public void FoundBulletNoSubTasks()
 		{
 			var filename = new Filename(@"BulletSpeed.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 			Mover mover = (Mover)manager.CreateBullet();
 			mover.InitTopNode(pattern.RootNode);

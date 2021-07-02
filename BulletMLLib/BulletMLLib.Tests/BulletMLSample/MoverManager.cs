@@ -1,4 +1,5 @@
 ﻿using BulletMLLib;
+using Equationator;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -18,6 +19,8 @@ namespace BulletMLSample
 		private float _timeSpeed = 1.0f;
 		private float _scale = 1.0f;
 
+
+
 		#endregion //Members
 
 		#region Properties
@@ -27,8 +30,8 @@ namespace BulletMLSample
 		/// Can be used to do slowdown, speedup, etc.
 		/// </summary>
 		/// <value>The time speed.</value>
-		public float TimeSpeed 
-		{ 
+		public float TimeSpeed
+		{
 			get
 			{
 				return _timeSpeed;
@@ -52,7 +55,7 @@ namespace BulletMLSample
 		/// </summary>
 		/// <value>The scale.</value>
 		public float Scale
-		{ 
+		{
 			get
 			{
 				return _scale;
@@ -69,6 +72,12 @@ namespace BulletMLSample
 				}
 			}
 		}
+
+		public double Difficulty { get; set; }
+
+		public Dictionary<string, FunctionDelegate> CallbackFunctions { get; set; } = new Dictionary<string, FunctionDelegate>();
+
+		public FunctionDelegate GameDifficulty => () => Difficulty;
 
 		#endregion //Properties
 

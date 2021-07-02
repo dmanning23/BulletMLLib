@@ -3,7 +3,7 @@ namespace BulletMLLib
 {
 	public class ParamNode : BulletMLNode
 	{
-		public ParamNode() : base(ENodeName.param)
+		public ParamNode(IBulletManager manager) : base(ENodeName.param, manager)
 		{
 		}
 	}

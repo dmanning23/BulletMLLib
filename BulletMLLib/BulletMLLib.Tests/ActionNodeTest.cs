@@ -1,18 +1,29 @@
-using NUnit.Framework;
-using FilenameBuddy;
-using System;
 using BulletMLLib;
+using BulletMLSample;
+using FilenameBuddy;
+using NUnit.Framework;
 
 namespace BulletMLTests
 {
 	[TestFixture()]
 	public class ActionNodeTest
 	{
+		MoverManager manager;
+		Myship dude;
+
+		[SetUp()]
+		public void setupHarness()
+		{
+			Filename.SetCurrentDirectory(@"C:\Projects\BulletMLLib\BulletMLLib\BulletMLLib.Tests\bin\Debug");
+			dude = new Myship();
+			manager = new MoverManager(dude.Position);
+		}
+
 		[Test()]
 		public void TestOneTop()
 		{
 			var filename = new Filename(@"ActionOneTop.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			ActionNode testNode = pattern.RootNode.FindLabelNode("top", ENodeName.action) as ActionNode;
@@ -23,7 +34,7 @@ namespace BulletMLTests
 		public void TestNoRepeatNode()
 		{
 			var filename = new Filename(@"ActionOneTop.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			ActionNode testNode = pattern.RootNode.FindLabelNode("top", ENodeName.action) as ActionNode;
@@ -34,7 +45,7 @@ namespace BulletMLTests
 		public void TestManyTop()
 		{
 			var filename = new Filename(@"ActionManyTop.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			ActionNode testNode = pattern.RootNode.FindLabelNode("top1", ENodeName.action) as ActionNode;

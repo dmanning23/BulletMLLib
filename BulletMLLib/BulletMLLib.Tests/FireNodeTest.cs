@@ -2,17 +2,29 @@ using NUnit.Framework;
 using FilenameBuddy;
 using System;
 using BulletMLLib;
+using BulletMLSample;
 
 namespace BulletMLTests
 {
 	[TestFixture()]
 	public class FireNodeTest
 	{
+		MoverManager manager;
+		Myship dude;
+
+		[SetUp()]
+		public void setupHarness()
+		{
+			Filename.SetCurrentDirectory(@"C:\Projects\BulletMLLib\BulletMLLib\BulletMLLib.Tests\bin\Debug");
+			dude = new Myship();
+			manager = new MoverManager(dude.Position);
+		}
+
 		[Test()]
 		public void CreatedFireNode()
 		{
 			var filename = new Filename(@"FireEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			Assert.IsNotNull(pattern.RootNode);
@@ -22,7 +34,7 @@ namespace BulletMLTests
 		public void CreatedFireNode1()
 		{
 			var filename = new Filename(@"FireEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			//get teh child action node
@@ -35,7 +47,7 @@ namespace BulletMLTests
 		public void CreatedFireNode2()
 		{
 			var filename = new Filename(@"FireEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			ActionNode testActionNode = pattern.RootNode.GetChild(ENodeName.action) as ActionNode;
@@ -47,7 +59,7 @@ namespace BulletMLTests
 		public void GotBulletNode()
 		{
 			var filename = new Filename(@"FireEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			ActionNode testActionNode = pattern.RootNode.GetChild(ENodeName.action) as ActionNode;
@@ -59,7 +71,7 @@ namespace BulletMLTests
 		public void CreatedTopLevelFireNode()
 		{
 			var filename = new Filename(@"FireEmpty.xml");
-			BulletPattern pattern = new BulletPattern();
+			BulletPattern pattern = new BulletPattern(manager);
 			pattern.ParseXML(filename.File);
 
 			FireNode testFireNode = pattern.RootNode.GetChild(ENodeName.fire) as FireNode;

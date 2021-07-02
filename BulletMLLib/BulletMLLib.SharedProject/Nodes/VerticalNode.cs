@@ -3,7 +3,7 @@ namespace BulletMLLib
 {
 	public class VerticalNode : BulletMLNode
 	{
-		public VerticalNode() : base(ENodeName.vertical)
+		public VerticalNode(IBulletManager manager) : base(ENodeName.vertical, manager)
 		{
 		}
 	}

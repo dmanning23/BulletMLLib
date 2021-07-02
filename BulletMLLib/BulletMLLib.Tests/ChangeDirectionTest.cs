@@ -20,7 +20,7 @@ namespace BulletMLTests
 			Filename.SetCurrentDirectory(@"C:\Projects\BulletMLLib\BulletMLLib\BulletMLLib.Tests\bin\Debug");
 			dude = new Myship();
 			manager = new MoverManager(dude.Position);
-			pattern = new BulletPattern();
+			pattern = new BulletPattern(manager);
 		}
 
 		[Test()]
