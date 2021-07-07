@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Equationator.iOS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Equationator.1.0.9\lib\Xamarin.iOS10\Equationator.iOS.dll</HintPath>
+      <HintPath>..\packages\Equationator.1.0.10\lib\Xamarin.iOS10\Equationator.iOS.dll</HintPath>
     </Reference>
     <Reference Include="FilenameBuddy.iOS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FilenameBuddy.2.0.8\lib\Xamarin.iOS10\FilenameBuddy.iOS.dll</HintPath>

@@ -37,7 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Equationator.Android, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Equationator.1.0.9\lib\MonoAndroid10\Equationator.Android.dll</HintPath>
+      <HintPath>..\packages\Equationator.1.0.10\lib\MonoAndroid10\Equationator.Android.dll</HintPath>
     </Reference>
     <Reference Include="FilenameBuddy.Android, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FilenameBuddy.2.0.8\lib\MonoAndroid10\FilenameBuddy.Android.dll</HintPath>

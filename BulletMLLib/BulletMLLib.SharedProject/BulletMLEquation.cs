@@ -1,6 +1,4 @@
-using System;
 using Equationator;
-using System.Diagnostics;
 
 namespace BulletMLLib
 {
@@ -14,6 +12,7 @@ namespace BulletMLLib
 		{
 			//add the specific functions we will use for bulletml grammar
 			AddFunction("rank", manager.GameDifficulty);
+			AddFunction("rand", manager.Rand.NextDouble);
 
 			//Add any additional methods that have been added to this specific bulletml implementation
 			foreach (var function in manager.CallbackFunctions)

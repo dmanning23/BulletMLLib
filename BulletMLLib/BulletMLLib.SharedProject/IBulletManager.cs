@@ -1,5 +1,6 @@
 using Equationator;
 using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 
 namespace BulletMLLib
@@ -9,6 +10,8 @@ namespace BulletMLLib
 	/// </summary>
 	public interface IBulletManager
 	{
+		Random Rand { get; }
+
 		/// <summary>
 		/// This is a list of additional callbacks that can be set in this BulletML implementation.
 		/// For example, if you have a method to return the player's Tier you could use $tier in the bulletml scripts

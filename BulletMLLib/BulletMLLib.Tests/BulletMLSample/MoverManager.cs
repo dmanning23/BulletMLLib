@@ -1,6 +1,7 @@
 ﻿using BulletMLLib;
 using Equationator;
 using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -8,7 +9,7 @@ namespace BulletMLSample
 {
 	public class MoverManager : IBulletManager
 	{
-		#region Members
+		#region Properties
 
 		public List<Mover> movers = new List<Mover>();
 
@@ -19,11 +20,7 @@ namespace BulletMLSample
 		private float _timeSpeed = 1.0f;
 		private float _scale = 1.0f;
 
-
-
-		#endregion //Members
-
-		#region Properties
+		public Random Rand { get; private set; } = new Random();
 
 		/// <summary>
 		/// How fast time moves in this game.
