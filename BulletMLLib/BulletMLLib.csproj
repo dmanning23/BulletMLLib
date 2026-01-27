@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <PackageId>BulletMLLib</PackageId>
+    <Version>5.0.0</Version>
+    <Title>BulletMLLib</Title>
+    <Authors>dmanning23</Authors>
+    <description>Library for parsing BulletML xml files. Used for scripting bullet patterns in shmup games.</description>
+    <PackageProjectUrl>https://github.com/dmanning23/BulletMLLib</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/dmanning23/BulletMLLib</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>monogame</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="../README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.*">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Vector2Extensions" Version="5.*"/>
+    <PackageReference Include="Equationator" Version="5.*"/>
+  </ItemGroup>
+</Project>
