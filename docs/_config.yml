@@ -1,3 +1,3 @@
 theme: jekyll-theme-cayman
 title: BulletMLLib
-description: Your library description
+description: A C# library for parsing and executing BulletML bullet patterns in shmup games
