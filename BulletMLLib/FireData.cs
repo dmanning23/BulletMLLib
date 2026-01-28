@@ -1,30 +1,29 @@
 
 namespace BulletMLLib
 {
-	//TODO: sort this shit out
-
 	/// <summary>
-	/// This is a template for creating new bullets.
-	/// These things are stored in a bullet object, and used to shoot more bullets.
-	/// It seems like every task in a bullet has a corresponding firedata object
-	/// They are initialized to 0 and set by the task when that task is run.
+	/// Template data for creating new bullets.
+	/// Stored in a bullet object and used by fire tasks to initialize newly fired bullets.
+	/// Each task in a bullet has a corresponding FireData that is initialized to defaults
+	/// and set by the task when it runs.
 	/// </summary>
 	public class FireData
 	{
 		#region Members
 
 		/// <summary>
-		/// The initial speed of bullets that are shot with this firedata object
+		/// The initial speed of bullets fired with this fire data.
 		/// </summary>
 		public float srcSpeed = 0;
 
 		/// <summary>
-		/// The initial direction of bullets that are shot with this firedata
+		/// The initial direction of bullets fired with this fire data.
 		/// </summary>
 		public float srcDir = 0;
 
 		/// <summary>
-		/// I don't quite get what this thing is for... if it is false, the bullet will default initial speed to 1?
+		/// Whether the speed has been explicitly set by a speed node.
+		/// If false, the bullet will use a default initial speed of 1.
 		/// </summary>
 		public bool speedInit = false;
 

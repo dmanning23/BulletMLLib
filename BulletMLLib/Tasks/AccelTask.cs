@@ -57,7 +57,7 @@ namespace BulletMLLib
         /// <param name="bullet">Bullet.</param>
         protected override void SetupTask(Bullet bullet)
         {
-            //set the accelerataion we are gonna add to the bullet
+            //set the acceleration to add to the bullet
             Duration = Node.GetChildValue(NodeName.term, this, bullet);
 
             //check for divide by 0
@@ -100,7 +100,7 @@ namespace BulletMLLib
             VerticalNode vert = Node.GetChild(NodeName.vertical) as VerticalNode;
             if (null != vert)
             {
-                //set teh y component of the acceleration
+                //set the y component of the acceleration
                 switch (vert.NodeType)
                 {
                     case NodeType.sequence:

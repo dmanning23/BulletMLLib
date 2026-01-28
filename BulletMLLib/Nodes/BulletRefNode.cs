@@ -2,6 +2,9 @@ using System;
 
 namespace BulletMLLib
 {
+    /// <summary>
+    /// Node representing a &lt;bulletRef&gt; element that references a labeled bullet definition.
+    /// </summary>
     public class BulletRefNode : BulletNode
     {
         #region Members
@@ -33,7 +36,7 @@ namespace BulletMLLib
             //do any base class validation
             base.ValidateNode();
 
-            //make sure this dude knows where his bullet node is
+            //resolve the referenced bullet node
             FindMyBulletNode();
         }
 
@@ -44,10 +47,10 @@ namespace BulletMLLib
         {
             if (null == ReferencedBulletNode)
             {
-                //Find the action node this dude references
+                //Find the bullet node this reference points to
                 BulletMLNode refNode = GetRootNode().FindLabelNode(Label, NodeName.bullet);
 
-                //make sure we foud something
+                //make sure we found something
                 if (null == refNode)
                 {
                     throw new NullReferenceException("Couldn't find the bullet node \"" + Label + "\"");

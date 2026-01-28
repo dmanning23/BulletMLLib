@@ -3,8 +3,8 @@
 namespace BulletMLLib
 {
 	/// <summary>
-	/// This is a task..each task is the action from a single xml node, for one bullet.
-	/// basically each bullet makes a tree of these to match its pattern
+	/// Task that handles repeat nodes by resetting all child sequence nodes when re-initialized.
+	/// This ensures sequence values accumulate correctly across repeat iterations.
 	/// </summary>
 	public class RepeatTask : BulletMLTask
 	{
@@ -25,7 +25,7 @@ namespace BulletMLLib
 		/// Init this task and all its sub tasks.  
 		/// This method should be called AFTER the nodes are parsed, but BEFORE run is called.
 		/// </summary>
-		/// <param name="bullet">the bullet this dude is controlling</param>
+		/// <param name="bullet">The bullet this task is controlling.</param>
 		public override void InitTask(Bullet bullet)
 		{
 			//Init task is being called on a RepeatTask, which means all the sequence nodes underneath this one need to be reset

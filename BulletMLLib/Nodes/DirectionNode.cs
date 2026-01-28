@@ -1,6 +1,10 @@
 
 namespace BulletMLLib
 {
+    /// <summary>
+    /// Node representing a &lt;direction&gt; element that specifies a bullet's direction in degrees.
+    /// Defaults to aim type if no valid type is specified.
+    /// </summary>
     public class DirectionNode : BulletMLNode
     {
         /// <summary>
@@ -14,7 +18,7 @@ namespace BulletMLLib
 
         /// <summary>
         /// Gets or sets the type of the node.
-        /// This is virtual so sub-classes can override it and validate their own shit.
+        /// Overridden to default unrecognized types to aim.
         /// </summary>
         /// <value>The type of the node.</value>
         public override NodeType NodeType

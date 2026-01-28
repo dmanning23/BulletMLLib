@@ -3,7 +3,7 @@
 namespace BulletMLLib
 {
     /// <summary>
-    /// An action task, this dude contains a list of tasks that are repeated
+    /// An action task that contains a list of child tasks that are repeated.
     /// </summary>
     public class ActionTask : BulletMLTask
     {
@@ -27,7 +27,6 @@ namespace BulletMLLib
         /// <summary>
         /// Initializes a new instance of the <see cref="BulletMLLib.ActionTask"/> class.
         /// </summary>
-        /// <param name="repeatNumMax">Repeat number max.</param>
         /// <param name="node">Node.</param>
         /// <param name="owner">Owner.</param>
         public ActionTask(ActionNode node, BulletMLTask owner) : base(node, owner)
@@ -39,8 +38,7 @@ namespace BulletMLLib
         /// <summary>
         /// Parse a specified node and bullet into this task
         /// </summary>
-        /// <param name="myNode">the node for this dude</param>
-        /// <param name="bullet">the bullet this dude is controlling</param>
+        /// <param name="bullet">The bullet this task is controlling.</param>
         public override void ParseTasks(Bullet bullet)
         {
             //set the number of times to repeat this action
@@ -90,7 +88,7 @@ namespace BulletMLLib
             {
                 RunStatus runStatus = base.Run(bullet);
 
-                //What was the return value from running all teh child actions?
+                //What was the return value from running all the child actions?
                 switch (runStatus)
                 {
                     case RunStatus.End:

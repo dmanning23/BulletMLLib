@@ -17,7 +17,7 @@ namespace BulletMLLib
 		/// Abstract property to get the X location of this bullet.
 		/// measured in pixels from upper left
 		/// </summary>
-		/// <value>The horizontrla position.</value>
+		/// <value>The horizontal position.</value>
 		float X { get; set; }
 
 		/// <summary>

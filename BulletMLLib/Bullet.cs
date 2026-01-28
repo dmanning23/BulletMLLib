@@ -51,8 +51,6 @@ namespace BulletMLLib
         /// </summary>
         private Vector2 _initialVelocity = Vector2.Zero;
 
-        //TODO: do a task factory, we are going to be creating a LOT of those little dudes
-
         #endregion //Members
 
         #region Properties
@@ -88,7 +86,7 @@ namespace BulletMLLib
         /// Abstract property to get the X location of this bullet.
         /// measured in pixels from upper left
         /// </summary>
-        /// <value>The horizontrla position.</value>
+        /// <value>The horizontal position.</value>
         public abstract float X
         {
             get;
@@ -135,7 +133,7 @@ namespace BulletMLLib
         }
 
         /// <summary>
-        /// Convenience property to get teh label of a bullet.
+        /// Convenience property to get the label of a bullet.
         /// </summary>
         /// <value>The label.</value>
         public string Label
@@ -173,7 +171,7 @@ namespace BulletMLLib
         /// <param name="myBulletManager">My bullet manager.</param>
         protected Bullet(IBulletManager myBulletManager)
         {
-            //grba the bullet manager for this dude
+            //grab the bullet manager
             Debug.Assert(null != myBulletManager);
             _bulletManager = myBulletManager;
 
@@ -313,7 +311,7 @@ namespace BulletMLLib
         /// <returns>angle to target the bullet</returns>
         public virtual float GetAimDir()
         {
-            //get the player position so we can aim at that little fucker
+            //get the player position to aim at
             Debug.Assert(null != MyBulletManager);
             Vector2 shipPos = MyBulletManager.PlayerPosition(this);
 
@@ -326,14 +324,14 @@ namespace BulletMLLib
 
         /// <summary>
         /// Finds the task by label.
-        /// This recurses into child tasks to find the taks with the correct label
-        /// Used only for unit testing!
+        /// Recurses into child tasks to find the task with the correct label.
+        /// Used only for unit testing.
         /// </summary>
         /// <returns>The task by label.</returns>
         /// <param name="strLabel">String label.</param>
         public BulletMLTask FindTaskByLabel(string strLabel)
         {
-            //check if any of teh child tasks have a task with that label
+            //check if any of the child tasks have a task with that label
             foreach (BulletMLTask childTask in Tasks)
             {
                 BulletMLTask foundTask = childTask.FindTaskByLabel(strLabel);
@@ -354,7 +352,7 @@ namespace BulletMLLib
         /// <param name="eName">the name of the node the task should be attached to</param>
         public BulletMLTask FindTaskByLabelAndName(string strLabel, NodeName eName)
         {
-            //check if any of teh child tasks have a task with that label
+            //check if any of the child tasks have a task with that label
             foreach (BulletMLTask childTask in Tasks)
             {
                 BulletMLTask foundTask = childTask.FindTaskByLabelAndName(strLabel, eName);

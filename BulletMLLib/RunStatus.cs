@@ -2,13 +2,17 @@
 namespace BulletMLLib
 {
     /// <summary>
-    /// Theese are used for tasks during runtime...
+    /// Status values returned by tasks during runtime execution.
     /// </summary>
     public enum RunStatus
     {
-        Continue, //keep parsing this task
-        End, //this task is finished parsing
-        Stop //this task is paused
+        /// <summary>The task is still running and should continue next frame.</summary>
+        Continue,
+
+        /// <summary>The task has finished executing.</summary>
+        End,
+
+        /// <summary>The task is paused and should stop processing for this frame.</summary>
+        Stop
     }
 }
-

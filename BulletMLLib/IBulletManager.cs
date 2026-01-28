@@ -10,6 +10,9 @@ namespace BulletMLLib
 	/// </summary>
 	public interface IBulletManager
 	{
+		/// <summary>
+		/// Random number generator used by the $rand function in BulletML expressions.
+		/// </summary>
 		Random Rand { get; }
 
 		/// <summary>
@@ -24,7 +27,7 @@ namespace BulletMLLib
 		FunctionDelegate GameDifficulty { get; }
 
 		/// <summary>
-		/// a mathod to get current position of the player
+		/// A method to get the current position of the player.
 		/// This is used to target bullets at that position
 		/// </summary>
 		/// <returns>The position to aim the bullet at</returns>

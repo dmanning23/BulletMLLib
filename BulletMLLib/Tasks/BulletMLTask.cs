@@ -13,7 +13,7 @@ namespace BulletMLLib
         #region Members
 
         /// <summary>
-        /// A list of child tasks of this dude
+        /// A list of child tasks of this task.
         /// </summary>
         public List<BulletMLTask> ChildTasks { get; private set; }
 
@@ -23,13 +23,13 @@ namespace BulletMLLib
         public List<float> ParamList { get; private set; }
 
         /// <summary>
-        /// the parent task of this dude in the tree
+        /// The parent task of this task in the tree.
         /// Used to fetch param values.
         /// </summary>
         public BulletMLTask Owner { get; set; }
 
         /// <summary>
-        /// The bullet ml node that this dude represents
+        /// The BulletML node that this task represents.
         /// </summary>
         public BulletMLNode Node { get; private set; }
 
@@ -64,8 +64,7 @@ namespace BulletMLLib
         /// <summary>
         /// Parse a specified node and bullet into this task
         /// </summary>
-        /// <param name="myNode">the node for this dude</param>
-        /// <param name="bullet">the bullet this dude is controlling</param>
+        /// <param name="bullet">The bullet this task is controlling.</param>
         public virtual void ParseTasks(Bullet bullet)
         {
             if (null == bullet)
@@ -82,8 +81,8 @@ namespace BulletMLLib
         /// <summary>
         /// Parse a specified node and bullet into this task
         /// </summary>
-        /// <param name="myNode">the node for this dude</param>
-        /// <param name="bullet">the bullet this dude is controlling</param>
+        /// <param name="childNode">The child node to parse.</param>
+        /// <param name="bullet">The bullet this task is controlling.</param>
         public virtual void ParseChildNode(BulletMLNode childNode, Bullet bullet)
         {
             Debug.Assert(null != childNode);
@@ -236,7 +235,7 @@ namespace BulletMLLib
         /// Init this task and all its sub tasks.  
         /// This method should be called AFTER the nodes are parsed, but BEFORE run is called.
         /// </summary>
-        /// <param name="bullet">the bullet this dude is controlling</param>
+        /// <param name="bullet">The bullet this task is controlling.</param>
         public virtual void InitTask(Bullet bullet)
         {
             TaskFinished = false;
@@ -302,7 +301,7 @@ namespace BulletMLLib
             //if that task doesn't have any params, go up until we find one that does
             if (ParamList.Count < iParamNumber)
             {
-                //the current task doens't have enough params to solve this value
+                //the current task doesn't have enough params to solve this value
                 if (null != Owner)
                 {
                     return Owner.GetParamValue(iParamNumber);
@@ -329,20 +328,20 @@ namespace BulletMLLib
 
         /// <summary>
         /// Finds the task by label.
-        /// This recurses into child tasks to find the taks with the correct label
-        /// Used only for unit testing!
+        /// Recurses into child tasks to find the task with the correct label.
+        /// Used only for unit testing.
         /// </summary>
         /// <returns>The task by label.</returns>
         /// <param name="strLabel">String label.</param>
         public BulletMLTask FindTaskByLabel(string strLabel)
         {
-            //check if this is the corretc task
+            //check if this is the correct task
             if (strLabel == Node.Label)
             {
                 return this;
             }
 
-            //check if any of teh child tasks have a task with that label
+            //check if any of the child tasks have a task with that label
             foreach (BulletMLTask childTask in ChildTasks)
             {
                 BulletMLTask foundTask = childTask.FindTaskByLabel(strLabel);
@@ -363,13 +362,13 @@ namespace BulletMLLib
         /// <param name="eName">the name of the node the task should be attached to</param>
         public BulletMLTask FindTaskByLabelAndName(string strLabel, NodeName eName)
         {
-            //check if this is the corretc task
+            //check if this is the correct task
             if ((strLabel == Node.Label) && (eName == Node.Name))
             {
                 return this;
             }
 
-            //check if any of teh child tasks have a task with that label
+            //check if any of the child tasks have a task with that label
             foreach (BulletMLTask childTask in ChildTasks)
             {
                 BulletMLTask foundTask = childTask.FindTaskByLabelAndName(strLabel, eName);

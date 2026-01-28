@@ -3,7 +3,7 @@ using System;
 namespace BulletMLLib
 {
     /// <summary>
-    /// Action node... also the base class for actionref nodes
+    /// Node representing an &lt;action&gt; element. Also serves as the base class for ActionRefNode.
     /// </summary>
     public class ActionNode : BulletMLNode
     {
@@ -31,8 +31,9 @@ namespace BulletMLLib
         /// Initializes a new instance of the <see cref="BulletMLLib.ActionNode"/> class.
         /// this is the constructor used by sub classes
         /// </summary>
-        /// <param name="NodeType">the node type.</param>
-        public ActionNode(NodeName NodeType, IBulletManager manager) : base(NodeType, manager)
+        /// <param name="nodeType">The node type.</param>
+        /// <param name="manager">The bullet manager.</param>
+        public ActionNode(NodeName nodeType, IBulletManager manager) : base(nodeType, manager)
         {
         }
 
@@ -69,14 +70,15 @@ namespace BulletMLLib
                 return Parent as RepeatNode;
             }
 
-            //This dude is not under a repeat node
+            //This node is not under a repeat node
             return null;
         }
 
         /// <summary>
         /// Get the number of times this action should be repeated.
         /// </summary>
-        /// <param name="myTask">the task to get the number of repeat times for</param>
+        /// <param name="myTask">The task to get the number of repeat times for.</param>
+        /// <param name="bullet">The bullet to evaluate against.</param>
         /// <returns>The number of times to repeat this node, as specified by a parent Repeat node.</returns>
         public int RepeatNum(ActionTask myTask, Bullet bullet)
         {

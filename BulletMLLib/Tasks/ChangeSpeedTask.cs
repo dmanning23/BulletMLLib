@@ -25,7 +25,7 @@ namespace BulletMLLib
         private float Duration { get; set; }
 
         /// <summary>
-        /// How many frames this dude has ran
+        /// How many frames this task has run.
         /// </summary>
         private float RunDelta { get; set; }
 
@@ -50,7 +50,7 @@ namespace BulletMLLib
         /// <param name="bullet">Bullet.</param>
         protected override void SetupTask(Bullet bullet)
         {
-            //set the length of time to run this dude
+            //set the length of time to run this task
             Duration = Node.GetChildValue(NodeName.term, this, bullet);
 
             //check for divide by 0

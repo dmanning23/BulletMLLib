@@ -12,6 +12,7 @@ namespace BulletMLLib
         /// </summary>
         /// <returns>An instance of the correct node type</returns>
         /// <param name="nodeType">Node type that we want.</param>
+        /// <param name="manager">The bullet manager.</param>
         public static BulletMLNode CreateNode(NodeName nodeType, IBulletManager manager)
         {
             switch (nodeType)

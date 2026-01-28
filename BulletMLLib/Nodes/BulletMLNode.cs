@@ -6,7 +6,7 @@ namespace BulletMLLib
 {
     /// <summary>
     /// This is a single node from a BulletML document.
-    /// Used as the base node for all teh other node types.
+    /// Used as the base node for all the other node types.
     /// </summary>
     public class BulletMLNode
     {
@@ -18,13 +18,13 @@ namespace BulletMLLib
         public NodeName Name { get; private set; }
 
         /// <summary>
-        /// The type modifier of this node... like is it a sequence, or whatver
+        /// The type modifier of this node (e.g. aim, absolute, relative, sequence).
         /// </summary>
         private NodeType _nodeType = NodeType.none;
 
         /// <summary>
         /// Gets or sets the type of the node.
-        /// This is virtual so sub-classes can override it and validate their own shit.
+        /// Virtual so subclasses can override it with their own validation logic.
         /// </summary>
         /// <value>The type of the node.</value>
         public virtual NodeType NodeType
@@ -52,12 +52,12 @@ namespace BulletMLLib
         protected BulletMLEquation NodeEquation;
 
         /// <summary>
-        /// A list of all the child nodes for this dude
+        /// A list of all the child nodes of this node.
         /// </summary>
         public List<BulletMLNode> ChildNodes { get; private set; }
 
         /// <summary>
-        /// pointer to the parent node of this dude
+        /// The parent node of this node in the tree.
         /// </summary>
         protected BulletMLNode Parent { get; private set; }
 
@@ -84,7 +84,7 @@ namespace BulletMLLib
         /// <summary>
         /// Convert a string to it's NodeType enum equivalent
         /// </summary>
-        /// <returns>NodeType: the nuem value of that string</returns>
+        /// <returns>The enum value of that string.</returns>
         /// <param name="str">The string to convert to an enum</param>
         public static NodeType StringToType(string str)
         {
@@ -102,7 +102,7 @@ namespace BulletMLLib
         /// <summary>
         /// Convert a string to it's NodeName enum equivalent
         /// </summary>
-        /// <returns>NodeName: the nuem value of that string</returns>
+        /// <returns>The enum value of that string.</returns>
         /// <param name="str">The string to convert to an enum</param>
         public static NodeName StringToName(string str)
         {
@@ -130,8 +130,8 @@ namespace BulletMLLib
         /// Recurse into the xml tree until we find it!
         /// </summary>
         /// <returns>The label node.</returns>
-        /// <param name="label">Label of the node we are looking for</param>
-        /// <param name="name">name of the node we are looking for</param>
+        /// <param name="strLabel">Label of the node we are looking for.</param>
+        /// <param name="eName">Name of the node we are looking for.</param>
         public BulletMLNode FindLabelNode(string strLabel, NodeName eName)
         {
             //this uses breadth first search, since labelled nodes are usually top level
@@ -173,7 +173,7 @@ namespace BulletMLLib
             }
             else if (nodeType == Parent.Name)
             {
-                //Our parent matches the query, reutrn it!
+                //Our parent matches the query, return it!
                 return Parent;
             }
             else
@@ -188,7 +188,8 @@ namespace BulletMLLib
         /// </summary>
         /// <returns>The child value. return 0.0 if no node found</returns>
         /// <param name="name">type of child node we want.</param>
-        /// <param name="task">Task to get a value for</param>
+        /// <param name="task">Task to get a value for.</param>
+        /// <param name="bullet">The bullet to evaluate against.</param>
         public float GetChildValue(NodeName name, BulletMLTask task, Bullet bullet)
         {
             foreach (BulletMLNode tree in ChildNodes)
@@ -205,7 +206,7 @@ namespace BulletMLLib
         /// Get a direct child node of a specific type.  Does not recurse!
         /// </summary>
         /// <returns>The child.</returns>
-        /// <param name="name">type of node we want. null if not found</param>
+        /// <param name="name">The type of child node to find.</param>
         public BulletMLNode GetChild(NodeName name)
         {
             foreach (BulletMLNode node in ChildNodes)
@@ -234,9 +235,11 @@ namespace BulletMLLib
 
         /// <summary>
         /// Parse the specified bulletNodeElement.
-        /// Read all the data from the xml node into this dude.
+        /// Reads all data from the xml node into this BulletMLNode.
         /// </summary>
         /// <param name="bulletNodeElement">Bullet node element.</param>
+        /// <param name="parentNode">The parent node in the tree.</param>
+        /// <param name="manager">The bullet manager.</param>
         public void Parse(XmlNode bulletNodeElement, BulletMLNode parentNode, IBulletManager manager)
         {
             // Handle null argument.
@@ -280,7 +283,7 @@ namespace BulletMLLib
                      null != childNode;
                      childNode = childNode.NextSibling)
                 {
-                    //if the child node is a text node, parse it into this dude
+                    //if the child node is a text node, parse it into this node
                     if (XmlNodeType.Text == childNode.NodeType)
                     {
                         //Get the text of the child xml node, but store it in THIS bullet node
@@ -310,7 +313,7 @@ namespace BulletMLLib
         /// </summary>
         public virtual void ValidateNode()
         {
-            //validate all the childe nodes
+            //validate all the child nodes
             foreach (BulletMLNode childnode in ChildNodes)
             {
                 childnode.ValidateNode();

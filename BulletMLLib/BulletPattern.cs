@@ -25,8 +25,8 @@ namespace BulletMLLib
         public string Filename { get; private set; }
 
         /// <summary>
-        /// the orientation of this bullet pattern: horizontal or veritcal
-        /// this is read in from the xml
+        /// The orientation of this bullet pattern: horizontal or vertical.
+        /// Read from the type attribute of the root bulletml element.
         /// </summary>
         /// <value>The orientation.</value>
         public PatternType Orientation { get; private set; } = PatternType.none;
@@ -60,6 +60,7 @@ namespace BulletMLLib
         /// Parses a bulletml document into this bullet pattern
         /// </summary>
         /// <param name="xmlFileName">Xml file name.</param>
+        /// <param name="content">Optional MonoGame ContentManager. If provided, loads via the content pipeline (path should be relative, no extension).</param>
         public void ParseXML(string xmlFileName, ContentManager content = null)
         {
             //grab that filename 

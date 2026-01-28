@@ -3,6 +3,9 @@ using System.Diagnostics;
 
 namespace BulletMLLib
 {
+    /// <summary>
+    /// Node representing a &lt;fireRef&gt; element that references a labeled fire definition.
+    /// </summary>
     public class FireRefNode : FireNode
     {
         #region Members
@@ -31,11 +34,11 @@ namespace BulletMLLib
         /// </summary>
         public override void ValidateNode()
         {
-            //Find the action node this dude 
+            //Find the fire node this reference points to
             Debug.Assert(null != GetRootNode());
             BulletMLNode refNode = GetRootNode().FindLabelNode(Label, NodeName.fire);
 
-            //make sure we foud something
+            //make sure we found something
             if (null == refNode)
             {
                 throw new NullReferenceException("Couldn't find the fire node \"" + Label + "\"");
@@ -47,7 +50,7 @@ namespace BulletMLLib
                 throw new NullReferenceException("The BulletMLNode \"" + Label + "\" isn't a fire node");
             }
 
-            //Do not validate the base class of this dude... it will crap out trying to find the bullet node!
+            //Skip base class validation since the bullet node belongs to the referenced fire, not this ref node.
         }
 
         #endregion //Methods

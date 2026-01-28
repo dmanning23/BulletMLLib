@@ -3,7 +3,7 @@
 namespace BulletMLLib
 {
 	/// <summary>
-	/// This task sets the direction of a bullet
+	/// Task that holds a direction value for use by a fire task when setting the initial direction of a fired bullet.
 	/// </summary>
 	public class SetDirectionTask : BulletMLTask
 	{

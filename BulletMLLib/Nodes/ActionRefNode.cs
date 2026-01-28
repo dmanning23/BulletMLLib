@@ -10,6 +10,9 @@ namespace BulletMLLib
     {
         #region Members
 
+        /// <summary>
+        /// The action node that this reference points to, resolved during validation.
+        /// </summary>
         public ActionNode ReferencedActionNode { get; private set; }
 
         #endregion //Members
@@ -33,10 +36,10 @@ namespace BulletMLLib
             //do any base class validation
             base.ValidateNode();
 
-            //Find the action node this dude references
+            //Find the action node this reference points to
             BulletMLNode refNode = GetRootNode().FindLabelNode(Label, NodeName.action);
 
-            //make sure we foud something
+            //make sure we found something
             if (null == refNode)
             {
                 throw new NullReferenceException("Couldn't find the action node \"" + Label + "\"");

@@ -2,6 +2,9 @@ using System.Diagnostics;
 
 namespace BulletMLLib
 {
+    /// <summary>
+    /// Node representing a &lt;fire&gt; element that fires a new bullet with optional direction and speed.
+    /// </summary>
     public class FireNode : BulletMLNode
     {
         #region Members
@@ -27,7 +30,8 @@ namespace BulletMLLib
         /// Initializes a new instance of the <see cref="BulletMLLib.FireNode"/> class.
         /// this is the constructor used by sub classes
         /// </summary>
-        /// <param name="NodeType">the node type.</param>
+        /// <param name="nodeType">The node type.</param>
+        /// <param name="manager">The bullet manager.</param>
         public FireNode(NodeName nodeType, IBulletManager manager) : base(nodeType, manager)
         {
         }
@@ -47,7 +51,7 @@ namespace BulletMLLib
             //if it didn't find one, check for the bulletref node
             if (null == BulletDescriptionNode)
             {
-                //make sure that dude knows what he's doing
+                //resolve the bullet reference
                 BulletRefNode refNode = GetChild(NodeName.bulletRef) as BulletRefNode;
                 refNode.FindMyBulletNode();
                 BulletDescriptionNode = refNode.ReferencedBulletNode;

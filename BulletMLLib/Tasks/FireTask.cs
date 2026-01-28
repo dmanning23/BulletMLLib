@@ -67,9 +67,9 @@ namespace BulletMLLib
         public SetDirectionTask SequenceDirectionTask { get; private set; }
 
         /// <summary>
-        /// If there is a sequence direction node used to increment the direction of each successive bullet that is fired
+        /// If there is a sequence speed node used to increment the speed of each successive bullet that is fired.
         /// </summary>
-        /// <value>The sequence direction node.</value>
+        /// <value>The sequence speed task.</value>
         public SetSpeedTask SequenceSpeedTask { get; private set; }
 
         #endregion //Members
@@ -92,8 +92,7 @@ namespace BulletMLLib
         /// <summary>
         /// Parse a specified node and bullet into this task
         /// </summary>
-        /// <param name="myNode">the node for this dude</param>
-        /// <param name="bullet">the bullet this dude is controlling</param>
+        /// <param name="bullet">The bullet this task is controlling.</param>
         public override void ParseTasks(Bullet bullet)
         {
             if (null == bullet)
@@ -118,8 +117,8 @@ namespace BulletMLLib
         /// <summary>
         /// Parse a specified node and bullet into this task
         /// </summary>
-        /// <param name="myNode">the node for this dude</param>
-        /// <param name="bullet">the bullet this dude is controlling</param>
+        /// <param name="childNode">The child node to parse.</param>
+        /// <param name="bullet">The bullet this task is controlling.</param>
         public override void ParseChildNode(BulletMLNode childNode, Bullet bullet)
         {
             Debug.Assert(null != childNode);
@@ -256,7 +255,7 @@ namespace BulletMLLib
                 }
                 else
                 {
-                    //there is no initial speed task, use the old dude's speed
+                    //there is no initial speed task, use the parent bullet's speed
                     FireSpeed = bullet.Speed;
                 }
             }
@@ -293,7 +292,7 @@ namespace BulletMLLib
 
             if (newBullet == null)
             {
-                //wtf did you do???
+                //bullet manager returned null
                 TaskFinished = true;
                 return RunStatus.End;
             }
@@ -305,7 +304,7 @@ namespace BulletMLLib
             //set the direction of the new bullet
             newBullet.Direction = FireDirection;
 
-            //set teh speed of the new bullet
+            //set the speed of the new bullet
             newBullet.Speed = FireSpeed;
 
             //initialize the bullet with the bullet node stored in the Fire node
@@ -313,7 +312,7 @@ namespace BulletMLLib
             Debug.Assert(null != myFireNode);
             newBullet.InitNode(myFireNode.BulletDescriptionNode);
 
-            //set the owner of all the top level tasks for the new bullet to this dude
+            //set the owner of all the top level tasks for the new bullet to this task
             foreach (BulletMLTask task in newBullet.Tasks)
             {
                 task.Owner = this;
@@ -334,7 +333,7 @@ namespace BulletMLLib
                 return;
             }
 
-            //check if the dude has a direction node
+            //check if the task has a direction node
             DirectionNode dirNode = taskToCheck.Node.GetChild(NodeName.direction) as DirectionNode;
             if (null != dirNode)
             {
@@ -363,7 +362,7 @@ namespace BulletMLLib
         /// <summary>
         /// Given a node, pull the speed nodes out from underneath it and store them if necessary
         /// </summary>
-        /// <param name="nodeToCheck">Node to check.</param>
+        /// <param name="taskToCheck">Task to check for speed child nodes.</param>
         private void GetSpeedNodes(BulletMLTask taskToCheck)
         {
             if (null == taskToCheck)
@@ -371,7 +370,7 @@ namespace BulletMLLib
                 return;
             }
 
-            //check if the dude has a speed node
+            //check if the task has a speed node
             SpeedNode spdNode = taskToCheck.Node.GetChild(NodeName.speed) as SpeedNode;
             if (null != spdNode)
             {

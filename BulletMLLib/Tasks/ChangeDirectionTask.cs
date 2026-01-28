@@ -27,7 +27,7 @@ namespace BulletMLLib
         private float Duration { get; set; }
 
         /// <summary>
-        /// How many frames this dude has ran
+        /// How many frames this task has run.
         /// </summary>
         private float RunDelta { get; set; }
 
@@ -54,7 +54,7 @@ namespace BulletMLLib
         {
             RunDelta = 0;
 
-            //set the time length to run this dude
+            //set the time length to run this task
             Duration = Node.GetChildValue(NodeName.term, this, bullet);
 
             //check for divide by 0
@@ -112,7 +112,7 @@ namespace BulletMLLib
             //The sequence type of change direction is unaffected by the duration
             if (ChangeType == NodeType.absolute)
             {
-                //divide by the amount fo time remaining
+                //divide by the amount of time remaining
                 direction /= Duration - RunDelta;
             }
             else if (ChangeType != NodeType.sequence)
@@ -124,6 +124,11 @@ namespace BulletMLLib
             return direction;
         }
 
+        /// <summary>
+        /// Run this task against a bullet. Adjusts the bullet's direction each frame.
+        /// </summary>
+        /// <returns>RunStatus indicating whether the task is done or still running.</returns>
+        /// <param name="bullet">The bullet to update.</param>
         public override RunStatus Run(Bullet bullet)
         {
             //change the direction of the bullet by the correct amount

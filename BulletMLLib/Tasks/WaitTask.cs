@@ -11,7 +11,7 @@ namespace BulletMLLib
 
         /// <summary>
         /// How long to run this task... measured in frames
-        /// This task will pause until the durection runs out, then resume running tasks
+        /// This task will pause until the duration runs out, then resume running tasks.
         /// </summary>
         private float Duration { get; set; }
 

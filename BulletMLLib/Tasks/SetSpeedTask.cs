@@ -3,7 +3,7 @@
 namespace BulletMLLib
 {
 	/// <summary>
-	/// This action sets the velocity of a bullet
+	/// Task that holds a speed value for use by a fire task when setting the initial speed of a fired bullet.
 	/// </summary>
 	public class SetSpeedTask : BulletMLTask
 	{

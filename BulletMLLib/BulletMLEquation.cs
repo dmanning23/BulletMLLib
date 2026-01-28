@@ -4,11 +4,16 @@ namespace BulletMLLib
 {
 	/// <summary>
 	/// This is an equation used in BulletML nodes.
-	/// This is an eays way to set up the grammar for all our equations.
+	/// This is an easy way to set up the grammar for all our equations.
 	/// </summary>
 	public class BulletMLEquation : Equation
 	{
-		public BulletMLEquation(IBulletManager manager)
+		/// <summary>
+	/// Initializes a new instance of the <see cref="BulletMLEquation"/> class.
+	/// Registers rank, rand, and any custom callback functions from the manager.
+	/// </summary>
+	/// <param name="manager">The bullet manager providing callback functions.</param>
+	public BulletMLEquation(IBulletManager manager)
 		{
 			//add the specific functions we will use for bulletml grammar
 			AddFunction("rank", manager.GameDifficulty);
