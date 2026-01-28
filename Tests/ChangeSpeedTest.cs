@@ -1,9 +1,9 @@
 using BulletMLSample;
 using FilenameBuddy;
 using NUnit.Framework;
+using Shouldly;
 using System;
 using BulletMLLib;
-using NUnit.Framework.Legacy;
 
 namespace BulletMLTests
 {
@@ -29,7 +29,7 @@ namespace BulletMLTests
             pattern.ParseXML(filename.File);
             Mover mover = (Mover)manager.CreateBullet();
             mover.InitTopNode(pattern.RootNode);
-            ClassicAssert.AreEqual(0, mover.Speed);
+            mover.Speed.ShouldBe(0);
         }
 
         [Test()]
@@ -42,7 +42,7 @@ namespace BulletMLTests
 
             manager.Update();
 
-            ClassicAssert.AreEqual(1, mover.Speed);
+            mover.Speed.ShouldBe(1);
         }
 
         [Test()]
@@ -55,16 +55,16 @@ namespace BulletMLTests
             mover.Speed = 110;
             mover.InitTopNode(pattern.RootNode);
 
-            ClassicAssert.AreEqual(110, mover.Speed);
+            mover.Speed.ShouldBe(110);
             manager.Update();
-            ClassicAssert.AreEqual(100, mover.Speed);
+            mover.Speed.ShouldBe(100);
 
             for (int i = 0; i < 10; i++)
             {
                 manager.Update();
             }
 
-            ClassicAssert.AreEqual(10, mover.Speed);
+            mover.Speed.ShouldBe(10);
         }
 
         [Test()]
@@ -76,16 +76,16 @@ namespace BulletMLTests
             mover.Speed = 100;
             mover.InitTopNode(pattern.RootNode);
 
-            ClassicAssert.AreEqual(100, mover.Speed);
+            mover.Speed.ShouldBe(100);
             manager.Update();
-            ClassicAssert.AreEqual(101, mover.Speed);
+            mover.Speed.ShouldBe(101);
 
             for (int i = 0; i < 10; i++)
             {
                 manager.Update();
             }
 
-            ClassicAssert.AreEqual(110, mover.Speed);
+            mover.Speed.ShouldBe(110);
         }
 
         [Test()]
@@ -97,16 +97,16 @@ namespace BulletMLTests
             mover.Speed = 100;
             mover.InitTopNode(pattern.RootNode);
 
-            ClassicAssert.AreEqual(100, mover.Speed);
+            mover.Speed.ShouldBe(100);
             manager.Update();
-            ClassicAssert.AreEqual(110, mover.Speed);
+            mover.Speed.ShouldBe(110);
 
             for (int i = 0; i < 10; i++)
             {
                 manager.Update();
             }
 
-            ClassicAssert.AreEqual(200, mover.Speed);
+            mover.Speed.ShouldBe(200);
         }
     }
 }

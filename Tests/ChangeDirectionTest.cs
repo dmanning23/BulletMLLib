@@ -4,7 +4,6 @@ using NUnit.Framework;
 using System;
 using BulletMLLib;
 using Microsoft.Xna.Framework;
-using NUnit.Framework.Legacy;
 using Shouldly;
 
 namespace BulletMLTests
@@ -34,7 +33,7 @@ namespace BulletMLTests
             mover.InitTopNode(pattern.RootNode);
 
             float direction = mover.Direction * 180 / (float)Math.PI;
-            ClassicAssert.AreEqual(0, (int)direction);
+            ((int)direction).ShouldBe(0);
         }
 
         [Test()]
@@ -48,7 +47,7 @@ namespace BulletMLTests
 
             manager.Update();
             float direction = mover.Direction * 180 / (float)Math.PI;
-            ClassicAssert.AreEqual(45, (int)direction);
+            ((int)direction).ShouldBe(45);
         }
 
         [Test()]
@@ -63,7 +62,7 @@ namespace BulletMLTests
             manager.Update();
             manager.Update();
             float direction = mover.Direction * 180 / (float)Math.PI;
-            ClassicAssert.AreEqual(90, (int)direction);
+            ((int)direction).ShouldBe(90);
         }
 
         [Test()]
@@ -76,7 +75,7 @@ namespace BulletMLTests
             mover.InitTopNode(pattern.RootNode);
 
             float direction = mover.Direction * 180 / (float)Math.PI;
-            ClassicAssert.AreEqual(0, (int)direction);
+            ((int)direction).ShouldBe(0);
         }
 
         [Test()]
@@ -90,7 +89,7 @@ namespace BulletMLTests
 
             manager.Update();
             float direction = mover.Direction * 180 / (float)Math.PI;
-            ClassicAssert.AreEqual(45, (int)direction);
+            ((int)direction).ShouldBe(45);
         }
 
         [Test()]
@@ -169,7 +168,7 @@ namespace BulletMLTests
 
             manager.Update();
             float direction = mover.Direction * 180 / (float)Math.PI;
-            ClassicAssert.AreEqual(90, (int)direction);
+            ((int)direction).ShouldBe(90);
         }
 
         [Test()]
@@ -183,7 +182,7 @@ namespace BulletMLTests
             manager.Update();
             manager.Update();
             float direction = mover.Direction * 180 / (float)Math.PI;
-            ClassicAssert.AreEqual(180, (int)direction);
+            ((int)direction).ShouldBe(180);
         }
     }
 }

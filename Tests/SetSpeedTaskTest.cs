@@ -4,7 +4,6 @@ using NUnit.Framework;
 using System;
 using BulletMLLib;
 using Shouldly;
-using NUnit.Framework.Legacy;
 
 namespace BulletMLTests
 {
@@ -45,7 +44,7 @@ namespace BulletMLTests
             ActionTask myAction = mover.Tasks[0] as ActionTask;
 
             ActionNode testNode = pattern.RootNode.FindLabelNode("top", NodeName.action) as ActionNode;
-            ClassicAssert.AreEqual(1, testNode.RepeatNum(myAction, mover));
+            testNode.RepeatNum(myAction, mover).ShouldBe(1);
         }
 
         [Test()]
@@ -56,7 +55,7 @@ namespace BulletMLTests
             Mover mover = (Mover)manager.CreateBullet();
             mover.InitTopNode(pattern.RootNode);
             BulletMLTask myTask = mover.Tasks[0];
-            ClassicAssert.AreEqual(1, myTask.ChildTasks.Count);
+            myTask.ChildTasks.Count.ShouldBe(1);
         }
 
         [Test()]
@@ -67,7 +66,7 @@ namespace BulletMLTests
             Mover mover = (Mover)manager.CreateBullet();
             mover.InitTopNode(pattern.RootNode);
             BulletMLTask myTask = mover.Tasks[0];
-            ClassicAssert.AreEqual(1, myTask.ChildTasks.Count);
+            myTask.ChildTasks.Count.ShouldBe(1);
             (myTask.ChildTasks[0] is FireTask).ShouldBeTrue();
         }
 
@@ -95,7 +94,7 @@ namespace BulletMLTests
             BulletMLTask myTask = mover.Tasks[0];
             FireTask testTask = myTask.ChildTasks[0] as FireTask;
 
-            ClassicAssert.AreEqual(1, testTask.ChildTasks.Count);
+            testTask.ChildTasks.Count.ShouldBe(1);
         }
 
         [Test()]
@@ -179,7 +178,7 @@ namespace BulletMLTests
             SetSpeedTask speedTask = testTask.InitialSpeedTask as SetSpeedTask;
             SpeedNode speedNode = speedTask.Node as SpeedNode;
 
-            ClassicAssert.AreEqual(5.0f, speedNode.GetValue(speedTask, mover));
+            speedNode.GetValue(speedTask, mover).ShouldBe(5.0f);
         }
 
         [Test()]
@@ -192,7 +191,7 @@ namespace BulletMLTests
             BulletMLTask myTask = mover.Tasks[0];
             FireTask testTask = myTask.ChildTasks[0] as FireTask;
 
-            ClassicAssert.AreEqual(5.0f, testTask.FireSpeed);
+            testTask.FireSpeed.ShouldBe(5.0f);
         }
 
         [Test()]
@@ -205,7 +204,7 @@ namespace BulletMLTests
             BulletMLTask myTask = mover.Tasks[0];
             FireTask testTask = myTask.ChildTasks[0] as FireTask;
 
-            ClassicAssert.AreEqual(5.0f, testTask.FireSpeed);
+            testTask.FireSpeed.ShouldBe(5.0f);
         }
 
         [Test()]
@@ -289,7 +288,7 @@ namespace BulletMLTests
             SetSpeedTask speedTask = testTask.InitialSpeedTask as SetSpeedTask;
             SpeedNode speedNode = speedTask.Node as SpeedNode;
 
-            ClassicAssert.AreEqual(10.0f, speedNode.GetValue(speedTask, mover));
+            speedNode.GetValue(speedTask, mover).ShouldBe(10.0f);
         }
 
         [Test()]
@@ -302,7 +301,7 @@ namespace BulletMLTests
             BulletMLTask myTask = mover.Tasks[0];
             FireTask testTask = myTask.ChildTasks[0] as FireTask;
 
-            ClassicAssert.AreEqual(10.0f, testTask.FireSpeed);
+            testTask.FireSpeed.ShouldBe(10.0f);
         }
     }
 }

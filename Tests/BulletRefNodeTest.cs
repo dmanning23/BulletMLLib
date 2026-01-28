@@ -3,7 +3,6 @@ using BulletMLSample;
 using FilenameBuddy;
 using NUnit.Framework;
 using Shouldly;
-using NUnit.Framework.Legacy;
 
 namespace BulletMLTests
 {
@@ -38,7 +37,7 @@ namespace BulletMLTests
             pattern.ParseXML(filename.File);
 
             BulletNode testBulletNode = pattern.RootNode.GetChild(NodeName.bullet) as BulletNode;
-            ClassicAssert.AreEqual("test", testBulletNode.Label);
+            testBulletNode.Label.ShouldBe("test");
         }
 
         [Test()]
@@ -117,7 +116,7 @@ namespace BulletMLTests
             BulletRefNode refNode = testFireNode.GetChild(NodeName.bulletRef) as BulletRefNode;
             BulletNode testBulletNode = refNode.ReferencedBulletNode as BulletNode;
 
-            ClassicAssert.AreEqual("test", testBulletNode.Label);
+            testBulletNode.Label.ShouldBe("test");
         }
 
         [Test()]
@@ -132,7 +131,7 @@ namespace BulletMLTests
             BulletRefNode refNode = testFireNode.GetChild(NodeName.bulletRef) as BulletRefNode;
             BulletNode testBulletNode = refNode.ReferencedBulletNode as BulletNode;
 
-            ClassicAssert.AreEqual("test2", testBulletNode.Label);
+            testBulletNode.Label.ShouldBe("test2");
         }
     }
 }

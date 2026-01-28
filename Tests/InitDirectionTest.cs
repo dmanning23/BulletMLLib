@@ -3,7 +3,6 @@ using FilenameBuddy;
 using NUnit.Framework;
 using System;
 using BulletMLLib;
-using NUnit.Framework.Legacy;
 using Shouldly;
 
 namespace BulletMLTests
@@ -65,7 +64,7 @@ namespace BulletMLTests
             Mover testDude = manager.movers[1];
 
             float direction = testDude.Direction * 180 / (float)Math.PI;
-            ClassicAssert.AreEqual(110, (int)(direction + 0.5f));
+            ((int)(direction + 0.5f)).ShouldBe(110);
         }
 
         [Test()]
@@ -97,7 +96,7 @@ namespace BulletMLTests
             Mover testDude = manager.movers[1];
 
             float direction = testDude.Direction * 180 / (float)Math.PI;
-            ClassicAssert.AreEqual(10.0f, direction);
+            direction.ShouldBe(10.0f);
         }
 
         [Test()]
@@ -111,7 +110,7 @@ namespace BulletMLTests
 
             Mover testDude = manager.movers[1];
             float direction = testDude.Direction * 180 / (float)Math.PI;
-            ClassicAssert.AreEqual(10.0f, direction);
+            direction.ShouldBe(10.0f);
         }
 
         [Test()]
@@ -125,7 +124,7 @@ namespace BulletMLTests
 
             Mover testDude = manager.movers[2];
             float direction = testDude.Direction * 180 / (float)Math.PI;
-            ClassicAssert.AreEqual(20.0f, direction);
+            direction.ShouldBe(20.0f);
         }
 
         [Test()]
@@ -141,7 +140,7 @@ namespace BulletMLTests
             Mover testDude = manager.movers[1];
 
             float direction = testDude.Direction * 180 / (float)Math.PI;
-            ClassicAssert.AreEqual(20.0f, direction);
+            direction.ShouldBe(20.0f);
         }
     }
 }

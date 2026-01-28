@@ -2,7 +2,7 @@ using BulletMLLib;
 using BulletMLSample;
 using FilenameBuddy;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
+using Shouldly;
 
 namespace BulletMLTests
 {
@@ -29,7 +29,7 @@ namespace BulletMLTests
             Mover mover = (Mover)manager.CreateBullet();
             mover.InitTopNode(pattern.RootNode);
             manager.Update();
-            ClassicAssert.AreEqual(0, manager.movers.Count);
+            manager.movers.Count.ShouldBe(0);
         }
 
         [Test()]
@@ -40,7 +40,7 @@ namespace BulletMLTests
             Mover mover = (Mover)manager.CreateBullet();
             mover.InitTopNode(pattern.RootNode);
             manager.Update();
-            ClassicAssert.AreEqual(0, manager.movers.Count);
+            manager.movers.Count.ShouldBe(0);
         }
     }
 }

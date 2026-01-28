@@ -4,7 +4,6 @@ using NUnit.Framework;
 using System;
 using BulletMLLib;
 using Shouldly;
-using NUnit.Framework.Legacy;
 
 namespace BulletMLTests
 {
@@ -30,7 +29,7 @@ namespace BulletMLTests
             Mover mover = (Mover)manager.CreateBullet();
             mover.InitTopNode(pattern.RootNode);
 
-            ClassicAssert.AreEqual(1, mover.Tasks.Count);
+            mover.Tasks.Count.ShouldBe(1);
         }
 
         [Test()]
@@ -54,7 +53,7 @@ namespace BulletMLTests
             Mover mover = (Mover)manager.CreateBullet();
             mover.InitTopNode(pattern.RootNode);
 
-            ClassicAssert.AreEqual(mover.Tasks[0].ChildTasks.Count, 0);
+            mover.Tasks[0].ChildTasks.Count.ShouldBe(0);
         }
 
         [Test()]
@@ -66,7 +65,7 @@ namespace BulletMLTests
             Mover mover = (Mover)manager.CreateBullet();
             mover.InitTopNode(pattern.RootNode);
 
-            ClassicAssert.AreEqual(mover.Tasks[0].ParamList.Count, 0);
+            mover.Tasks[0].ParamList.Count.ShouldBe(0);
         }
 
         [Test()]
@@ -114,7 +113,7 @@ namespace BulletMLTests
             Mover mover = (Mover)manager.CreateBullet();
             mover.InitTopNode(pattern.RootNode);
 
-            ClassicAssert.AreEqual(RunStatus.End, mover.Tasks[0].Run(mover));
+            mover.Tasks[0].Run(mover).ShouldBe(RunStatus.End);
         }
 
         [Test()]

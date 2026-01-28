@@ -4,7 +4,6 @@ using FilenameBuddy;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
 using Shouldly;
-using NUnit.Framework.Legacy;
 
 namespace BulletMLTests
 {
@@ -31,8 +30,8 @@ namespace BulletMLTests
             Mover mover = (Mover)manager.CreateBullet();
             mover.Acceleration = new Vector2(20.0f, 40.0f);
             mover.InitTopNode(pattern.RootNode);
-            ClassicAssert.AreEqual(20.0f, mover.Acceleration.X);
-            ClassicAssert.AreEqual(40.0f, mover.Acceleration.Y);
+            mover.Acceleration.X.ShouldBe(20.0f);
+            mover.Acceleration.Y.ShouldBe(40.0f);
         }
 
         [Test()]
@@ -46,8 +45,8 @@ namespace BulletMLTests
 
             manager.Update();
 
-            ClassicAssert.AreEqual(19.0f, mover.Acceleration.X);
-            ClassicAssert.AreEqual(38.0f, mover.Acceleration.Y);
+            mover.Acceleration.X.ShouldBe(19.0f);
+            mover.Acceleration.Y.ShouldBe(38.0f);
         }
 
         [Test()]
@@ -64,8 +63,8 @@ namespace BulletMLTests
                 manager.Update();
             }
 
-            ClassicAssert.AreEqual(10.0f, mover.Acceleration.X);
-            ClassicAssert.AreEqual(20.0f, mover.Acceleration.Y);
+            mover.Acceleration.X.ShouldBe(10.0f);
+            mover.Acceleration.Y.ShouldBe(20.0f);
         }
 
         [Test()]
@@ -79,8 +78,8 @@ namespace BulletMLTests
 
             manager.Update();
 
-            ClassicAssert.AreEqual(21.0f, mover.Acceleration.X);
-            ClassicAssert.AreEqual(42.0f, mover.Acceleration.Y);
+            mover.Acceleration.X.ShouldBe(21.0f);
+            mover.Acceleration.Y.ShouldBe(42.0f);
         }
 
         [Test()]
@@ -97,8 +96,8 @@ namespace BulletMLTests
                 manager.Update();
             }
 
-            ClassicAssert.AreEqual(30.0f, mover.Acceleration.X);
-            ClassicAssert.AreEqual(60.0f, mover.Acceleration.Y);
+            mover.Acceleration.X.ShouldBe(30.0f);
+            mover.Acceleration.Y.ShouldBe(60.0f);
         }
 
         [Test()]
@@ -137,8 +136,8 @@ namespace BulletMLTests
             mover.InitTopNode(pattern.RootNode);
 
             AccelTask myTask = mover.FindTaskByLabelAndName("test", NodeName.accel) as AccelTask;
-            ClassicAssert.AreEqual(1.0f, myTask.Acceleration.X);
-            ClassicAssert.AreEqual(2.0f, myTask.Acceleration.Y);
+            myTask.Acceleration.X.ShouldBe(1.0f);
+            myTask.Acceleration.Y.ShouldBe(2.0f);
         }
 
         [Test()]
@@ -152,7 +151,7 @@ namespace BulletMLTests
 
             AccelTask myTask = mover.FindTaskByLabelAndName("test", NodeName.accel) as AccelTask;
             BulletMLNode myNode = myTask.Node.GetChild(NodeName.horizontal);
-            ClassicAssert.AreEqual(10.0f, myNode.GetValue(myTask, mover));
+            myNode.GetValue(myTask, mover).ShouldBe(10.0f);
         }
 
         [Test()]
@@ -166,7 +165,7 @@ namespace BulletMLTests
 
             AccelTask myTask = mover.FindTaskByLabelAndName("test", NodeName.accel) as AccelTask;
             BulletMLNode myNode = myTask.Node.GetChild(NodeName.vertical);
-            ClassicAssert.AreEqual(NodeType.relative, myNode.NodeType);
+            myNode.NodeType.ShouldBe(NodeType.relative);
         }
 
         [Test()]
@@ -180,7 +179,7 @@ namespace BulletMLTests
 
             AccelTask myTask = mover.FindTaskByLabelAndName("test", NodeName.accel) as AccelTask;
             BulletMLNode myNode = myTask.Node.GetChild(NodeName.horizontal);
-            ClassicAssert.AreEqual(NodeType.relative, myNode.NodeType);
+            myNode.NodeType.ShouldBe(NodeType.relative);
         }
 
         [Test()]
@@ -194,7 +193,7 @@ namespace BulletMLTests
 
             AccelTask myTask = mover.FindTaskByLabelAndName("test", NodeName.accel) as AccelTask;
             BulletMLNode myNode = myTask.Node.GetChild(NodeName.vertical);
-            ClassicAssert.AreEqual(20.0f, myNode.GetValue(myTask, mover));
+            myNode.GetValue(myTask, mover).ShouldBe(20.0f);
         }
 
         [Test()]
@@ -207,7 +206,7 @@ namespace BulletMLTests
             mover.InitTopNode(pattern.RootNode);
 
             AccelTask myTask = mover.FindTaskByLabelAndName("test", NodeName.accel) as AccelTask;
-            ClassicAssert.AreEqual(10.0f, myTask.Duration);
+            myTask.Duration.ShouldBe(10.0f);
         }
 
         [Test()]
@@ -220,8 +219,8 @@ namespace BulletMLTests
             mover.InitTopNode(pattern.RootNode);
 
             AccelTask myTask = mover.FindTaskByLabelAndName("test", NodeName.accel) as AccelTask;
-            ClassicAssert.AreEqual(1.0f, myTask.Acceleration.X);
-            ClassicAssert.AreEqual(2.0f, myTask.Acceleration.Y);
+            myTask.Acceleration.X.ShouldBe(1.0f);
+            myTask.Acceleration.Y.ShouldBe(2.0f);
         }
 
         [Test()]
@@ -235,8 +234,8 @@ namespace BulletMLTests
 
             manager.Update();
 
-            ClassicAssert.AreEqual(21.0f, mover.Acceleration.X);
-            ClassicAssert.AreEqual(42.0f, mover.Acceleration.Y);
+            mover.Acceleration.X.ShouldBe(21.0f);
+            mover.Acceleration.Y.ShouldBe(42.0f);
         }
 
         [Test()]
@@ -253,8 +252,8 @@ namespace BulletMLTests
                 manager.Update();
             }
 
-            ClassicAssert.AreEqual(30.0f, mover.Acceleration.X);
-            ClassicAssert.AreEqual(60.0f, mover.Acceleration.Y);
+            mover.Acceleration.X.ShouldBe(30.0f);
+            mover.Acceleration.Y.ShouldBe(60.0f);
         }
     }
 }

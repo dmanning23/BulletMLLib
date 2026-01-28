@@ -3,7 +3,6 @@ using BulletMLSample;
 using FilenameBuddy;
 using NUnit.Framework;
 using Shouldly;
-using NUnit.Framework.Legacy;
 
 namespace BulletMLTests
 {
@@ -23,12 +22,12 @@ namespace BulletMLTests
         [Test()]
         public void TestStringToType()
         {
-            ClassicAssert.AreEqual(BulletMLNode.StringToType(""), NodeType.none);
-            ClassicAssert.AreEqual(BulletMLNode.StringToType("none"), NodeType.none);
-            ClassicAssert.AreEqual(BulletMLNode.StringToType("aim"), NodeType.aim);
-            ClassicAssert.AreEqual(BulletMLNode.StringToType("absolute"), NodeType.absolute);
-            ClassicAssert.AreEqual(BulletMLNode.StringToType("relative"), NodeType.relative);
-            ClassicAssert.AreEqual(BulletMLNode.StringToType("sequence"), NodeType.sequence);
+            BulletMLNode.StringToType("").ShouldBe(NodeType.none);
+            BulletMLNode.StringToType("none").ShouldBe(NodeType.none);
+            BulletMLNode.StringToType("aim").ShouldBe(NodeType.aim);
+            BulletMLNode.StringToType("absolute").ShouldBe(NodeType.absolute);
+            BulletMLNode.StringToType("relative").ShouldBe(NodeType.relative);
+            BulletMLNode.StringToType("sequence").ShouldBe(NodeType.sequence);
         }
 
         //		[Test]
@@ -44,12 +43,12 @@ namespace BulletMLTests
             BulletPattern pattern = new BulletPattern(manager);
             pattern.ParseXML(filename.File);
 
-            ClassicAssert.AreEqual(filename.File, pattern.Filename);
-            ClassicAssert.AreEqual(PatternType.none, pattern.Orientation);
+            pattern.Filename.ShouldBe(filename.File);
+            pattern.Orientation.ShouldBe(PatternType.none);
 
             pattern.RootNode.ShouldNotBeNull();
-            ClassicAssert.AreEqual(pattern.RootNode.Name, NodeName.bulletml);
-            ClassicAssert.AreEqual(pattern.RootNode.NodeType, NodeType.none);
+            pattern.RootNode.Name.ShouldBe(NodeName.bulletml);
+            pattern.RootNode.NodeType.ShouldBe(NodeType.none);
         }
 
         [Test()]
@@ -59,12 +58,12 @@ namespace BulletMLTests
             BulletPattern pattern = new BulletPattern(manager);
             pattern.ParseXML(filename.File);
 
-            ClassicAssert.AreEqual(filename.File, pattern.Filename);
-            ClassicAssert.AreEqual(PatternType.horizontal, pattern.Orientation);
+            pattern.Filename.ShouldBe(filename.File);
+            pattern.Orientation.ShouldBe(PatternType.horizontal);
 
             pattern.RootNode.ShouldNotBeNull();
-            ClassicAssert.AreEqual(pattern.RootNode.Name, NodeName.bulletml);
-            ClassicAssert.AreEqual(pattern.RootNode.NodeType, NodeType.none);
+            pattern.RootNode.Name.ShouldBe(NodeName.bulletml);
+            pattern.RootNode.NodeType.ShouldBe(NodeType.none);
         }
 
         [Test()]
@@ -74,12 +73,12 @@ namespace BulletMLTests
             BulletPattern pattern = new BulletPattern(manager);
             pattern.ParseXML(filename.File);
 
-            ClassicAssert.AreEqual(filename.File, pattern.Filename);
-            ClassicAssert.AreEqual(PatternType.vertical, pattern.Orientation);
+            pattern.Filename.ShouldBe(filename.File);
+            pattern.Orientation.ShouldBe(PatternType.vertical);
 
             pattern.RootNode.ShouldNotBeNull();
-            ClassicAssert.AreEqual(pattern.RootNode.Name, NodeName.bulletml);
-            ClassicAssert.AreEqual(pattern.RootNode.NodeType, NodeType.none);
+            pattern.RootNode.Name.ShouldBe(NodeName.bulletml);
+            pattern.RootNode.NodeType.ShouldBe(NodeType.none);
         }
 
         [Test()]
@@ -89,7 +88,7 @@ namespace BulletMLTests
             BulletPattern pattern = new BulletPattern(manager);
             pattern.ParseXML(filename.File);
 
-            ClassicAssert.AreEqual(pattern.RootNode, pattern.RootNode.GetRootNode());
+            pattern.RootNode.GetRootNode().ShouldBe(pattern.RootNode);
         }
     }
 }

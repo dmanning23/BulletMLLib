@@ -4,7 +4,6 @@ using FilenameBuddy;
 using NUnit.Framework;
 using Shouldly;
 using System;
-using NUnit.Framework.Legacy;
 
 namespace BulletMLTests
 {
@@ -33,7 +32,7 @@ namespace BulletMLTests
             Mover mover = (Mover)manager.CreateBullet();
             mover.InitTopNode(pattern.RootNode);
 
-            ClassicAssert.AreEqual(1, manager.movers.Count);
+            manager.movers.Count.ShouldBe(1);
         }
 
         [Test()]
@@ -47,7 +46,7 @@ namespace BulletMLTests
             mover.InitTopNode(pattern.RootNode);
 
             manager.Update();
-            ClassicAssert.AreEqual(2, manager.movers.Count);
+            manager.movers.Count.ShouldBe(2);
         }
 
         [Test()]
@@ -64,11 +63,11 @@ namespace BulletMLTests
             for (int i = 2; i < 12; i++)
             {
                 manager.Update();
-                ClassicAssert.AreEqual(i, manager.movers.Count);
+                manager.movers.Count.ShouldBe(i);
             }
 
             //there should be 11 bullets
-            ClassicAssert.AreEqual(11, manager.movers.Count);
+            manager.movers.Count.ShouldBe(11);
         }
 
         [Test()]
@@ -139,8 +138,8 @@ namespace BulletMLTests
             mover.InitTopNode(pattern.RootNode);
 
             FireTask testTask = mover.FindTaskByLabel("testFire") as FireTask;
-            ClassicAssert.AreEqual(1.0f, testTask.InitialSpeedTask.GetNodeValue(mover));
-            ClassicAssert.AreEqual(1.0f, testTask.SequenceSpeedTask.GetNodeValue(mover));
+            testTask.InitialSpeedTask.GetNodeValue(mover).ShouldBe(1.0f);
+            testTask.SequenceSpeedTask.GetNodeValue(mover).ShouldBe(1.0f);
         }
 
         [Test()]
@@ -154,7 +153,7 @@ namespace BulletMLTests
             mover.InitTopNode(pattern.RootNode);
 
             FireTask testTask = mover.FindTaskByLabel("testFire") as FireTask;
-            ClassicAssert.AreEqual(1, testTask.NumTimesInitialized);
+            testTask.NumTimesInitialized.ShouldBe(1);
         }
 
         [Test()]
@@ -168,7 +167,7 @@ namespace BulletMLTests
             mover.InitTopNode(pattern.RootNode);
 
             FireTask testTask = mover.FindTaskByLabel("testFire") as FireTask;
-            ClassicAssert.AreEqual(1.0f, testTask.FireSpeed);
+            testTask.FireSpeed.ShouldBe(1.0f);
         }
 
         [Test()]
@@ -189,11 +188,11 @@ namespace BulletMLTests
 
             //check the top bullet
             Mover testDude = manager.movers[0];
-            ClassicAssert.AreEqual(0, testDude.Speed);
+            testDude.Speed.ShouldBe(0);
 
             //check the second bullet
             testDude = manager.movers[1];
-            ClassicAssert.AreEqual(1, testDude.Speed);
+            testDude.Speed.ShouldBe(1);
         }
 
         [Test()]
@@ -219,7 +218,7 @@ namespace BulletMLTests
             for (int i = 1; i < manager.movers.Count; i++)
             {
                 Mover testDude = manager.movers[i];
-                ClassicAssert.AreEqual(i, testDude.Speed);
+                testDude.Speed.ShouldBe(i);
             }
         }
     }

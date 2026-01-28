@@ -3,7 +3,6 @@ using BulletMLSample;
 using FilenameBuddy;
 using NUnit.Framework;
 using Shouldly;
-using NUnit.Framework.Legacy;
 
 namespace BulletMLTests
 {
@@ -49,7 +48,7 @@ namespace BulletMLTests
             pattern.ParseXML(filename.File);
 
             BulletNode testBulletNode = pattern.RootNode.GetChild(NodeName.bullet) as BulletNode;
-            ClassicAssert.AreEqual("test", testBulletNode.Label);
+            testBulletNode.Label.ShouldBe("test");
         }
     }
 }

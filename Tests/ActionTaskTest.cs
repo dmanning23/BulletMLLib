@@ -3,7 +3,6 @@ using BulletMLSample;
 using FilenameBuddy;
 using NUnit.Framework;
 using Shouldly;
-using NUnit.Framework.Legacy;
 
 namespace BulletMLTests
 {
@@ -44,7 +43,7 @@ namespace BulletMLTests
             ActionTask myAction = mover.Tasks[0] as ActionTask;
 
             ActionNode testNode = pattern.RootNode.FindLabelNode("top", NodeName.action) as ActionNode;
-            ClassicAssert.AreEqual(1, testNode.RepeatNum(myAction, mover));
+            testNode.RepeatNum(myAction, mover).ShouldBe(1);
         }
 
         [Test()]
@@ -56,7 +55,7 @@ namespace BulletMLTests
             Mover mover = (Mover)manager.CreateBullet();
             mover.InitTopNode(pattern.RootNode);
             BulletMLTask myTask = mover.Tasks[0];
-            ClassicAssert.AreEqual(1, myTask.ChildTasks.Count);
+            myTask.ChildTasks.Count.ShouldBe(1);
         }
 
         [Test()]
@@ -68,7 +67,7 @@ namespace BulletMLTests
             Mover mover = (Mover)manager.CreateBullet();
             mover.InitTopNode(pattern.RootNode);
             BulletMLTask myTask = mover.Tasks[0];
-            ClassicAssert.AreEqual(1, myTask.ChildTasks.Count);
+            myTask.ChildTasks.Count.ShouldBe(1);
             (myTask.ChildTasks[0] is ActionTask).ShouldBeTrue();
         }
 
@@ -85,7 +84,7 @@ namespace BulletMLTests
 
             testTask.Node.ShouldNotBeNull();
             (testTask.Node.Name == NodeName.action).ShouldBeTrue();
-            ClassicAssert.AreEqual(testTask.Node.Label, "test");
+            testTask.Node.Label.ShouldBe("test");
         }
 
         [Test()]
@@ -98,7 +97,7 @@ namespace BulletMLTests
             mover.InitTopNode(pattern.RootNode);
             BulletMLTask myTask = mover.Tasks[0];
             ActionTask testTask = myTask.ChildTasks[0] as ActionTask;
-            ClassicAssert.AreEqual(0, testTask.RepeatNum);
+            testTask.RepeatNum.ShouldBe(0);
         }
 
         [Test()]
@@ -113,7 +112,7 @@ namespace BulletMLTests
             ActionTask testTask = myTask.ChildTasks[0] as ActionTask;
             ActionNode actionNode = testTask.Node as ActionNode;
 
-            ClassicAssert.AreEqual(1, actionNode.RepeatNum(testTask, mover));
+            actionNode.RepeatNum(testTask, mover).ShouldBe(1);
         }
 
         [Test()]
@@ -139,7 +138,7 @@ namespace BulletMLTests
             ActionTask testTask = mover.FindTaskByLabel("test") as ActionTask;
             ActionNode actionNode = testTask.Node as ActionNode;
 
-            ClassicAssert.AreEqual(10, actionNode.RepeatNum(testTask, mover));
+            actionNode.RepeatNum(testTask, mover).ShouldBe(10);
         }
     }
 }

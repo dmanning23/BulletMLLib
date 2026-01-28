@@ -4,7 +4,6 @@ using System;
 using BulletMLLib;
 using BulletMLSample;
 using Shouldly;
-using NUnit.Framework.Legacy;
 
 namespace BulletMLTests
 {
@@ -90,7 +89,7 @@ namespace BulletMLTests
             ActionNode testActionNode = pattern.RootNode.GetChild(NodeName.action) as ActionNode;
             FireRefNode testFireNode = testActionNode.GetChild(NodeName.fireRef) as FireRefNode;
             FireNode fireNode = testFireNode.ReferencedFireNode as FireNode;
-            ClassicAssert.AreEqual("test", fireNode.Label);
+            fireNode.Label.ShouldBe("test");
         }
 
         [Test()]

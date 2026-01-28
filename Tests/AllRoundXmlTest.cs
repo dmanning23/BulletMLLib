@@ -3,7 +3,6 @@ using BulletMLSample;
 using FilenameBuddy;
 using NUnit.Framework;
 using Shouldly;
-using NUnit.Framework.Legacy;
 
 namespace BulletMLTests
 {
@@ -66,7 +65,7 @@ namespace BulletMLTests
             ActionTask myAction = mover.Tasks[0] as ActionTask;
 
             ActionNode testNode = pattern.RootNode.FindLabelNode("top", NodeName.action) as ActionNode;
-            ClassicAssert.AreEqual(1, testNode.RepeatNum(myAction, mover));
+            testNode.RepeatNum(myAction, mover).ShouldBe(1);
         }
 
         [Test()]
@@ -78,7 +77,7 @@ namespace BulletMLTests
             Mover mover = (Mover)manager.CreateBullet();
             mover.InitTopNode(pattern.RootNode);
             BulletMLTask myTask = mover.Tasks[0];
-            ClassicAssert.AreEqual(1, myTask.ChildTasks.Count);
+            myTask.ChildTasks.Count.ShouldBe(1);
         }
 
         [Test()]
@@ -101,7 +100,7 @@ namespace BulletMLTests
             mover.InitTopNode(pattern.RootNode);
             ActionTask testTask = mover.FindTaskByLabelAndName("circle", NodeName.actionRef) as ActionTask;
 
-            ClassicAssert.AreEqual(NodeName.actionRef, testTask.Node.Name);
+            testTask.Node.Name.ShouldBe(NodeName.actionRef);
         }
 
         [Test()]
@@ -113,7 +112,7 @@ namespace BulletMLTests
             mover.InitTopNode(pattern.RootNode);
             ActionTask testTask = mover.FindTaskByLabelAndName("circle", NodeName.actionRef) as ActionTask;
 
-            ClassicAssert.AreEqual("circle", testTask.Node.Label);
+            testTask.Node.Label.ShouldBe("circle");
         }
 
         [Test()]
@@ -124,7 +123,7 @@ namespace BulletMLTests
             Mover mover = (Mover)manager.CreateBullet();
             mover.InitTopNode(pattern.RootNode);
             ActionTask testTask = mover.FindTaskByLabelAndName("circle", NodeName.actionRef) as ActionTask;
-            ClassicAssert.AreEqual(1, testTask.ChildTasks.Count);
+            testTask.ChildTasks.Count.ShouldBe(1);
         }
 
         [Test()]
@@ -171,7 +170,7 @@ namespace BulletMLTests
             mover.InitTopNode(pattern.RootNode);
             ActionTask testTask = mover.FindTaskByLabelAndName("circle", NodeName.actionRef) as ActionTask;
             ActionTask testActionTask = testTask.ChildTasks[0] as ActionTask;
-            ClassicAssert.AreEqual(NodeName.action, testActionTask.Node.Name);
+            testActionTask.Node.Name.ShouldBe(NodeName.action);
         }
 
         [Test()]
@@ -183,7 +182,7 @@ namespace BulletMLTests
             mover.InitTopNode(pattern.RootNode);
             ActionTask testTask = mover.FindTaskByLabelAndName("circle", NodeName.actionRef) as ActionTask;
             ActionTask testActionTask = testTask.ChildTasks[0] as ActionTask;
-            ClassicAssert.AreEqual("circle", testActionTask.Node.Label);
+            testActionTask.Node.Label.ShouldBe("circle");
         }
 
         [Test()]
@@ -207,7 +206,7 @@ namespace BulletMLTests
             manager.Update();
 
             //there should be 11 bullets
-            ClassicAssert.AreEqual(21, manager.movers.Count);
+            manager.movers.Count.ShouldBe(21);
         }
     }
 }

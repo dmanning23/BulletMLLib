@@ -4,7 +4,6 @@ using NUnit.Framework;
 using System;
 using BulletMLLib;
 using Shouldly;
-using NUnit.Framework.Legacy;
 
 namespace BulletMLTests
 {
@@ -33,7 +32,7 @@ namespace BulletMLTests
             mover.Speed = 100;
 
             manager.Update();
-            ClassicAssert.AreEqual(manager.movers.Count, 2);
+            manager.movers.Count.ShouldBe(2);
         }
 
         [Test()]
@@ -72,7 +71,7 @@ namespace BulletMLTests
             testDude.InitialDirectionTask.ShouldBeNull();
             testDude.SequenceDirectionTask.ShouldBeNull();
 
-            ClassicAssert.AreEqual(100.0f, testDude.FireSpeed);
+            testDude.FireSpeed.ShouldBe(100.0f);
         }
 
         [Test()]
@@ -86,7 +85,7 @@ namespace BulletMLTests
             manager.Update();
             Mover testDude = manager.movers[1];
 
-            ClassicAssert.AreEqual(100.0f, testDude.Speed);
+            testDude.Speed.ShouldBe(100.0f);
         }
 
         [Test()]
@@ -100,7 +99,7 @@ namespace BulletMLTests
             manager.Update();
             Mover testDude = manager.movers[1];
 
-            ClassicAssert.AreEqual(5.0f, testDude.Speed);
+            testDude.Speed.ShouldBe(5.0f);
         }
 
         [Test()]
@@ -114,7 +113,7 @@ namespace BulletMLTests
             manager.Update();
             Mover testDude = manager.movers[1];
 
-            ClassicAssert.AreEqual(5.0f, testDude.Speed);
+            testDude.Speed.ShouldBe(5.0f);
         }
 
         [Test()]
@@ -131,7 +130,7 @@ namespace BulletMLTests
             BulletMLTask myTask = mover.Tasks[0];
             FireTask testTask = myTask.ChildTasks[0] as FireTask;
 
-            ClassicAssert.AreEqual(105.0f, testTask.FireSpeed);
+            testTask.FireSpeed.ShouldBe(105.0f);
         }
 
         [Test()]
@@ -145,7 +144,7 @@ namespace BulletMLTests
             manager.Update();
             Mover testDude = manager.movers[1];
 
-            ClassicAssert.AreEqual(105.0f, testDude.Speed);
+            testDude.Speed.ShouldBe(105.0f);
         }
 
         [Test()]
@@ -159,7 +158,7 @@ namespace BulletMLTests
             manager.Update();
             Mover testDude = manager.movers[1];
 
-            ClassicAssert.AreEqual(5.0f, testDude.Speed);
+            testDude.Speed.ShouldBe(5.0f);
         }
 
         [Test()]
@@ -188,7 +187,7 @@ namespace BulletMLTests
             BulletMLTask myTask = mover.Tasks[0];
             FireTask testTask = myTask.ChildTasks[0] as FireTask;
 
-            ClassicAssert.AreEqual(NodeType.sequence, testTask.SequenceSpeedTask.Node.NodeType);
+            testTask.SequenceSpeedTask.Node.NodeType.ShouldBe(NodeType.sequence);
         }
 
         [Test()]
@@ -202,9 +201,9 @@ namespace BulletMLTests
             BulletMLTask myTask = mover.Tasks[0];
             FireTask testTask = myTask.ChildTasks[0] as FireTask;
 
-            ClassicAssert.AreEqual(100.0f, mover.Speed);
+            mover.Speed.ShouldBe(100.0f);
             testTask.InitialRun.ShouldBeFalse();
-            ClassicAssert.AreEqual(5.0f, testTask.SequenceSpeedTask.Node.GetValue(testTask, mover));
+            testTask.SequenceSpeedTask.Node.GetValue(testTask, mover).ShouldBe(5.0f);
         }
 
         [Test()]
@@ -220,10 +219,10 @@ namespace BulletMLTests
 
             testTask.InitialSpeedTask.ShouldBeNull();
             testTask.SequenceSpeedTask.ShouldNotBeNull();
-            ClassicAssert.AreEqual(NodeType.sequence, testTask.SequenceSpeedTask.Node.NodeType);
-            ClassicAssert.AreEqual(100.0f, mover.Speed);
+            testTask.SequenceSpeedTask.Node.NodeType.ShouldBe(NodeType.sequence);
+            mover.Speed.ShouldBe(100.0f);
             testTask.InitialRun.ShouldBeFalse();
-            ClassicAssert.AreEqual(5.0f, testTask.SequenceSpeedTask.Node.GetValue(testTask, mover));
+            testTask.SequenceSpeedTask.Node.GetValue(testTask, mover).ShouldBe(5.0f);
         }
 
         [Test()]
@@ -237,7 +236,7 @@ namespace BulletMLTests
             BulletMLTask myTask = mover.Tasks[0];
             FireTask testTask = myTask.ChildTasks[0] as FireTask;
 
-            ClassicAssert.AreEqual(100.0f, testTask.FireSpeed);
+            testTask.FireSpeed.ShouldBe(100.0f);
         }
 
         [Test()]
@@ -251,7 +250,7 @@ namespace BulletMLTests
             manager.Update();
             Mover testDude = manager.movers[1];
 
-            ClassicAssert.AreEqual(100.0f, testDude.Speed);
+            testDude.Speed.ShouldBe(100.0f);
         }
 
         [Test()]
@@ -265,7 +264,7 @@ namespace BulletMLTests
             manager.Update();
             Mover testDude = manager.movers[1];
 
-            ClassicAssert.AreEqual(5.0f, testDude.Speed);
+            testDude.Speed.ShouldBe(5.0f);
         }
 
         [Test()]
@@ -279,7 +278,7 @@ namespace BulletMLTests
             manager.Update();
             Mover testDude = manager.movers[1];
 
-            ClassicAssert.AreEqual(105.0f, testDude.Speed);
+            testDude.Speed.ShouldBe(105.0f);
         }
 
         [Test()]
@@ -293,7 +292,7 @@ namespace BulletMLTests
 
             //test the second bullet
             Mover testDude = manager.movers[1];
-            ClassicAssert.AreEqual(10.0f, testDude.Speed);
+            testDude.Speed.ShouldBe(10.0f);
         }
 
         [Test()]
@@ -305,7 +304,7 @@ namespace BulletMLTests
             mover.InitTopNode(pattern.RootNode);
             manager.Update();
 
-            ClassicAssert.AreEqual(3, manager.movers.Count);
+            manager.movers.Count.ShouldBe(3);
         }
 
         [Test()]
@@ -319,7 +318,7 @@ namespace BulletMLTests
 
             //test the second bullet
             Mover testDude = manager.movers[2];
-            ClassicAssert.AreEqual(20.0f, testDude.Speed);
+            testDude.Speed.ShouldBe(20.0f);
         }
     }
 }

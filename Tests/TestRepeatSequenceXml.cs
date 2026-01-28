@@ -2,7 +2,7 @@ using BulletMLLib;
 using BulletMLSample;
 using FilenameBuddy;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
+using Shouldly;
 
 namespace BulletMLTests
 {
@@ -28,7 +28,7 @@ namespace BulletMLTests
             pattern.ParseXML(filename.File);
             Mover mover = (Mover)manager.CreateBullet();
             mover.InitTopNode(pattern.RootNode);
-            ClassicAssert.AreEqual(0, mover.Speed);
+            mover.Speed.ShouldBe(0);
         }
 
         [Test()]
@@ -43,7 +43,7 @@ namespace BulletMLTests
                 manager.Update();
             }
 
-            ClassicAssert.AreEqual(10, mover.Speed);
+            mover.Speed.ShouldBe(10);
         }
 
         [Test()]
@@ -55,7 +55,7 @@ namespace BulletMLTests
             mover.InitTopNode(pattern.RootNode);
             manager.Update();
 
-            ClassicAssert.AreEqual(1, mover.Speed);
+            mover.Speed.ShouldBe(1);
         }
     }
 }

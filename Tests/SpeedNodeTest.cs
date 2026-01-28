@@ -4,7 +4,6 @@ using System;
 using BulletMLLib;
 using BulletMLSample;
 using Shouldly;
-using NUnit.Framework.Legacy;
 
 namespace BulletMLTests
 {
@@ -79,7 +78,7 @@ namespace BulletMLTests
             FireNode testFireNode = testActionNode.GetChild(NodeName.fire) as FireNode;
             SpeedNode testSpeedNode = testFireNode.GetChild(NodeName.speed) as SpeedNode;
 
-            ClassicAssert.AreEqual(NodeType.absolute, testSpeedNode.NodeType);
+            testSpeedNode.NodeType.ShouldBe(NodeType.absolute);
         }
 
         [Test()]
@@ -93,7 +92,7 @@ namespace BulletMLTests
             FireNode testFireNode = testActionNode.GetChild(NodeName.fire) as FireNode;
             SpeedNode testSpeedNode = testFireNode.GetChild(NodeName.speed) as SpeedNode;
 
-            ClassicAssert.AreEqual(NodeType.absolute, testSpeedNode.NodeType);
+            testSpeedNode.NodeType.ShouldBe(NodeType.absolute);
         }
 
         [Test()]
@@ -107,7 +106,7 @@ namespace BulletMLTests
             FireNode testFireNode = testActionNode.GetChild(NodeName.fire) as FireNode;
             SpeedNode testSpeedNode = testFireNode.GetChild(NodeName.speed) as SpeedNode;
 
-            ClassicAssert.AreEqual(NodeType.sequence, testSpeedNode.NodeType);
+            testSpeedNode.NodeType.ShouldBe(NodeType.sequence);
         }
 
         [Test()]
@@ -121,7 +120,7 @@ namespace BulletMLTests
             FireNode testFireNode = testActionNode.GetChild(NodeName.fire) as FireNode;
             SpeedNode testSpeedNode = testFireNode.GetChild(NodeName.speed) as SpeedNode;
 
-            ClassicAssert.AreEqual(NodeType.relative, testSpeedNode.NodeType);
+            testSpeedNode.NodeType.ShouldBe(NodeType.relative);
         }
     }
 }

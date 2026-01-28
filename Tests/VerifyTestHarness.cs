@@ -2,8 +2,8 @@ using BulletMLLib;
 using BulletMLSample;
 using FilenameBuddy;
 using NUnit.Framework;
+using Shouldly;
 using System.IO;
-using NUnit.Framework.Legacy;
 
 namespace BulletMLTests
 {
@@ -48,7 +48,7 @@ namespace BulletMLTests
             mover.InitTopNode(pattern.RootNode);
             manager.FreeMovers();
 
-            ClassicAssert.AreEqual(0, manager.movers.Count);
+            manager.movers.Count.ShouldBe(0);
         }
 
         [Test()]
@@ -61,7 +61,7 @@ namespace BulletMLTests
             mover.InitTopNode(pattern.RootNode);
             manager.FreeMovers();
 
-            ClassicAssert.AreEqual(0, manager.movers.Count);
+            manager.movers.Count.ShouldBe(0);
         }
 
         [Test()]
@@ -74,7 +74,7 @@ namespace BulletMLTests
             mover.InitTopNode(pattern.RootNode);
             manager.FreeMovers();
 
-            ClassicAssert.AreEqual(0, manager.movers.Count);
+            manager.movers.Count.ShouldBe(0);
         }
 
         [Test()]
@@ -87,7 +87,7 @@ namespace BulletMLTests
             mover.InitTopNode(pattern.RootNode);
             manager.FreeMovers();
 
-            ClassicAssert.AreEqual(0, manager.movers.Count);
+            manager.movers.Count.ShouldBe(0);
         }
 
         [Test()]
@@ -100,7 +100,7 @@ namespace BulletMLTests
             mover.InitTopNode(pattern.RootNode);
             manager.FreeMovers();
 
-            ClassicAssert.AreEqual(1, manager.movers.Count);
+            manager.movers.Count.ShouldBe(1);
         }
 
         [Test()]
@@ -113,7 +113,7 @@ namespace BulletMLTests
             mover.InitTopNode(pattern.RootNode);
             manager.FreeMovers();
 
-            ClassicAssert.AreEqual(1, manager.movers.Count);
+            manager.movers.Count.ShouldBe(1);
         }
 
         [Test()]
@@ -126,7 +126,7 @@ namespace BulletMLTests
             mover.InitTopNode(pattern.RootNode);
             manager.FreeMovers();
 
-            ClassicAssert.AreEqual(0, manager.movers.Count);
+            manager.movers.Count.ShouldBe(0);
         }
     }
 }

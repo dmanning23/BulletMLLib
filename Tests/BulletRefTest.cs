@@ -4,7 +4,6 @@ using NUnit.Framework;
 using System;
 using BulletMLLib;
 using Shouldly;
-using NUnit.Framework.Legacy;
 
 namespace BulletMLTests
 {
@@ -33,10 +32,10 @@ namespace BulletMLTests
 
             manager.Update();
 
-            ClassicAssert.AreEqual(2, manager.movers.Count);
+            manager.movers.Count.ShouldBe(2);
 
             mover = manager.movers[1];
-            ClassicAssert.AreEqual("test", mover.Label);
+            mover.Label.ShouldBe("test");
         }
 
         [Test()]
@@ -62,7 +61,7 @@ namespace BulletMLTests
 
             //find the task for the bulletRef
             BulletMLTask bulletRefTask = mover.FindTaskByLabelAndName("test", NodeName.bullet);
-            ClassicAssert.AreEqual(1, bulletRefTask.ParamList.Count);
+            bulletRefTask.ParamList.Count.ShouldBe(1);
         }
 
         [Test()]
@@ -75,7 +74,7 @@ namespace BulletMLTests
 
             //find the task for the bulletRef
             BulletMLTask bulletRefTask = mover.FindTaskByLabelAndName("test", NodeName.bullet);
-            ClassicAssert.AreEqual(15.0f, bulletRefTask.ParamList[0]);
+            bulletRefTask.ParamList[0].ShouldBe(15.0f);
         }
 
         [Test()]
@@ -114,11 +113,11 @@ namespace BulletMLTests
 
             manager.Update();
 
-            ClassicAssert.AreEqual(2, manager.movers.Count);
+            manager.movers.Count.ShouldBe(2);
 
             mover = manager.movers[1];
-            ClassicAssert.AreEqual("test", mover.Label);
-            ClassicAssert.AreEqual(15.0f, mover.Speed);
+            mover.Label.ShouldBe("test");
+            mover.Speed.ShouldBe(15.0f);
         }
     }
 }

@@ -3,7 +3,6 @@ using BulletMLSample;
 using FilenameBuddy;
 using NUnit.Framework;
 using Shouldly;
-using NUnit.Framework.Legacy;
 
 namespace BulletMLTests
 {
@@ -135,7 +134,7 @@ namespace BulletMLTests
             ActionRefNode testActionRefNode = testBulletNode.GetChild(NodeName.actionRef) as ActionRefNode;
             ActionNode refNode = testActionRefNode.ReferencedActionNode as ActionNode;
 
-            ClassicAssert.AreEqual(refNode.Label, "test");
+            refNode.Label.ShouldBe("test");
         }
 
         [Test()]
@@ -151,7 +150,7 @@ namespace BulletMLTests
             ActionRefNode testActionRefNode = testBulletNode.GetChild(NodeName.actionRef) as ActionRefNode;
             ActionNode refNode = testActionRefNode.ReferencedActionNode as ActionNode;
 
-            ClassicAssert.AreEqual(refNode.Label, "test2");
+            refNode.Label.ShouldBe("test2");
         }
     }
 }

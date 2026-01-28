@@ -4,7 +4,6 @@ using System;
 using BulletMLLib;
 using BulletMLSample;
 using Shouldly;
-using NUnit.Framework.Legacy;
 
 namespace BulletMLTests
 {
@@ -68,7 +67,7 @@ namespace BulletMLTests
             FireNode testFireNode = testActionNode.GetChild(NodeName.fire) as FireNode;
             DirectionNode testDirectionNode = testFireNode.GetChild(NodeName.direction) as DirectionNode;
 
-            ClassicAssert.AreEqual(NodeType.aim, testDirectionNode.NodeType);
+            testDirectionNode.NodeType.ShouldBe(NodeType.aim);
         }
 
         [Test()]
@@ -82,7 +81,7 @@ namespace BulletMLTests
             FireNode testFireNode = testActionNode.GetChild(NodeName.fire) as FireNode;
             DirectionNode testDirectionNode = testFireNode.GetChild(NodeName.direction) as DirectionNode;
 
-            ClassicAssert.AreEqual(NodeType.aim, testDirectionNode.NodeType);
+            testDirectionNode.NodeType.ShouldBe(NodeType.aim);
         }
 
         [Test()]
@@ -96,7 +95,7 @@ namespace BulletMLTests
             FireNode testFireNode = testActionNode.GetChild(NodeName.fire) as FireNode;
             DirectionNode testDirectionNode = testFireNode.GetChild(NodeName.direction) as DirectionNode;
 
-            ClassicAssert.AreEqual(NodeType.absolute, testDirectionNode.NodeType);
+            testDirectionNode.NodeType.ShouldBe(NodeType.absolute);
         }
 
         [Test()]
@@ -110,7 +109,7 @@ namespace BulletMLTests
             FireNode testFireNode = testActionNode.GetChild(NodeName.fire) as FireNode;
             DirectionNode testDirectionNode = testFireNode.GetChild(NodeName.direction) as DirectionNode;
 
-            ClassicAssert.AreEqual(NodeType.sequence, testDirectionNode.NodeType);
+            testDirectionNode.NodeType.ShouldBe(NodeType.sequence);
         }
 
         [Test()]
@@ -124,7 +123,7 @@ namespace BulletMLTests
             FireNode testFireNode = testActionNode.GetChild(NodeName.fire) as FireNode;
             DirectionNode testDirectionNode = testFireNode.GetChild(NodeName.direction) as DirectionNode;
 
-            ClassicAssert.AreEqual(NodeType.relative, testDirectionNode.NodeType);
+            testDirectionNode.NodeType.ShouldBe(NodeType.relative);
         }
     }
 }

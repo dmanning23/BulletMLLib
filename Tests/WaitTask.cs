@@ -2,7 +2,7 @@ using BulletMLLib;
 using BulletMLSample;
 using FilenameBuddy;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
+using Shouldly;
 
 namespace BulletMLTests
 {
@@ -28,7 +28,7 @@ namespace BulletMLTests
             pattern.ParseXML(filename.File);
             Mover mover = (Mover)manager.CreateBullet();
             mover.InitTopNode(pattern.RootNode);
-            ClassicAssert.AreEqual(1, manager.movers.Count);
+            manager.movers.Count.ShouldBe(1);
         }
 
         [Test()]
@@ -39,7 +39,7 @@ namespace BulletMLTests
             Mover mover = (Mover)manager.CreateBullet();
             mover.InitTopNode(pattern.RootNode);
             manager.Update();
-            ClassicAssert.AreEqual(1, manager.movers.Count);
+            manager.movers.Count.ShouldBe(1);
         }
 
         [Test()]
@@ -51,7 +51,7 @@ namespace BulletMLTests
             mover.InitTopNode(pattern.RootNode);
             manager.Update();
             manager.Update();
-            ClassicAssert.AreEqual(0, manager.movers.Count);
+            manager.movers.Count.ShouldBe(0);
         }
 
         [Test()]
@@ -63,7 +63,7 @@ namespace BulletMLTests
             mover.InitTopNode(pattern.RootNode);
             manager.Update();
             manager.Update();
-            ClassicAssert.AreEqual(0, manager.movers.Count);
+            manager.movers.Count.ShouldBe(0);
         }
 
         [Test()]
@@ -74,7 +74,7 @@ namespace BulletMLTests
             Mover mover = (Mover)manager.CreateBullet();
             mover.InitTopNode(pattern.RootNode);
             manager.Update();
-            ClassicAssert.AreEqual(0, manager.movers.Count);
+            manager.movers.Count.ShouldBe(0);
         }
 
         [Test()]
@@ -84,7 +84,7 @@ namespace BulletMLTests
             pattern.ParseXML(filename.File);
             Mover mover = (Mover)manager.CreateBullet();
             mover.InitTopNode(pattern.RootNode);
-            ClassicAssert.AreEqual(1, manager.movers.Count);
+            manager.movers.Count.ShouldBe(1);
             manager.Update();
         }
 
@@ -96,7 +96,7 @@ namespace BulletMLTests
             Mover mover = (Mover)manager.CreateBullet();
             mover.InitTopNode(pattern.RootNode);
             manager.Update();
-            ClassicAssert.AreEqual(1, manager.movers.Count);
+            manager.movers.Count.ShouldBe(1);
         }
 
         [Test()]
@@ -108,7 +108,7 @@ namespace BulletMLTests
             mover.InitTopNode(pattern.RootNode);
             manager.Update();
             manager.Update();
-            ClassicAssert.AreEqual(1, manager.movers.Count);
+            manager.movers.Count.ShouldBe(1);
         }
 
         [Test()]
@@ -121,7 +121,7 @@ namespace BulletMLTests
             manager.Update();
             manager.Update();
             manager.Update();
-            ClassicAssert.AreEqual(0, manager.movers.Count);
+            manager.movers.Count.ShouldBe(0);
         }
     }
 }

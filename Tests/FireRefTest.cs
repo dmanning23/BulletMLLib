@@ -1,9 +1,9 @@
 using BulletMLSample;
 using FilenameBuddy;
 using NUnit.Framework;
+using Shouldly;
 using System;
 using BulletMLLib;
-using NUnit.Framework.Legacy;
 
 namespace BulletMLTests
 {
@@ -32,10 +32,10 @@ namespace BulletMLTests
 
             manager.Update();
 
-            ClassicAssert.AreEqual(2, manager.movers.Count);
+            manager.movers.Count.ShouldBe(2);
 
             mover = manager.movers[1];
-            ClassicAssert.AreEqual("testBullet", mover.Label);
+            mover.Label.ShouldBe("testBullet");
         }
 
         [Test()]
@@ -48,11 +48,11 @@ namespace BulletMLTests
 
             manager.Update();
 
-            ClassicAssert.AreEqual(2, manager.movers.Count);
+            manager.movers.Count.ShouldBe(2);
 
             mover = manager.movers[1];
-            ClassicAssert.AreEqual("testBullet", mover.Label);
-            ClassicAssert.AreEqual(15.0f, mover.Speed);
+            mover.Label.ShouldBe("testBullet");
+            mover.Speed.ShouldBe(15.0f);
         }
     }
 }
