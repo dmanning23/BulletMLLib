@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "bulletml.dtd">
+<bulletml>
+	<action label="top">
+		<fire>
+			<bulletRef label="split"/>
+		</fire>
+	</action>
+	<bullet label="split">
+		<action>
+			<wait>1</wait>
+			<fire>
+				<bulletRef label="split"/>
+			</fire>
+			<vanish/>
+		</action>
+	</bullet>
+</bulletml>

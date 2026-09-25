@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-  <Content Include="Content/*.xml">
+  <Content Include="Content/**/*.xml">
     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
   </Content>
 </ItemGroup>

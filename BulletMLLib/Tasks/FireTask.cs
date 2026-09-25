@@ -138,16 +138,17 @@ namespace BulletMLLib
                             BulletRefTask.ParamList.Add(childNode.ChildNodes[i].GetValue(this, bullet));
                         }
 
-                        BulletRefTask.ParseTasks(bullet);
+                        //Don't parse the referenced bullet's child tasks here.
+                        //The fired bullet builds its own task tree in InitNode, and parsing it here would recurse forever if the bullet fires itself.
                         ChildTasks.Add(BulletRefTask);
                     }
                     break;
 
                 case NodeName.bullet:
                     {
-                        //Create a task for the bullet ref 
+                        //Create a task for the bullet ref
+                        //The fired bullet builds its own task tree in InitNode, so don't parse its child tasks here.
                         BulletRefTask = new BulletMLTask(childNode, this);
-                        BulletRefTask.ParseTasks(bullet);
                         ChildTasks.Add(BulletRefTask);
                     }
                     break;

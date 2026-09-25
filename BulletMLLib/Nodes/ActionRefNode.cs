@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace BulletMLLib
 {
@@ -49,6 +51,72 @@ namespace BulletMLLib
             if (null == ReferencedActionNode)
             {
                 throw new NullReferenceException("The BulletMLNode \"" + Label + "\" isn't an action node");
+            }
+
+            //An action that references itself would expand into an infinite task tree, so catch that here
+            CheckForCircularReference(ReferencedActionNode, new Stack<ActionNode>());
+        }
+
+        /// <summary>
+        /// Walk the action tree that would be expanded from an action node, and throw if any action ends up referencing itself.
+        /// </summary>
+        /// <param name="action">The action node to check.</param>
+        /// <param name="path">The action nodes currently being expanded.</param>
+        private static void CheckForCircularReference(ActionNode action, Stack<ActionNode> path)
+        {
+            if (path.Contains(action))
+            {
+                throw new InvalidDataException("The action node \"" + action.Label + "\" has a circular actionRef");
+            }
+
+            path.Push(action);
+            CheckChildNodesForCircularReference(action, path);
+            path.Pop();
+        }
+
+        /// <summary>
+        /// Recurse into the child nodes of a node, following any actionRefs to the actions they point to.
+        /// </summary>
+        /// <param name="node">The node whose children to check.</param>
+        /// <param name="path">The action nodes currently being expanded.</param>
+        private static void CheckChildNodesForCircularReference(BulletMLNode node, Stack<ActionNode> path)
+        {
+            foreach (BulletMLNode childNode in node.ChildNodes)
+            {
+                switch (childNode.Name)
+                {
+                    case NodeName.fire:
+                    case NodeName.fireRef:
+                    case NodeName.bullet:
+                    case NodeName.bulletRef:
+                        {
+                            //Fired bullets build their own task trees, so a bullet firing itself is not a cycle
+                        }
+                        break;
+
+                    case NodeName.actionRef:
+                        {
+                            //If the label doesn't resolve, that actionRef's own validation will report it
+                            ActionNode refAction = childNode.GetRootNode().FindLabelNode(childNode.Label, NodeName.action) as ActionNode;
+                            if (null != refAction)
+                            {
+                                CheckForCircularReference(refAction, path);
+                            }
+                        }
+                        break;
+
+                    case NodeName.action:
+                        {
+                            CheckForCircularReference(childNode as ActionNode, path);
+                        }
+                        break;
+
+                    default:
+                        {
+                            CheckChildNodesForCircularReference(childNode, path);
+                        }
+                        break;
+                }
             }
         }
 

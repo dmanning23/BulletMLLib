@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "bulletml.dtd">
+<bulletml>
+	<action label="top">
+		<actionRef label="shoot"/>
+	</action>
+	<action label="shoot">
+		<fire>
+			<bulletRef label="split"/>
+		</fire>
+	</action>
+	<bullet label="split">
+		<action>
+			<wait>1</wait>
+			<actionRef label="shoot"/>
+			<vanish/>
+		</action>
+	</bullet>
+</bulletml>
