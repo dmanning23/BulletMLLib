@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.IO;
 
 namespace BulletMLLib
 {
@@ -53,6 +54,12 @@ namespace BulletMLLib
             {
                 //resolve the bullet reference
                 BulletRefNode refNode = GetChild(NodeName.bulletRef) as BulletRefNode;
+                if (null == refNode)
+                {
+                    string name = string.IsNullOrEmpty(Label) ? "A fire node" : "The fire node \"" + Label + "\"";
+                    throw new InvalidDataException(name + " has no bullet or bulletRef child");
+                }
+
                 refNode.FindMyBulletNode();
                 BulletDescriptionNode = refNode.ReferencedBulletNode;
             }

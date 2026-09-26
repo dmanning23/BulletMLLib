@@ -38,7 +38,9 @@ Test suite status at the time of review: **13 of 272 tests fail** (`dotnet test`
 
 **Fix:** In each ref node's `ValidateNode`, throw if `string.IsNullOrEmpty(Label)`. `FindLabelNode` should also never match on a null label.
 
-### 1.3 `<fire>` with no `<bullet>`/`<bulletRef>` throws `NullReferenceException` **(verified)**
+### 1.3 `<fire>` with no `<bullet>`/`<bulletRef>` throws `NullReferenceException` **(verified) — FIXED**
+
+> **Status:** Fixed. `FireNode.ValidateNode` throws an `InvalidDataException` naming the fire node ("The fire node "x" has no bullet or bulletRef child"). Covered by `Tests/FireNoBulletTest.cs`.
 
 **Problem:** `FireNode.ValidateNode` ([FireNode.cs](../BulletMLLib/Nodes/FireNode.cs)) calls `refNode.FindMyBulletNode()` without checking whether `refNode` is null. The user gets a bare NRE with no hint of which node is broken.
 
