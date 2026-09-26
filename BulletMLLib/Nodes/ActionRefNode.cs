@@ -38,6 +38,11 @@ namespace BulletMLLib
             //do any base class validation
             base.ValidateNode();
 
+            if (string.IsNullOrEmpty(Label))
+            {
+                throw new InvalidDataException("An actionRef node is missing a label");
+            }
+
             //Find the action node this reference points to
             BulletMLNode refNode = GetRootNode().FindLabelNode(Label, NodeName.action);
 

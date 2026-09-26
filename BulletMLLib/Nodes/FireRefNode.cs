@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.IO;
 
 namespace BulletMLLib
 {
@@ -34,6 +35,11 @@ namespace BulletMLLib
         /// </summary>
         public override void ValidateNode()
         {
+            if (string.IsNullOrEmpty(Label))
+            {
+                throw new InvalidDataException("A fireRef node is missing a label");
+            }
+
             //Find the fire node this reference points to
             Debug.Assert(null != GetRootNode());
             BulletMLNode refNode = GetRootNode().FindLabelNode(Label, NodeName.fire);

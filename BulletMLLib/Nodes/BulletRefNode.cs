@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 
 namespace BulletMLLib
 {
@@ -47,6 +48,11 @@ namespace BulletMLLib
         {
             if (null == ReferencedBulletNode)
             {
+                if (string.IsNullOrEmpty(Label))
+                {
+                    throw new InvalidDataException("A bulletRef node is missing a label");
+                }
+
                 //Find the bullet node this reference points to
                 BulletMLNode refNode = GetRootNode().FindLabelNode(Label, NodeName.bullet);
 

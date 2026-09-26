@@ -30,7 +30,9 @@ Test suite status at the time of review: **13 of 272 tests fail** (`dotnet test`
 - Stop building the referenced bullet's task tree inside `FireTask`. `FireTask` only needs the bullet's `<speed>` and `<direction>` nodes, and the fired bullet builds its own tree in `Bullet.InitNode`. With that change, recursive bullets work, which is the correct BulletML behavior.
 - For `actionRef`, detect cycles in `ValidateNode` by keeping a stack of the refs being resolved, and throw a clear error, or build child action tasks lazily.
 
-### 1.2 Refs with no `label` resolve to the wrong node **(verified)**
+### 1.2 Refs with no `label` resolve to the wrong node **(verified) — FIXED**
+
+> **Status:** Fixed. `FindLabelNode` never matches a null or empty label. `ActionRefNode`, `BulletRefNode` and `FireRefNode` throw an `InvalidDataException` ("… is missing a label") during validation. Covered by `Tests/MissingLabelTest.cs`.
 
 **Problem:** `ActionRefNode`, `BulletRefNode` and `FireRefNode` call `FindLabelNode(Label, …)` even when `Label` is null. `null == null` matches the first *unlabeled* node of that type, so `<actionRef/>` quietly links to an unrelated action.
 

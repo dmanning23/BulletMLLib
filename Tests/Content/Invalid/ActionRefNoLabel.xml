@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "bulletml.dtd">
+<bulletml>
+	<action label="top">
+		<actionRef/>
+	</action>
+	<action>
+		<changeSpeed>
+			<speed>99</speed>
+			<term>1</term>
+		</changeSpeed>
+	</action>
+</bulletml>

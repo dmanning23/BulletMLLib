@@ -134,6 +134,12 @@ namespace BulletMLLib
         /// <param name="eName">Name of the node we are looking for.</param>
         public BulletMLNode FindLabelNode(string strLabel, NodeName eName)
         {
+            //an empty label would match every unlabeled node, so it can never be a valid search
+            if (string.IsNullOrEmpty(strLabel))
+            {
+                return null;
+            }
+
             //this uses breadth first search, since labelled nodes are usually top level
 
             //Check if any of our child nodes match the request
