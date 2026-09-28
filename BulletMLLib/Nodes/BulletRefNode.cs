@@ -1,6 +1,3 @@
-using System;
-using System.IO;
-
 namespace BulletMLLib
 {
     /// <summary>
@@ -50,7 +47,7 @@ namespace BulletMLLib
             {
                 if (string.IsNullOrEmpty(Label))
                 {
-                    throw new InvalidDataException("A bulletRef node is missing a label");
+                    throw ValidationError("A bulletRef node is missing a label");
                 }
 
                 //Find the bullet node this reference points to
@@ -59,13 +56,13 @@ namespace BulletMLLib
                 //make sure we found something
                 if (null == refNode)
                 {
-                    throw new NullReferenceException("Couldn't find the bullet node \"" + Label + "\"");
+                    throw ValidationError("Couldn't find the bullet node \"" + Label + "\"");
                 }
 
                 ReferencedBulletNode = refNode as BulletNode;
                 if (null == ReferencedBulletNode)
                 {
-                    throw new NullReferenceException("The BulletMLNode \"" + Label + "\" isn't a bullet node");
+                    throw ValidationError("The BulletMLNode \"" + Label + "\" isn't a bullet node");
                 }
             }
         }

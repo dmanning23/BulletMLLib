@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
 
 namespace BulletMLLib
 {
@@ -40,7 +38,7 @@ namespace BulletMLLib
 
             if (string.IsNullOrEmpty(Label))
             {
-                throw new InvalidDataException("An actionRef node is missing a label");
+                throw ValidationError("An actionRef node is missing a label");
             }
 
             //Find the action node this reference points to
@@ -49,13 +47,13 @@ namespace BulletMLLib
             //make sure we found something
             if (null == refNode)
             {
-                throw new NullReferenceException("Couldn't find the action node \"" + Label + "\"");
+                throw ValidationError("Couldn't find the action node \"" + Label + "\"");
             }
 
             ReferencedActionNode = refNode as ActionNode;
             if (null == ReferencedActionNode)
             {
-                throw new NullReferenceException("The BulletMLNode \"" + Label + "\" isn't an action node");
+                throw ValidationError("The BulletMLNode \"" + Label + "\" isn't an action node");
             }
 
             //An action that references itself would expand into an infinite task tree, so catch that here
@@ -71,7 +69,7 @@ namespace BulletMLLib
         {
             if (path.Contains(action))
             {
-                throw new InvalidDataException("The action node \"" + action.Label + "\" has a circular actionRef");
+                throw action.ValidationError("The action node \"" + action.Label + "\" has a circular actionRef");
             }
 
             path.Push(action);

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Content;
 using System;
+using System.IO;
 using System.Xml;
 
 namespace BulletMLLib
@@ -46,16 +47,6 @@ namespace BulletMLLib
         }
 
         /// <summary>
-        /// convert a string to a pattern type enum
-        /// </summary>
-        /// <returns>The type to name.</returns>
-        /// <param name="str">String.</param>
-        private static PatternType StringToPatternType(string str)
-        {
-            return (PatternType)Enum.Parse(typeof(PatternType), str);
-        }
-
-        /// <summary>
         /// Parses a bulletml document into this bullet pattern
         /// </summary>
         /// <param name="xmlFileName">Xml file name.</param>
@@ -65,52 +56,76 @@ namespace BulletMLLib
             //grab that filename 
             Filename = xmlFileName;
 
+#if NETFX_CORE
+			XmlReaderSettings settings = new XmlReaderSettings();
+			settings.DtdProcessing = DtdProcessing.Ignore;
+#else
+            //The DTD isn't used for validation, that is done in code by BulletMLNode.ValidateNode so it works the same for every load path
+            XmlReaderSettings settings = new XmlReaderSettings();
+            settings.DtdProcessing = DtdProcessing.Parse;
+#endif
+
             try
             {
+                //LineInfoXmlDocument remembers where each element is, so errors can report the line number
+                var xmlDoc = new LineInfoXmlDocument();
+
                 //If the content manager is null, load the file as a text file.
                 if (null == content)
                 {
-#if NETFX_CORE
-					XmlReaderSettings settings = new XmlReaderSettings();
-					settings.DtdProcessing = DtdProcessing.Ignore;
-#else
-                    //The DTD isn't used for validation, that is done in code by BulletMLNode.ValidateNode so it works the same for every load path
-                    XmlReaderSettings settings = new XmlReaderSettings();
-                    settings.DtdProcessing = DtdProcessing.Parse;
-#endif
-
                     using (XmlReader reader = XmlReader.Create(xmlFileName, settings))
                     {
-                        //Open the file.
-                        XmlDocument xmlDoc = new XmlDocument();
                         xmlDoc.Load(reader);
-                        ReadXmlDocument(xmlDoc);
                     }
                 }
                 else
                 {
                     //Load the document as a content resource. If you do this, the file name should be relative path with no extension
                     var data = content.Load<string>(xmlFileName);
-                    var xmlDoc = new XmlDocument();
-                    xmlDoc.LoadXml(data);
-                    ReadXmlDocument(xmlDoc);
+                    using (XmlReader reader = XmlReader.Create(new StringReader(data), settings))
+                    {
+                        xmlDoc.Load(reader);
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                //an error ocurred reading in the tree
-                throw new Exception("Error reading \"" + xmlFileName + "\"", ex);
-            }
 
-            //validate that the bullet nodes are all valid
-            try
-            {
+                ReadXmlDocument(xmlDoc);
+
+                //validate that the bullet nodes are all valid
                 RootNode.ValidateNode();
             }
             catch (Exception ex)
             {
                 //an error ocurred reading in the tree
-                throw new Exception("Error reading \"" + xmlFileName + "\"", ex);
+                int lineNumber;
+                int linePosition;
+                GetErrorLocation(ex, out lineNumber, out linePosition);
+                throw new BulletMLException(xmlFileName, lineNumber, linePosition, ex);
+            }
+        }
+
+        /// <summary>
+        /// Find where in the xml file an error happened, if the exception knows.
+        /// </summary>
+        /// <param name="ex">The exception thrown while loading.</param>
+        /// <param name="lineNumber">The line of the error, or 0 if not known.</param>
+        /// <param name="linePosition">The column of the error, or 0 if not known.</param>
+        private static void GetErrorLocation(Exception ex, out int lineNumber, out int linePosition)
+        {
+            lineNumber = 0;
+            linePosition = 0;
+
+            XmlException xmlException = ex as XmlException;
+            if (null != xmlException)
+            {
+                //malformed xml
+                lineNumber = xmlException.LineNumber;
+                linePosition = xmlException.LinePosition;
+            }
+            else if (ex.Data.Contains(BulletMLNode.LineNumberKey))
+            {
+                //an invalid pattern, thrown by BulletMLNode
+                lineNumber = (int)ex.Data[BulletMLNode.LineNumberKey];
+                linePosition = (int)ex.Data[BulletMLNode.LinePositionKey];
             }
         }
 
@@ -126,7 +141,7 @@ namespace BulletMLLib
                 if ("bulletml" != strElementName)
                 {
                     //The first node HAS to be bulletml
-                    throw new Exception("Error reading \"" + Filename + "\": XML root node needs to be \"bulletml\", found \"" + strElementName + "\" instead");
+                    throw BulletMLNode.CreateError("The root element needs to be <bulletml>, found <" + strElementName + "> instead", rootXmlNode);
                 }
 
                 //Create the root node of the bulletml tree
@@ -145,7 +160,12 @@ namespace BulletMLLib
                     if ("type" == strName)
                     {
                         //if  this is a top level node, "type" will be veritcal or horizontal
-                        Orientation = StringToPatternType(strValue);
+                        PatternType orientation;
+                        if (!Enum.TryParse(strValue, out orientation) || (orientation.ToString() != strValue))
+                        {
+                            throw BulletMLNode.CreateError("\"" + strValue + "\" is not a valid type for a <bulletml> node", rootXmlNode);
+                        }
+                        Orientation = orientation;
                     }
                 }
             }

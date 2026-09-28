@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "bulletml.dtd">
+<bulletml>
+	<action label="top">
+		<fire>
+			<speed><![CDATA[1 + 2]]></speed>
+			<bullet/>
+		</fire>
+	</action>
+</bulletml>

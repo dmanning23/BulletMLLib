@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "bulletml.dtd">
+<bulletml>
+	<action label="top">
+		<wait>1</wait>
+		<actionRef label="nope"/>
+	</action>
+</bulletml>

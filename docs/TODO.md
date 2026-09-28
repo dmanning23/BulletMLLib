@@ -62,7 +62,9 @@ Test suite status at the time of review: **13 of 272 tests fail** (`dotnet test`
 
 **Fix:** Give `SpeedNode`, `HorizontalNode` and `VerticalNode` an `absolute` default and override `NodeType` the same way `DirectionNode` does. Throw on a type that isn't valid for the node.
 
-### 1.6 Parse errors don't say where they happened
+### 1.6 Parse errors don't say where they happened — FIXED
+
+> **Status:** Fixed. Every load error includes the line and column, and `ParseXML` throws a `BulletMLException` with `FileName`, `LineNumber` and `LinePosition` whose message includes the problem. `InvalidDataException` is sealed, so `BulletMLException` wraps it instead of deriving from it, which keeps the 5.1 contract (inner exception is `InvalidDataException`). Unknown elements, CDATA, bad root `type` values and missing ref targets are all handled. Covered by `Tests/ErrorLocationTest.cs`.
 
 **Problem:**
 - `StringToName` and `StringToType` use `Enum.Parse`. A typo like `<chnageSpeed>` or `type="Relative"` produces *"Requested value … was not found"* with no line number or parent element.

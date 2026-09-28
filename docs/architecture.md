@@ -48,7 +48,7 @@ After parsing, the tree is validated:
 - `actionRef` chains that loop back on themselves are rejected.
 - `<fire>` must contain a `<bullet>` or `<bulletRef>`.
 - `ActionNode` objects find their parent `RepeatNode` (if any).
-- Every problem throws an `InvalidDataException` describing the bad node, wrapped in an exception naming the file.
+- Every problem throws an `InvalidDataException` describing the bad node and its line and column. `BulletPattern.ParseXML` wraps it in a `BulletMLException` that names the file and exposes the location as properties. Line numbers come from `LineInfoXmlDocument`, an `XmlDocument` that records where each element was read.
 
 ### Node Type Hierarchy
 
