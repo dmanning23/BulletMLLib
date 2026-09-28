@@ -56,38 +56,49 @@ namespace BulletMLLib
                 throw ValidationError("The BulletMLNode \"" + Label + "\" isn't an action node");
             }
 
-            //An action that references itself would expand into an infinite task tree, so catch that here
+            //An action can reference itself, but only if it waits first. Otherwise it would loop forever in a single frame.
             CheckForCircularReference(ReferencedActionNode, new Stack<ActionNode>());
         }
 
         /// <summary>
-        /// Walk the action tree that would be expanded from an action node, and throw if any action ends up referencing itself.
+        /// Walk the actions that would run from an action node in a single frame, and throw if any action ends up referencing itself.
+        /// Once a wait node is reached, the rest runs in a later frame, so the walk stops there.
         /// </summary>
         /// <param name="action">The action node to check.</param>
-        /// <param name="path">The action nodes currently being expanded.</param>
-        private static void CheckForCircularReference(ActionNode action, Stack<ActionNode> path)
+        /// <param name="path">The action nodes currently being walked.</param>
+        /// <returns>true if a wait node was reached</returns>
+        private static bool CheckForCircularReference(ActionNode action, Stack<ActionNode> path)
         {
             if (path.Contains(action))
             {
-                throw action.ValidationError("The action node \"" + action.Label + "\" has a circular actionRef");
+                throw action.ValidationError("The action node \"" + action.Label + "\" has a circular actionRef with no wait before it");
             }
 
             path.Push(action);
-            CheckChildNodesForCircularReference(action, path);
+            bool waited = CheckChildNodesForCircularReference(action, path);
             path.Pop();
+            return waited;
         }
 
         /// <summary>
         /// Recurse into the child nodes of a node, following any actionRefs to the actions they point to.
         /// </summary>
         /// <param name="node">The node whose children to check.</param>
-        /// <param name="path">The action nodes currently being expanded.</param>
-        private static void CheckChildNodesForCircularReference(BulletMLNode node, Stack<ActionNode> path)
+        /// <param name="path">The action nodes currently being walked.</param>
+        /// <returns>true if a wait node was reached</returns>
+        private static bool CheckChildNodesForCircularReference(BulletMLNode node, Stack<ActionNode> path)
         {
             foreach (BulletMLNode childNode in node.ChildNodes)
             {
+                bool waited = false;
                 switch (childNode.Name)
                 {
+                    case NodeName.wait:
+                        {
+                            waited = true;
+                        }
+                        break;
+
                     case NodeName.fire:
                     case NodeName.fireRef:
                     case NodeName.bullet:
@@ -103,24 +114,31 @@ namespace BulletMLLib
                             ActionNode refAction = childNode.GetRootNode().FindLabelNode(childNode.Label, NodeName.action) as ActionNode;
                             if (null != refAction)
                             {
-                                CheckForCircularReference(refAction, path);
+                                waited = CheckForCircularReference(refAction, path);
                             }
                         }
                         break;
 
                     case NodeName.action:
                         {
-                            CheckForCircularReference(childNode as ActionNode, path);
+                            waited = CheckForCircularReference(childNode as ActionNode, path);
                         }
                         break;
 
                     default:
                         {
-                            CheckChildNodesForCircularReference(childNode, path);
+                            waited = CheckChildNodesForCircularReference(childNode, path);
                         }
                         break;
                 }
+
+                if (waited)
+                {
+                    return true;
+                }
             }
+
+            return false;
         }
 
         #endregion //Methods

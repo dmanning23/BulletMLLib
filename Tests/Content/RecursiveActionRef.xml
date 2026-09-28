@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "bulletml.dtd">
+<bulletml>
+	<action label="top">
+		<actionRef label="loop">
+			<param>1</param>
+		</actionRef>
+	</action>
+	<action label="loop">
+		<wait>1</wait>
+		<fire>
+			<speed>$1</speed>
+			<bullet label="shot"/>
+		</fire>
+		<actionRef label="loop">
+			<param>$1+1</param>
+		</actionRef>
+	</action>
+</bulletml>

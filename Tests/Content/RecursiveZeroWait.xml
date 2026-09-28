@@ -5,6 +5,10 @@
 		<actionRef label="loop"/>
 	</action>
 	<action label="loop">
+		<wait>0</wait>
+		<fire>
+			<bullet label="shot"/>
+		</fire>
 		<actionRef label="loop"/>
 	</action>
 </bulletml>
