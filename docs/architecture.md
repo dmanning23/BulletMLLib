@@ -24,7 +24,7 @@ bulletml.xml  ──ParseXML──> │ Node Tree │ ──InitNode──> Task
 XML file → XmlReader → XmlDocument → BulletMLNode.Parse()
 ```
 
-- Opens the XML file using `XmlReader` with DTD validation.
+- Opens the XML file using `XmlReader`. The DTD isn't used for validation; the checks happen in code (step 3) so every load path behaves the same.
 - Alternatively loads via MonoGame's `ContentManager` for content pipeline integration.
 - Reads the `type` attribute from `<bulletml>` to determine pattern orientation.
 
@@ -34,7 +34,7 @@ Each XML element maps to a `BulletMLNode` (or a specialized subclass). The parse
 
 1. Read the element name and map it to a `NodeName` enum value.
 2. Create the appropriate node type via `NodeFactory.CreateNode()`.
-3. Read attributes (`type`, `label`) and store on the node.
+3. Read attributes (`type`, `label`) and store on the node. A `type` value the node doesn't accept throws an `InvalidDataException`.
 4. Parse text content as a mathematical equation via `BulletMLEquation`.
 5. Recursively parse child elements into child nodes.
 6. Set parent-child relationships.
@@ -43,9 +43,12 @@ Each XML element maps to a `BulletMLNode` (or a specialized subclass). The parse
 
 After parsing, the tree is validated:
 
-- Reference nodes (`bulletRef`, `actionRef`, `fireRef`) resolve their `label` to the target node.
+- Each node may only contain the child elements the BulletML DTD allows, and must have the ones it requires (e.g. `<changeSpeed>` needs `<speed>` and `<term>`, `<repeat>` needs `<times>` and an action).
+- Reference nodes (`bulletRef`, `actionRef`, `fireRef`) must have a `label`, and resolve it to the target node.
+- `actionRef` chains that loop back on themselves are rejected.
+- `<fire>` must contain a `<bullet>` or `<bulletRef>`.
 - `ActionNode` objects find their parent `RepeatNode` (if any).
-- Missing references throw descriptive exceptions.
+- Every problem throws an `InvalidDataException` describing the bad node, wrapped in an exception naming the file.
 
 ### Node Type Hierarchy
 

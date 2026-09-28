@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Xml;
 
 namespace BulletMLLib
@@ -65,6 +66,49 @@ namespace BulletMLLib
         /// The ID of this node.
         /// </summary>
         public string Id { get; set; }
+
+        /// <summary>
+        /// The values allowed in the type attribute of this node.
+        /// Empty for nodes that don't take a type attribute.
+        /// </summary>
+        protected virtual NodeType[] ValidTypes
+        {
+            get
+            {
+                return NoTypes;
+            }
+        }
+
+        private static readonly NodeType[] NoTypes = new NodeType[0];
+
+        /// <summary>
+        /// The child nodes each type of node is allowed to have, from the bulletml DTD.
+        /// </summary>
+        private static readonly Dictionary<NodeName, NodeName[]> AllowedChildren = new Dictionary<NodeName, NodeName[]>
+        {
+            { NodeName.bulletml, new[] { NodeName.bullet, NodeName.fire, NodeName.action } },
+            { NodeName.bullet, new[] { NodeName.direction, NodeName.speed, NodeName.action, NodeName.actionRef } },
+            { NodeName.action, new[] { NodeName.changeDirection, NodeName.accel, NodeName.vanish, NodeName.changeSpeed, NodeName.repeat, NodeName.wait, NodeName.fire, NodeName.fireRef, NodeName.action, NodeName.actionRef } },
+            { NodeName.fire, new[] { NodeName.direction, NodeName.speed, NodeName.bullet, NodeName.bulletRef } },
+            { NodeName.changeDirection, new[] { NodeName.direction, NodeName.term } },
+            { NodeName.changeSpeed, new[] { NodeName.speed, NodeName.term } },
+            { NodeName.accel, new[] { NodeName.horizontal, NodeName.vertical, NodeName.term } },
+            { NodeName.repeat, new[] { NodeName.times, NodeName.action, NodeName.actionRef } },
+            { NodeName.bulletRef, new[] { NodeName.param } },
+            { NodeName.actionRef, new[] { NodeName.param } },
+            { NodeName.fireRef, new[] { NodeName.param } },
+        };
+
+        /// <summary>
+        /// The child nodes each type of node must have, from the bulletml DTD.
+        /// </summary>
+        private static readonly Dictionary<NodeName, NodeName[]> RequiredChildren = new Dictionary<NodeName, NodeName[]>
+        {
+            { NodeName.changeDirection, new[] { NodeName.direction, NodeName.term } },
+            { NodeName.changeSpeed, new[] { NodeName.speed, NodeName.term } },
+            { NodeName.accel, new[] { NodeName.term } },
+            { NodeName.repeat, new[] { NodeName.times } },
+        };
 
         #endregion //Members
 
@@ -273,7 +317,7 @@ namespace BulletMLLib
                     }
 
                     //get the bullet node type
-                    NodeType = BulletMLNode.StringToType(strValue);
+                    NodeType = ParseValidType(strValue);
                 }
                 else if ("label" == strName)
                 {
@@ -319,11 +363,69 @@ namespace BulletMLLib
         /// </summary>
         public virtual void ValidateNode()
         {
+            ValidateChildNodeNames();
+
             //validate all the child nodes
             foreach (BulletMLNode childnode in ChildNodes)
             {
                 childnode.ValidateNode();
             }
+        }
+
+        /// <summary>
+        /// Check that this node only has the child nodes the bulletml DTD allows, and has all the ones it requires.
+        /// </summary>
+        protected void ValidateChildNodeNames()
+        {
+            NodeName[] allowed;
+            if (!AllowedChildren.TryGetValue(Name, out allowed))
+            {
+                allowed = new NodeName[0];
+            }
+
+            foreach (BulletMLNode childNode in ChildNodes)
+            {
+                if (Array.IndexOf(allowed, childNode.Name) < 0)
+                {
+                    throw new InvalidDataException("<" + childNode.Name + "> is not allowed inside <" + Name + ">");
+                }
+            }
+
+            NodeName[] required;
+            if (RequiredChildren.TryGetValue(Name, out required))
+            {
+                foreach (NodeName requiredName in required)
+                {
+                    if (null == GetChild(requiredName))
+                    {
+                        throw new InvalidDataException("<" + Name + "> requires a <" + requiredName + "> child");
+                    }
+                }
+            }
+
+            //a repeat node needs something to repeat
+            if ((NodeName.repeat == Name) && (null == GetChild(NodeName.action)) && (null == GetChild(NodeName.actionRef)))
+            {
+                throw new InvalidDataException("<repeat> requires an <action> or <actionRef> child");
+            }
+        }
+
+        /// <summary>
+        /// Convert the text of a type attribute to a NodeType, making sure it is valid for this node.
+        /// </summary>
+        /// <returns>The node type.</returns>
+        /// <param name="strValue">The text of the type attribute.</param>
+        private NodeType ParseValidType(string strValue)
+        {
+            foreach (NodeType validType in ValidTypes)
+            {
+                if (validType.ToString() == strValue)
+                {
+                    return validType;
+                }
+            }
+
+            throw new InvalidDataException("\"" + strValue + "\" is not a valid type for a <" + Name + "> node");
         }
 
         #endregion //XML Methods

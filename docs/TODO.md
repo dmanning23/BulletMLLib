@@ -46,13 +46,17 @@ Test suite status at the time of review: **13 of 272 tests fail** (`dotnet test`
 
 **Fix:** Check for null and throw a descriptive error, e.g. *"fire node 'label' has no bullet or bulletRef child"*.
 
-### 1.4 The DTD is never enforced
+### 1.4 The DTD is never enforced — FIXED
+
+> **Status:** Fixed. The dead `MyValidationEventHandler` was removed. `BulletMLNode.ValidateNode` checks allowed and required child elements against a table taken from the DTD, on every load path. Covered by `Tests/NodeValidationTest.cs`.
 
 **Problem:** `BulletPattern.ParseXML` sets `ValidationType.None`, so `MyValidationEventHandler` never fires. Missing required labels, missing bullets and bad `type` values all reach the node code unchecked. The content-pipeline path and the `NETFX_CORE` path don't process the DTD at all.
 
 **Fix:** Do structural validation in code (`ValidateNode`) so it runs the same way on every load path. Items 1.2, 1.3, 1.5 and 1.7 cover most of what matters. Either delete the dead validation handler or switch on `ValidationType.DTD` for the file path as an extra check.
 
-### 1.5 Default `type` handling is inconsistent
+### 1.5 Default `type` handling is inconsistent — FIXED
+
+> **Status:** Fixed. `SpeedNode`, `HorizontalNode` and `VerticalNode` default to `absolute`. Each value node lists the types it accepts, and any other value, including a misspelling like `Absolute`, throws an `InvalidDataException`. `DirectionNode` no longer silently turns invalid types into `aim`. `SpeedNodeDefaultValue` now passes.
 
 **Problem:** `DirectionNode` defaults to `aim` and turns invalid values into `aim`. `SpeedNode`, `HorizontalNode` and `VerticalNode` keep `NodeType.none`, and each task treats `none` as absolute through its own `default:` branch. The parser also accepts types that make no sense, such as `<speed type="aim">`. The failing `SpeedNodeDefaultValue` test is caused by this.
 
@@ -81,7 +85,7 @@ Test suite status at the time of review: **13 of 272 tests fail** (`dotnet test`
 - **Every node allocates an equation.** Each `BulletMLNode` constructs a `BulletMLEquation` and registers `rank`, `rand` and every callback, including `<action>`, `<bullet>` and `<repeat>`, which never hold a value. Create the equation lazily, only when the node has text.
 - **Stray text is accepted silently.** Text inside structural nodes (`<action>oops<wait>…`) is parsed as an equation and ignored. Throw instead.
 - **`BulletMLNode.Id` is unused.** Remove it.
-- **`FireRefNode.ValidateNode` never validates its children.** It skips `base.ValidateNode()`, so its `<param>` children are never validated. Validate the children explicitly.
+- ~~**`FireRefNode.ValidateNode` never validates its children.**~~ Fixed with 1.4: `FireRefNode` now checks that its children are only `<param>` nodes.
 - **`FireNode.BulletDescriptionNode` has a public setter.** Make it `private set`.
 - **`ActionNode.FindParentRepeatNode` throws `NullReferenceException`.** It should throw an invalid-data error instead.
 
@@ -159,7 +163,7 @@ Vector2 vel = (Acceleration + Direction.ToVector2() * Speed) * TimeSpeed * Scale
 ## 4. Tests and housekeeping
 
 - **Get the suite green.** The 13 failing tests are:
-  - `SpeedNodeDefaultValue` (1.5)
+  - ~~`SpeedNodeDefaultValue` (1.5)~~ — fixed
   - `ChangeDirectionAim1`, `ChangeDirectionRel`, `ChangeDirectionRel1` (2.4)
   - `OneAction1`
   - `FireDirectionInitCorrect` 0–3

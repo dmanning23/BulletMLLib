@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "bulletml.dtd">
+<bulletml>
+	<action label="top">
+		<repeat>
+			<times>2</times>
+		</repeat>
+	</action>
+</bulletml>

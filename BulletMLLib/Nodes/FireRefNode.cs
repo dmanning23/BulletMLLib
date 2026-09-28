@@ -40,6 +40,9 @@ namespace BulletMLLib
                 throw new InvalidDataException("A fireRef node is missing a label");
             }
 
+            //make sure only param nodes are underneath this node
+            ValidateChildNodeNames();
+
             //Find the fire node this reference points to
             Debug.Assert(null != GetRootNode());
             BulletMLNode refNode = GetRootNode().FindLabelNode(Label, NodeName.fire);

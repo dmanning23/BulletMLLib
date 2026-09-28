@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Content;
 using System;
 using System.Xml;
-using System.Xml.Schema;
 
 namespace BulletMLLib
 {
@@ -75,10 +74,9 @@ namespace BulletMLLib
 					XmlReaderSettings settings = new XmlReaderSettings();
 					settings.DtdProcessing = DtdProcessing.Ignore;
 #else
+                    //The DTD isn't used for validation, that is done in code by BulletMLNode.ValidateNode so it works the same for every load path
                     XmlReaderSettings settings = new XmlReaderSettings();
-                    settings.ValidationType = ValidationType.None;
                     settings.DtdProcessing = DtdProcessing.Parse;
-                    settings.ValidationEventHandler += new ValidationEventHandler(MyValidationEventHandler);
 #endif
 
                     using (XmlReader reader = XmlReader.Create(xmlFileName, settings))
@@ -152,21 +150,6 @@ namespace BulletMLLib
                 }
             }
         }
-
-#if !NETFX_CORE
-        /// <summary>
-        /// delegate method that gets called when a validation error occurs
-        /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="args">Arguments.</param>
-        public static void MyValidationEventHandler(object sender, ValidationEventArgs args)
-        {
-            throw new XmlSchemaException("Error validating bulletml document: " + args.Message,
-                                         args.Exception,
-                                         args.Exception.LineNumber,
-                                         args.Exception.LinePosition);
-        }
-#endif
 
         #endregion //Methods
     }
