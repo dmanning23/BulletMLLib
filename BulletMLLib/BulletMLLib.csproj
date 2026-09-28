@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <PackageId>BulletMLLib</PackageId>
-    <Version>5.1.2</Version>
+    <Version>5.1.3</Version>
     <Title>BulletMLLib</Title>
     <Authors>dmanning23</Authors>
     <description>Library for parsing BulletML xml files. Used for scripting bullet patterns in shmup games.</description>
@@ -17,12 +17,12 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageReleaseNotes>
-5.1.2
+5.1.3
 
-Duplicate labels are rejected. Two action, bullet or fire nodes with the same label used to load, and a ref silently used whichever came first in the file. ParseXML now throws, pointing at the second one:
-Error reading "Content/boss.xml": Duplicate action label "shoot", first used on line 7 (line 10, column 3)
-- Labels only need to be unique within a type, so an action and a bullet can still share a label.
-- A pattern that relied on the first-match behavior will now fail to load.
+Recursive actions work. An action can now reference itself, directly or through other actions, as long as it reaches a wait before it recurses. 5.1 rejected every such pattern as a "circular actionRef".
+- When the recursive actionRef is the last thing left to run, the action restarts with the new params instead of nesting another copy of itself, so a pattern can recurse for as long as the game runs without using more memory or stack.
+- A cycle with no wait would loop forever in one frame, so it still fails to load: The action node "loop" has a circular actionRef with no wait before it
+- If a recursive action's waits come out as 0 at runtime (for example $rand*2), it runs once per frame instead of hanging.
 
 Upgrading from 5.0? 5.1.0 made pattern validation much stricter. See the full release notes before upgrading.
 
