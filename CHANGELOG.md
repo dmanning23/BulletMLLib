@@ -1,5 +1,21 @@
 # Changelog
 
+## Unreleased
+
+### Fixed
+
+- **Recursive actions work.** An action can now reference itself, directly or through other actions, as long as it reaches a `<wait>` before it recurses. 5.1 rejected every such pattern as a "circular actionRef", including real ones like `[ESP_RADE]_round_123_boss_izuna_fan.xml`.
+
+  When the recursive `actionRef` is the last thing left to run, the action restarts with the new params instead of nesting another copy of itself, so a pattern can recurse for as long as the game runs without using more memory or stack. A recursive call that isn't the last thing to run builds its part of the task tree when it first runs.
+
+  A cycle with no `<wait>` would loop forever in one frame, so it still fails to load:
+
+  ```
+  The action node "loop" has a circular actionRef with no wait before it
+  ```
+
+  If a recursive action's waits come out as 0 at runtime (for example `<wait>$rand*2</wait>`), it runs once per frame instead of hanging.
+
 ## 5.1.2
 
 ### Changed
@@ -64,7 +80,7 @@ This release makes pattern loading much stricter and fixes several ways a bad pa
 | A misspelled or wrongly-cased `type` | `"Absolute" is not a valid type for a <direction> node` |
 | A `type` on an element that doesn't take one | `"relative" is not a valid type for a <wait> node` |
 | A ref with no `label` | `An actionRef node is missing a label` |
-| A circular `actionRef` | `The action node "loop" has a circular actionRef` |
+| A circular `actionRef` with no `<wait>` | `The action node "loop" has a circular actionRef with no wait before it` |
 
 The required children are:
 - `<changeSpeed>`: `<speed>` and `<term>`

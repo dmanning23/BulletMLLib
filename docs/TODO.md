@@ -10,7 +10,7 @@ Test suite status at the time of review: **13 of 272 tests fail** (`dotnet test`
 
 ### 1.1 Self-referencing bullets and actions crash with a stack overflow **(verified) — FIXED**
 
-> **Status:** Fixed. `FireTask` no longer builds the fired bullet's task tree, so bullets can fire themselves. `ActionRefNode.ValidateNode` rejects circular `actionRef` chains with an `InvalidDataException`. Covered by `Tests/RecursionTest.cs`.
+> **Status:** Fixed. `FireTask` no longer builds the fired bullet's task tree, so bullets can fire themselves. Actions can recurse as long as they wait first: a recursive `actionRef` that is the last thing left to run restarts the running action with its new params instead of nesting, so the task tree and call depth stay the same size however long the pattern runs. Any other recursive `actionRef` builds its part of the task tree when it first runs. A recursive action whose waits are 0 at runtime is held to one run per frame. `ActionRefNode.ValidateNode` rejects circular `actionRef` chains that never reach a `<wait>`, since those would loop forever in one frame. Covered by `Tests/RecursionTest.cs`.
 
 **Problem:** A bullet that fires itself is a common BulletML idiom for splitting or chained bullets, but it crashes the process:
 

@@ -2,9 +2,10 @@
 <!DOCTYPE bulletml SYSTEM "bulletml.dtd">
 <bulletml>
 	<action label="top">
-		<actionRef label="loop"/>
-	</action>
-	<action label="loop">
-		<actionRef label="loop"/>
+		<wait>1</wait>
+		<fire>
+			<bullet label="shot"/>
+		</fire>
+		<actionRef label="top"/>
 	</action>
 </bulletml>

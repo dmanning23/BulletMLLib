@@ -13,7 +13,6 @@
 		</repeat>
 	</action>
 	<action label="b">
-		<wait>1</wait>
 		<actionRef label="a"/>
 	</action>
 </bulletml>
