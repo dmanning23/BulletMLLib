@@ -17,20 +17,17 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageReleaseNotes>
-5.1.0
+5.1.1
 
-BREAKING: patterns are now validated against the BulletML DTD rules, so some patterns that loaded in 5.0 will throw from ParseXML. Errors are InvalidDataException, wrapped in an exception naming the file.
-- Elements in places the DTD doesn't allow are rejected.
-- Required children are enforced: changeSpeed needs speed and term, changeDirection needs direction and term, accel needs term, repeat needs times plus an action or actionRef.
-- Invalid, misspelled or misplaced type attributes are rejected. A direction with a bad type is no longer silently treated as aim.
-- actionRef, bulletRef and fireRef must have a label.
-- BulletPattern.MyValidationEventHandler has been removed.
+Load errors now say where the problem is. ParseXML throws a BulletMLException whose message names the file, the problem, and the line and column, for example:
+Error reading "Content/boss.xml": changeSpeed requires a term child (line 12, column 4)
+- BulletMLException has FileName, LineNumber and LinePosition properties. It derives from Exception, and its InnerException is still InvalidDataException (or XmlException for malformed XML), so 5.1 catch code keeps working.
+- A misspelled element name is reported as an unknown element with its location, instead of an ArgumentException.
+- CDATA sections are read as text.
+- A ref whose label points at nothing throws InvalidDataException with its location, instead of NullReferenceException.
+- An invalid type on the root bulletml element is reported like any other invalid type.
 
-Fixed:
-- Bullets that fire themselves (recursive bulletRef) no longer crash with a stack overflow.
-- Circular actionRef chains are reported as an error instead of overflowing the stack.
-- A fire node with no bullet or bulletRef reports which node is broken, instead of throwing a NullReferenceException.
-- speed, horizontal and vertical now default to absolute, as the spec says.
+Upgrading from 5.0? 5.1.0 made pattern validation much stricter. See the full release notes before upgrading.
 
 Full release notes: https://github.com/dmanning23/BulletMLLib/blob/master/CHANGELOG.md
     </PackageReleaseNotes>
