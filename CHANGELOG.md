@@ -1,5 +1,21 @@
 # Changelog
 
+## 5.1.1
+
+### Improved
+
+- **Load errors say where the problem is.** Every error now includes the line and column in the XML file, and `ParseXML` throws a `BulletMLException` whose message contains the problem itself, not just the file name:
+
+  ```
+  Error reading "Content/boss.xml": <changeSpeed> requires a <term> child (line 12, column 4)
+  ```
+
+  `BulletMLException` has `FileName`, `LineNumber` and `LinePosition` properties. It derives from `Exception`, and its `InnerException` is still the `InvalidDataException` described in 5.1, so existing `catch` code keeps working. Malformed XML reports its location the same way, with an `XmlException` as the inner exception.
+- **Unknown elements are reported clearly.** A typo like `<chnageSpeed>` now gives `Unknown element <chnageSpeed>` with its location, instead of an `ArgumentException` from `Enum.Parse`.
+- **CDATA sections are read as text,** so `<speed><![CDATA[1 + 2]]></speed>` works.
+- **Missing reference targets throw `InvalidDataException`** (inside `BulletMLException`) with a location, instead of `NullReferenceException`. For example: `Couldn't find the action node "nope" (line 6, column 4)`.
+- **An invalid `type` on the root `<bulletml>` element** is reported like any other invalid type, instead of throwing an `ArgumentException`.
+
 ## 5.1.0
 
 This release makes pattern loading much stricter and fixes several ways a bad pattern file could crash a game. **Some patterns that loaded in 5.0 will now throw when you call `ParseXML`.** See [Breaking changes](#breaking-changes) before upgrading.

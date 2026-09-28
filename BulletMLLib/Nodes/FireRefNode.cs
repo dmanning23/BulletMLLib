@@ -1,6 +1,4 @@
-using System;
 using System.Diagnostics;
-using System.IO;
 
 namespace BulletMLLib
 {
@@ -37,7 +35,7 @@ namespace BulletMLLib
         {
             if (string.IsNullOrEmpty(Label))
             {
-                throw new InvalidDataException("A fireRef node is missing a label");
+                throw ValidationError("A fireRef node is missing a label");
             }
 
             //make sure only param nodes are underneath this node
@@ -50,13 +48,13 @@ namespace BulletMLLib
             //make sure we found something
             if (null == refNode)
             {
-                throw new NullReferenceException("Couldn't find the fire node \"" + Label + "\"");
+                throw ValidationError("Couldn't find the fire node \"" + Label + "\"");
             }
 
             ReferencedFireNode = refNode as FireNode;
             if (null == ReferencedFireNode)
             {
-                throw new NullReferenceException("The BulletMLNode \"" + Label + "\" isn't a fire node");
+                throw ValidationError("The BulletMLNode \"" + Label + "\" isn't a fire node");
             }
 
             //Skip base class validation since the bullet node belongs to the referenced fire, not this ref node.

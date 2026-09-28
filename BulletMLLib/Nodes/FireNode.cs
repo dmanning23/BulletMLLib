@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using System.IO;
 
 namespace BulletMLLib
 {
@@ -57,7 +56,7 @@ namespace BulletMLLib
                 if (null == refNode)
                 {
                     string name = string.IsNullOrEmpty(Label) ? "A fire node" : "The fire node \"" + Label + "\"";
-                    throw new InvalidDataException(name + " has no bullet or bulletRef child");
+                    throw ValidationError(name + " has no bullet or bulletRef child");
                 }
 
                 refNode.FindMyBulletNode();

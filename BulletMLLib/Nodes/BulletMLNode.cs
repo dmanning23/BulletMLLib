@@ -68,6 +68,22 @@ namespace BulletMLLib
         public string Id { get; set; }
 
         /// <summary>
+        /// The line in the xml file this node came from, or 0 if not known.
+        /// </summary>
+        public int LineNumber { get; private set; }
+
+        /// <summary>
+        /// The column in the xml file this node came from, or 0 if not known.
+        /// </summary>
+        public int LinePosition { get; private set; }
+
+        /// <summary>
+        /// Keys used to store the location of an error in Exception.Data, so BulletPattern can report it.
+        /// </summary>
+        internal const string LineNumberKey = "BulletML.LineNumber";
+        internal const string LinePositionKey = "BulletML.LinePosition";
+
+        /// <summary>
         /// The values allowed in the type attribute of this node.
         /// Empty for nodes that don't take a type attribute.
         /// </summary>
@@ -301,6 +317,14 @@ namespace BulletMLLib
             //grab the parent node
             Parent = parentNode;
 
+            //remember where this node is in the file, for error messages
+            IXmlLineInfo lineInfo = bulletNodeElement as IXmlLineInfo;
+            if (null != lineInfo && lineInfo.HasLineInfo())
+            {
+                LineNumber = lineInfo.LineNumber;
+                LinePosition = lineInfo.LinePosition;
+            }
+
             //Parse all our attributes
             XmlNamedNodeMap mapAttributes = bulletNodeElement.Attributes;
             for (int i = 0; i < mapAttributes.Count; i++)
@@ -334,7 +358,7 @@ namespace BulletMLLib
                      childNode = childNode.NextSibling)
                 {
                     //if the child node is a text node, parse it into this node
-                    if (XmlNodeType.Text == childNode.NodeType)
+                    if ((XmlNodeType.Text == childNode.NodeType) || (XmlNodeType.CDATA == childNode.NodeType))
                     {
                         //Get the text of the child xml node, but store it in THIS bullet node
                         NodeEquation.Parse(childNode.Value);
@@ -346,8 +370,15 @@ namespace BulletMLLib
                         continue;
                     }
 
+                    //make sure it's an element bulletml knows about
+                    NodeName childName;
+                    if (!Enum.TryParse(childNode.Name, out childName) || (childName.ToString() != childNode.Name))
+                    {
+                        throw CreateError("Unknown element <" + childNode.Name + ">", childNode);
+                    }
+
                     //create a new node
-                    BulletMLNode childBulletNode = NodeFactory.CreateNode(BulletMLNode.StringToName(childNode.Name), manager);
+                    BulletMLNode childBulletNode = NodeFactory.CreateNode(childName, manager);
 
                     //read in the node and store it
                     childBulletNode.Parse(childNode, this, manager);
@@ -387,7 +418,7 @@ namespace BulletMLLib
             {
                 if (Array.IndexOf(allowed, childNode.Name) < 0)
                 {
-                    throw new InvalidDataException("<" + childNode.Name + "> is not allowed inside <" + Name + ">");
+                    throw childNode.ValidationError("<" + childNode.Name + "> is not allowed inside <" + Name + ">");
                 }
             }
 
@@ -398,7 +429,7 @@ namespace BulletMLLib
                 {
                     if (null == GetChild(requiredName))
                     {
-                        throw new InvalidDataException("<" + Name + "> requires a <" + requiredName + "> child");
+                        throw ValidationError("<" + Name + "> requires a <" + requiredName + "> child");
                     }
                 }
             }
@@ -406,8 +437,49 @@ namespace BulletMLLib
             //a repeat node needs something to repeat
             if ((NodeName.repeat == Name) && (null == GetChild(NodeName.action)) && (null == GetChild(NodeName.actionRef)))
             {
-                throw new InvalidDataException("<repeat> requires an <action> or <actionRef> child");
+                throw ValidationError("<repeat> requires an <action> or <actionRef> child");
             }
+        }
+
+        /// <summary>
+        /// Create the exception to throw when this node is invalid.
+        /// The message includes the node's location in the xml file.
+        /// </summary>
+        /// <returns>The exception to throw.</returns>
+        /// <param name="message">Description of the problem.</param>
+        internal InvalidDataException ValidationError(string message)
+        {
+            return CreateError(message, LineNumber, LinePosition);
+        }
+
+        /// <summary>
+        /// Create the exception to throw when an xml element is invalid.
+        /// The message includes the element's location in the xml file, if it is known.
+        /// </summary>
+        /// <returns>The exception to throw.</returns>
+        /// <param name="message">Description of the problem.</param>
+        /// <param name="xmlNode">The xml element that has the problem.</param>
+        internal static InvalidDataException CreateError(string message, XmlNode xmlNode)
+        {
+            IXmlLineInfo lineInfo = xmlNode as IXmlLineInfo;
+            if (null != lineInfo && lineInfo.HasLineInfo())
+            {
+                return CreateError(message, lineInfo.LineNumber, lineInfo.LinePosition);
+            }
+            return CreateError(message, 0, 0);
+        }
+
+        private static InvalidDataException CreateError(string message, int lineNumber, int linePosition)
+        {
+            if (lineNumber <= 0)
+            {
+                return new InvalidDataException(message);
+            }
+
+            var error = new InvalidDataException(message + " (line " + lineNumber + ", column " + linePosition + ")");
+            error.Data[LineNumberKey] = lineNumber;
+            error.Data[LinePositionKey] = linePosition;
+            return error;
         }
 
         /// <summary>
@@ -425,7 +497,7 @@ namespace BulletMLLib
                 }
             }
 
-            throw new InvalidDataException("\"" + strValue + "\" is not a valid type for a <" + Name + "> node");
+            throw ValidationError("\"" + strValue + "\" is not a valid type for a <" + Name + "> node");
         }
 
         #endregion //XML Methods

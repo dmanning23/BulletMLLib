@@ -98,6 +98,29 @@ public BulletPattern(IBulletManager manager)
 |---|---|
 | `ParseXML(string xmlFileName, ContentManager content = null)` | Parse a BulletML XML file. If `content` is provided, loads via MonoGame Content Pipeline (path should be relative, no extension). Otherwise loads from file system. |
 
+If the file can't be loaded, `ParseXML` throws a [`BulletMLException`](#bulletmlexception).
+
+---
+
+### BulletMLException
+
+```csharp
+public class BulletMLException : Exception
+```
+
+Thrown by `BulletPattern.ParseXML` when a pattern can't be loaded. The message names the file, the problem and where it is, for example:
+
+```
+Error reading "Content/boss.xml": <changeSpeed> requires a <term> child (line 12, column 4)
+```
+
+| Property | Type | Description |
+|---|---|---|
+| `FileName` | `string` | The file that failed to load. |
+| `LineNumber` | `int` | Line of the problem in the XML file, or `0` if not known. |
+| `LinePosition` | `int` | Column of the problem, or `0` if not known. |
+| `InnerException` | `Exception` | `InvalidDataException` for an invalid pattern, or `XmlException` for malformed XML. |
+
 ---
 
 ### BulletMLNode
