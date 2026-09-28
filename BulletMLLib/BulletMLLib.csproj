@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <PackageId>BulletMLLib</PackageId>
-    <Version>5.0.0</Version>
+    <Version>5.1.0</Version>
     <Title>BulletMLLib</Title>
     <Authors>dmanning23</Authors>
     <description>Library for parsing BulletML xml files. Used for scripting bullet patterns in shmup games.</description>
@@ -16,6 +16,24 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReleaseNotes>
+5.1.0
+
+BREAKING: patterns are now validated against the BulletML DTD rules, so some patterns that loaded in 5.0 will throw from ParseXML. Errors are InvalidDataException, wrapped in an exception naming the file.
+- Elements in places the DTD doesn't allow are rejected.
+- Required children are enforced: changeSpeed needs speed and term, changeDirection needs direction and term, accel needs term, repeat needs times plus an action or actionRef.
+- Invalid, misspelled or misplaced type attributes are rejected. A direction with a bad type is no longer silently treated as aim.
+- actionRef, bulletRef and fireRef must have a label.
+- BulletPattern.MyValidationEventHandler has been removed.
+
+Fixed:
+- Bullets that fire themselves (recursive bulletRef) no longer crash with a stack overflow.
+- Circular actionRef chains are reported as an error instead of overflowing the stack.
+- A fire node with no bullet or bulletRef reports which node is broken, instead of throwing a NullReferenceException.
+- speed, horizontal and vertical now default to absolute, as the spec says.
+
+Full release notes: https://github.com/dmanning23/BulletMLLib/blob/master/CHANGELOG.md
+    </PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
     <None Include="../README.md" Pack="true" PackagePath="" />
