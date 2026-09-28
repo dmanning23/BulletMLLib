@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <PackageId>BulletMLLib</PackageId>
-    <Version>5.1.0</Version>
+    <Version>5.1.1</Version>
     <Title>BulletMLLib</Title>
     <Authors>dmanning23</Authors>
     <description>Library for parsing BulletML xml files. Used for scripting bullet patterns in shmup games.</description>
