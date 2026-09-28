@@ -44,6 +44,7 @@ Each XML element maps to a `BulletMLNode` (or a specialized subclass). The parse
 After parsing, the tree is validated:
 
 - Each node may only contain the child elements the BulletML DTD allows, and must have the ones it requires (e.g. `<changeSpeed>` needs `<speed>` and `<term>`, `<repeat>` needs `<times>` and an action).
+- No two `<action>`, `<bullet>` or `<fire>` nodes may share a label (different node types may).
 - Reference nodes (`bulletRef`, `actionRef`, `fireRef`) must have a `label`, and resolve it to the target node.
 - `actionRef` chains that loop back on themselves are rejected.
 - `<fire>` must contain a `<bullet>` or `<bulletRef>`.

@@ -76,7 +76,9 @@ Test suite status at the time of review: **13 of 272 tests fail** (`dotnet test`
 - Use `Enum.TryParse` and throw that exception on failure.
 - Treat CDATA as text.
 
-### 1.7 Duplicate labels are silently ambiguous
+### 1.7 Duplicate labels are silently ambiguous — FIXED
+
+> **Status:** Fixed. Validation rejects two `<action>`, `<bullet>` or `<fire>` nodes with the same label, anywhere in the file, with an error on the second one that says where the first is. Different node types may still share a label. Refs still resolve through `FindLabelNode`; with duplicates rejected that search is no longer ambiguous, so the O(1) lookup table was left out. Covered by `Tests/DuplicateLabelTest.cs`.
 
 **Problem:** `FindLabelNode` searches the whole tree and returns the first match. When two nodes of the same type share a label, which one wins depends on where it sits in the document.
 
