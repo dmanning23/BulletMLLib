@@ -1,5 +1,17 @@
 # Changelog
 
+## 5.1.2
+
+### Changed
+
+- **Duplicate labels are rejected.** Two `<action>`, `<bullet>` or `<fire>` nodes with the same label used to load, and a ref silently used whichever came first in the file. `ParseXML` now throws, pointing at the second one:
+
+  ```
+  Duplicate <action> label "shoot", first used on line 7 (line 10, column 3)
+  ```
+
+  Labels only need to be unique within a type, so an `<action label="a">` and a `<bullet label="a">` can still coexist. **A pattern that relied on the first-match behavior will now fail to load.**
+
 ## 5.1.1
 
 ### Improved

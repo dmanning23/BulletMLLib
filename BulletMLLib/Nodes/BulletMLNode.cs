@@ -394,6 +394,12 @@ namespace BulletMLLib
         /// </summary>
         public virtual void ValidateNode()
         {
+            //check the labels before anything tries to resolve a reference to them
+            if (NodeName.bulletml == Name)
+            {
+                CheckForDuplicateLabels(this, new Dictionary<(NodeName, string), BulletMLNode>());
+            }
+
             ValidateChildNodeNames();
 
             //validate all the child nodes
@@ -438,6 +444,32 @@ namespace BulletMLLib
             if ((NodeName.repeat == Name) && (null == GetChild(NodeName.action)) && (null == GetChild(NodeName.actionRef)))
             {
                 throw ValidationError("<repeat> requires an <action> or <actionRef> child");
+            }
+        }
+
+        /// <summary>
+        /// Make sure no two action, bullet or fire nodes share a label, since a reference to that label would be ambiguous.
+        /// Different types of node can share a label.
+        /// </summary>
+        /// <param name="node">The node to check, along with all its children.</param>
+        /// <param name="labels">The labelled nodes found so far.</param>
+        private static void CheckForDuplicateLabels(BulletMLNode node, Dictionary<(NodeName, string), BulletMLNode> labels)
+        {
+            foreach (BulletMLNode childNode in node.ChildNodes)
+            {
+                bool isReferenceable = (NodeName.action == childNode.Name) || (NodeName.bullet == childNode.Name) || (NodeName.fire == childNode.Name);
+                if (isReferenceable && !string.IsNullOrEmpty(childNode.Label))
+                {
+                    var key = (childNode.Name, childNode.Label);
+                    BulletMLNode firstNode;
+                    if (labels.TryGetValue(key, out firstNode))
+                    {
+                        throw childNode.ValidationError("Duplicate <" + childNode.Name + "> label \"" + childNode.Label + "\", first used on line " + firstNode.LineNumber);
+                    }
+                    labels.Add(key, childNode);
+                }
+
+                CheckForDuplicateLabels(childNode, labels);
             }
         }
 
