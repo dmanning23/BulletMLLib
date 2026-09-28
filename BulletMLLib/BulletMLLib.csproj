@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <PackageId>BulletMLLib</PackageId>
-    <Version>5.1.1</Version>
+    <Version>5.1.2</Version>
     <Title>BulletMLLib</Title>
     <Authors>dmanning23</Authors>
     <description>Library for parsing BulletML xml files. Used for scripting bullet patterns in shmup games.</description>
@@ -17,15 +17,12 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageReleaseNotes>
-5.1.1
+5.1.2
 
-Load errors now say where the problem is. ParseXML throws a BulletMLException whose message names the file, the problem, and the line and column, for example:
-Error reading "Content/boss.xml": changeSpeed requires a term child (line 12, column 4)
-- BulletMLException has FileName, LineNumber and LinePosition properties. It derives from Exception, and its InnerException is still InvalidDataException (or XmlException for malformed XML), so 5.1 catch code keeps working.
-- A misspelled element name is reported as an unknown element with its location, instead of an ArgumentException.
-- CDATA sections are read as text.
-- A ref whose label points at nothing throws InvalidDataException with its location, instead of NullReferenceException.
-- An invalid type on the root bulletml element is reported like any other invalid type.
+Duplicate labels are rejected. Two action, bullet or fire nodes with the same label used to load, and a ref silently used whichever came first in the file. ParseXML now throws, pointing at the second one:
+Error reading "Content/boss.xml": Duplicate action label "shoot", first used on line 7 (line 10, column 3)
+- Labels only need to be unique within a type, so an action and a bullet can still share a label.
+- A pattern that relied on the first-match behavior will now fail to load.
 
 Upgrading from 5.0? 5.1.0 made pattern validation much stricter. See the full release notes before upgrading.
 
