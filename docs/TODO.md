@@ -99,7 +99,7 @@ Test suite status at the time of review: **13 of 272 tests fail** (`dotnet test`
 
 ### 2.1 Parameters don't reach a fired bullet's actions **(verified)**
 
-**Problem:** In `FireTask.Run`, the new bullet's top task gets its `Owner` set to the `FireTask`, but the `<param>` values live on `BulletRefTask`. `Owner` is also set *after* `InitNode` has already run `InitTask`, so values computed at setup see no parameters at all. For example, `<bulletRef label="b"><param>15</param></bulletRef>` into a bullet with `<changeSpeed><speed type="relative">$1</speed>…` never adds 15. Only the bullet's own `<speed>`/`<direction>` read the parameter correctly, which is why `CorrectSpeedFromParam` passes.
+**Problem:** In `FireTask.Run`, the new bullet's top task gets its `Owner` set to the `FireTask`, but the `<param>` values live on `BulletRefTask`. `Owner` is also set *after* `InitNode` has already run `InitTask`, so values computed at setup see no parameters at all. For example, `<bulletRef label="b"><param>15</param></bulletRef>` into a bullet with `<changeSpeed><speed type="relative">$1</speed>…` never adds 15. Only the bullet's own `<speed>`/`<direction>` read the parameter correctly, which is why `CorrectSpeedFromParam` passes. `fireRef` params, and params inherited from an enclosing `actionRef`, are lost the same way: a `$2` in a fired bullet's `<action>` evaluates to 0 in all three cases. The workaround is an `<actionRef>` with its own `<param>`s, called from inside the bullet's action.
 
 **Fix:** Pass the parameter owner into `InitNode`, e.g. `InitNode(node, BulletMLTask paramOwner)`. Set it on the top task *before* `ParseTasks` and `InitTask`, and use `BulletRefTask` (or the `FireTask` for inline `<bullet>`) as that owner.
 
@@ -145,7 +145,13 @@ Vector2 vel = (Acceleration + Direction.ToVector2() * Speed) * TimeSpeed * Scale
 
 **Fix:** Reset `Acceleration = Vector2.Zero` in `InitNode`.
 
-### 2.8 Minor runtime issues
+### 2.8 Fire values are computed when the action starts, not when the `<fire>` runs **(verified)**
+
+**Problem:** `FireTask.SetupTask`, which is called from `InitTask`/`HardReset`, computes `FireDirection` and `FireSpeed`. That includes `GetAimDir()` for `aim`, `bullet.Direction` for `relative`, and any `$rand`. So the values are fixed when the enclosing action pass starts, not when the fire actually happens. In `<action><wait>30</wait><fire><direction type="aim">0</direction>…</fire></action>`, a moving bullet aims from where it was 30 frames earlier, at where the player was then. Repro: fire a bullet at absolute 0°, speed 2, whose action waits 30 frames and then fires `aim 0`. With the player directly below the emitter, the child fires at 90° instead of about 107°. The original BulletML spec evaluates at fire time.
+
+**Fix:** Move the direction and speed calculation into `FireTask.Run`. Keep the per-`<fire>` sequence behavior (`NumTimesInitialized`, reset by `HardReset`). This changes how existing patterns behave, so treat it as a breaking change and mention it in the CHANGELOG. The workaround until then is to fire first and wait after, or to have the child aim itself with `<changeDirection><direction type="aim">0</direction><term>1</term></changeDirection>`, which is evaluated every frame.
+
+### 2.9 Minor runtime issues
 
 - **`InitTopNode` only finds `top1` to `top9`.** Scan for every action whose label starts with `top` instead.
 - **`GetParamValue(0)` indexes `ParamList[-1]`.** Treat `$0` as invalid, or return 0.
@@ -156,6 +162,8 @@ Vector2 vel = (Acceleration + Direction.ToVector2() * Speed) * TimeSpeed * Scale
 
 ## 3. Documentation and API accuracy
 
+- **`docs/bulletml-guide.md` has the wrong angle convention (verified).** It says "vertical: 0 degrees = down", and its absolute table says 0 = up, 180 = down. At runtime, velocity is `(cos θ, sin θ)` in screen space (y down), so absolute 0 = right, 90 = down, 180 = left, -90 = up. The root `type` attribute is ignored. Fix the guide and README, and say that angles from classic BulletML patterns need `-90` to convert.
+- **The guide's "360-Degree Circle" and "Aimed N-Way" examples are broken (verified).** Both fire once, then run a separate `<repeat>` of `<fire>` with `type="sequence"`. In BulletMLLib, sequence state belongs to each `FireTask`, so that second fire's first shot aims at the player, and `<speed type="sequence">` starts from the emitter's speed of 0. The circle ends up as 35 stationary bullets starting at the aim angle. The working idiom is one `<fire>` inside the repeat, with the start angle and speed on the `<fire>` and the step on its `<bullet>`: `<bullet><direction type="sequence">10</direction></bullet>`. Check that every example in the guide loads and behaves as described, and confirm the homing example's "then flies straight" claim.
 - **`FireData.cs`**: never used anywhere, and its docs (default speed 1) contradict `FireTask`, which falls back to the parent bullet's speed. **Delete the class.**
 - **`PatternType` / `BulletPattern.Orientation`**: the orientation is stored but never read, and the enum docs claim horizontal and vertical change the direction math. Either implement it (rotate by 90° for horizontal patterns) or document it as informational only.
 - **`NodeType.sequence` doc**: it says the value is "added to the previous value each time the node fires". That's true for `<fire>` direction and speed. In `changeSpeed`, `changeDirection` and `accel` it's actually added **every frame**. Document both meanings.
@@ -187,7 +195,7 @@ Vector2 vel = (Acceleration + Direction.ToVector2() * Speed) * TimeSpeed * Scale
 ## Suggested order
 
 1. Parsing safety: 1.1, 1.2, 1.3. A bad pattern file shouldn't be able to crash the game.
-2. Runtime correctness: 2.1, 2.3, 2.4, 2.2.
+2. Runtime correctness: 2.1, 2.3, 2.4, 2.2, 2.8. Items 2.1 and 2.8 change how existing patterns behave, and the `bulletml-patterns` Claude skill documents the current behavior (`references/semantics.md`, `scripts/bulletml_tool.py`), so update it when these land.
 3. Go through the failing tests and get the suite green (section 4).
 4. Validation and error-message improvements: 1.4 to 1.7.
 5. Documentation cleanup (section 3) and the minor items.
