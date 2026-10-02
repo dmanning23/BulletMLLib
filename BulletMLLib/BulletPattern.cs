@@ -42,6 +42,11 @@ namespace BulletMLLib
         /// </summary>
         public BulletPattern(IBulletManager manager)
         {
+            if (null == manager)
+            {
+                throw new ArgumentNullException("manager", "A BulletPattern needs an IBulletManager");
+            }
+
             BulletManager = manager;
             RootNode = null;
         }
